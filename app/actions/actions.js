@@ -1,10 +1,12 @@
+import $ from 'jquery'
+
 /*
 * action types
 */
 
 export const ADD_TODO = 'ADD_TODO'
+export const SEARCH_CITY = 'SEARCH_CITY'
 export const COMPLETE_TODO = 'COMPLETE_TODO'
-export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER'
 
 /*
 * other constants
@@ -30,10 +32,29 @@ export function addTodo(text) {
 	};
 }
 
-export function completeTodo(id) {
-	return { type: COMPLETE_TODO, id }
+export function searchCity(text) {
+	return dispatch => {
+		dispatch(requestCityAutoComplete())
+		$.get("https://maps.googleapis.com/maps/api/place/autocomplete/json", {
+			input: text,
+			types: '(cities)',
+			key: 'AIzaSyBafQ3H7ZXVGqbh8Z9Z3h27wQzniA64CJI'
+		})
+		.done(function(res){
+			dispatch(receiveCityAutoComplete(res.body.predictions));
+		})
+	}
 }
 
-export function setVisibilityFilter(filter) {
-	return { type: SET_VISIBILITY_FILTER, filter }
+function requestCityAutoComplete(text) {
+	return { type: COMPLETE_TODO }
+}
+
+function receiveCityAutoComplete(response) {
+	console.log(response)
+	return { type: COMPLETE_TODO }
+}
+
+export function completeTodo(id) {
+	return { type: COMPLETE_TODO, id }
 }

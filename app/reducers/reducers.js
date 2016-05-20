@@ -1,17 +1,8 @@
 import { combineReducers } from 'redux'
-import { ADD_TODO, COMPLETE_TODO, SET_VISIBILITY_FILTER, VisibilityFilters } from '../actions/actions'
+import { ADD_TODO, COMPLETE_TODO, VisibilityFilters } from '../actions/actions'
 const { SHOW_ALL } = VisibilityFilters
 
-function visibilityFilter(state = SHOW_ALL, action) {
-	switch (action.type) {
-		case SET_VISIBILITY_FILTER:
-		return action.filter
-		default:
-		return state
-	}
-}
-
-function todo(state, action) {
+function POI(state, action) {
 	switch (action.type) {
 		case ADD_TODO:
 		return {
@@ -31,23 +22,22 @@ function todo(state, action) {
 	}
 }
 
-function todos(state = [], action) {
+function POIs(state = [], action) {
 	switch (action.type) {
 		case ADD_TODO:
-		return state.concat(todo(undefined, action))
+		return state.concat(POI(undefined, action))
 
 		case COMPLETE_TODO:
 		return state.map(t =>
-			todo(t, action)
+			POI(t, action)
 		)
 		default:
 		return state
 	}
 }
 
-const todoApp = combineReducers({
-	visibilityFilter,
-	todos
-})
+const ItineraryApp = combineReducers({
+		POIs
+	})
 
-export default todoApp
+export default ItineraryApp
