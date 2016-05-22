@@ -5,17 +5,21 @@ import $ from 'jquery'
 */
 
 export const ADD_TODO = 'ADD_TODO'
-export const SEARCH_CITY = 'SEARCH_CITY'
+export const REQUEST_SEARCH_CITY = 'REQUEST_SEARCH_CITY'
+export const RECEIVE_SEARCH_CITY = 'RECEIVE_SEARCH_CITY'
+export const SELECT_CITY = 'SELECT_CITY'
 export const COMPLETE_TODO = 'COMPLETE_TODO'
+export const CHANGE_SEARCH_TEXT = 'CHANGE_SEARCH_TEXT'
 
 /*
 * other constants
 */
 
-export const VisibilityFilters = {
-	SHOW_ALL: 'SHOW_ALL',
-	SHOW_COMPLETED: 'SHOW_COMPLETED',
-	SHOW_ACTIVE: 'SHOW_ACTIVE'
+export const CitySearchStates = {
+	SEARCH_NONE: 'NONE',
+	SEARCH_IN_PROGRESS: 'IN_PROGRESS',
+	SEARCH_DONE: 'DONE',
+	SEARCH_NO_RESULT: 'NO_RESULT'
 }
 
 /*
@@ -29,32 +33,37 @@ export function addTodo(text) {
 		type: ADD_TODO,
 		id: nextTodoId++,
 		text
-	};
+	}
 }
 
 export function searchCity(text) {
 	return dispatch => {
 		dispatch(requestCityAutoComplete())
-		$.get("https://maps.googleapis.com/maps/api/place/autocomplete/json", {
-			input: text,
-			types: '(cities)',
-			key: 'AIzaSyBafQ3H7ZXVGqbh8Z9Z3h27wQzniA64CJI'
+
+		$.get("http://192.168.0.16:3000/api/cities", {
+			input: text
 		})
 		.done(function(res){
-			dispatch(receiveCityAutoComplete(res.body.predictions));
+			dispatch(receiveCityAutoComplete(res));
 		})
 	}
 }
 
 function requestCityAutoComplete(text) {
-	return { type: COMPLETE_TODO }
+	return { type: REQUEST_SEARCH_CITY }
 }
 
 function receiveCityAutoComplete(response) {
-	console.log(response)
-	return { type: COMPLETE_TODO }
+	return {
+		type: RECEIVE_SEARCH_CITY,
+		cities: response
+	}
 }
 
-export function completeTodo(id) {
-	return { type: COMPLETE_TODO, id }
+export function selectCity(city) {
+	return { type: SELECT_CITY, city}
+}
+
+export function changeSearchText(text) {
+	return { type: CHANGE_SEARCH_TEXT, text}
 }

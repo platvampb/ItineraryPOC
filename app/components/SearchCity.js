@@ -1,15 +1,24 @@
 import React, { Component, PropTypes } from 'react'
+import { Link } from 'react-router'
 
 export default class SearchCity extends Component {
 	render() {
+		let selectCityButton;
+		if (this.props.selectedCity.hasOwnProperty('description')) {
+			selectCityButton = (
+				<Link to={`/places`}>
+					Go there!
+				</Link>)
+		}
+
 		return (
 			<div>
 				<input type='text' ref='input' id="search-city"
-					//onKeyUp={(e) => this.handleKeyUp(e)}
+					placeholder="Enter a place you fancy:"
+					value={this.props.searchText}
+					onChange={(e) => this.handleChange(e)}
 					/>
-				<button onClick={(e) => this.handleClick(e)}>
-					Add
-				</button>
+				{selectCityButton}
 			</div>
 		)
 	}
@@ -21,29 +30,20 @@ export default class SearchCity extends Component {
 		node.value = ''
 	}
 
-	handleKeyUp(e) {
+	handleChange(e) {
 		const node = this.refs.input
 		const text = node.value.trim()
-		console.log(text)
-		this.props.onSearchTrigger(text)
+
+		this.props.onChangeSearchText(text)
+		if (text.length > 2) {
+			this.props.onSearchTrigger(text)
+		}
 	}
-
-	componentDidMount() {
-		let autocomplete = initAutocomplete()
-		autocomplete.addListener('place_changed', searchPOIs(autocomplete.getPlace()));
-	}
-}
-
-function initAutocomplete() {
-	return new google.maps.places.Autocomplete(
-			(document.getElementById('search-city')),
-			{types: ['cities']})
-}
-
-function searchPOIs(cityDetails) {
 
 }
 
 SearchCity.propTypes = {
-	//onAddClick: PropTypes.func.isRequired
+	onSearchTrigger: PropTypes.func.isRequired,
+	onChangeSearchText: PropTypes.func.isRequired,
+	searchText: PropTypes.string.isRequired
 }

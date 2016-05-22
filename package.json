@@ -10,13 +10,18 @@
   "author": "Bo Zhang",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.15.1",
+    "cors": "^2.7.1",
+    "express": "^4.13.4",
     "jquery": "^2.2.3",
+    "morgan": "^1.7.0",
     "react": "^0.14.6",
     "react-dom": "^0.14.6",
     "react-redux": "^4.1.2",
     "react-router": "^2.0.0-rc5",
     "redux": "^3.1.4",
-    "redux-thunk": "^2.1.0"
+    "redux-thunk": "^2.1.0",
+    "request": "^2.72.0"
   },
   "devDependencies": {
     "babel-core": "^6.4.5",

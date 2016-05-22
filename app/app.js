@@ -9,9 +9,10 @@ import thunk from 'redux-thunk';
 import { createStore, renderDevTools } from './utils/devTools';
 
 import ItineraryHandler from './containers/ItineraryContainer.js';
-import ItineraryApp from './reducers/reducers';
+import CitySearchHandler from './containers/CitySearchContainer.js';
+import CitySearchApp from './reducers/reducers';
 
-let store = createStore(ItineraryApp,
+let store = createStore(CitySearchApp,
 	applyMiddleware(thunk)
 );
 
@@ -19,7 +20,8 @@ let routes = (
 	<div>
 	<Provider store={store}>
 	<Router>
-		<Route name="todo" path="/" component={ItineraryHandler}/>
+		<Route name="itinerary" path="/places" component={ItineraryHandler}/>
+		<Route name="search" path="/" component={CitySearchHandler}/>
 	</Router>
 	</Provider>
 

@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux'
-import { ADD_TODO, COMPLETE_TODO, VisibilityFilters } from '../actions/actions'
-const { SHOW_ALL } = VisibilityFilters
+import { REQUEST_SEARCH_CITY, RECEIVE_SEARCH_CITY,  CitySearchStates, SELECT_CITY, CHANGE_SEARCH_TEXT } from '../actions/actions'
 
 function POI(state, action) {
 	switch (action.type) {
@@ -36,8 +35,95 @@ function POIs(state = [], action) {
 	}
 }
 
-const ItineraryApp = combineReducers({
-		POIs
-	})
+function citySearchState(state = CitySearchStates.SEARCH_NONE, action) {
+	switch (action.type) {
+		case RECEIVE_SEARCH_CITY:
+		if (action.cities > 0)
+			return CitySearchStates.SEARCH_DONE
+		else
+			return CitySearchStates.SEARCH_NO_RESULT
 
-export default ItineraryApp
+		case REQUEST_SEARCH_CITY:
+			return CitySearchStates.SEARCH_IN_PROGRESS
+
+		default:
+		return state
+	}
+}
+
+function highlightSearchResult(city) {
+	let desc = city.description,
+		tokens = []
+
+	var	noMatchStart = 0
+
+	for (var match of city.matched_substrings) {
+		tokens.push(desc.substring(noMatchStart, match.offset))
+		tokens.push("<b>" + desc.substr(match.offset, match.length) + "</b>")
+
+		noMatchStart = match.offset + match.length
+	}
+
+	if (noMatchStart < desc.length) {
+		tokens.push(desc.substring(noMatchStart, desc.length))
+	}
+
+	return tokens.join('')
+}
+
+function City(state, action) {
+	switch (action.type) {
+		case RECEIVE_SEARCH_CITY:
+		return Object.assign(state, {display_description: highlightSearchResult(state)});
+
+		default:
+		return state
+	}
+}
+
+function Cities(state = [], action) {
+	switch (action.type) {
+		case RECEIVE_SEARCH_CITY:
+		return action.cities/*.map(c =>
+			City(c, action)
+		)*/
+
+		default:
+		return state
+	}
+}
+
+function selectedCity(state = {}, action) {
+	switch (action.type) {
+		case CHANGE_SEARCH_TEXT:
+		return {}
+
+		case SELECT_CITY:
+		return action.city
+
+		default:
+		return state
+	}
+}
+
+function searchText(state = "", action) {
+	switch (action.type) {
+		case CHANGE_SEARCH_TEXT:
+		return action.text
+
+		case SELECT_CITY:
+		return action.city.description
+
+		default:
+		return state
+	}
+}
+
+const CitySearchApp = combineReducers({
+	Cities,
+	citySearchState,
+	selectedCity,
+	searchText
+})
+
+export default CitySearchApp
