@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import { alternateClass, parsePOIType, openNow } from '../utils/POIHelpers';
 
 export default class POIList extends Component {
 	componentWillMount() {
@@ -6,10 +7,14 @@ export default class POIList extends Component {
 	}
 
 	render() {
+
 		return (
-			<ul>
+			<div className="poi-list-wrapper">
+			<div className="header">Available Attractions</div>
+			<ul className="poi-list">
 				{this.props.POIs.map((poi, i) =>
 					<li
+					className={alternateClass(i)}
 					key = {poi.place_id}
 					data-id={poi.place_id}
 					data-index={i}
@@ -18,10 +23,15 @@ export default class POIList extends Component {
 					onDragStart={(e) => this.handleDragStart(e)}
 					onDragOver={(e) => this.handleDragOver(e)}
 					>
-					{poi.name}
+					<p className="poi-name">{poi.name}</p>
+					<p className="poi-details">
+						<span className="poi-type">{parsePOIType(poi)}</span>
+						<span className={"opening " + (openNow(poi) ? 'open-now': 'closed')}>{openNow(poi) ? 'Open': 'Closed'}</span>
+					</p>
 					</li>
 				)}
 			</ul>
+			</div>
 		)
 	}
 

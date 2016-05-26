@@ -9,8 +9,8 @@ class ItineraryHandler extends Component {
 		// Injected by connect() call:
 		const { dispatch, selectedCity, POIs, MyPOIs, dragPOI } = this.props
 		return (
-			<div>
-			{selectedCity.description}
+			<div className="itinerary-container">
+			<div className="header">Welcome to {selectedCity.description}!</div>
 			<POIList
 				selectedCity={selectedCity}
 				dragPOI={dragPOI}

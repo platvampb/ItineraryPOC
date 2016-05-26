@@ -46,6 +46,9 @@ function citySearchState(state = CitySearchStates.SEARCH_NONE, action) {
 		case REQUEST_SEARCH_CITY:
 			return CitySearchStates.SEARCH_IN_PROGRESS
 
+		case SELECT_CITY:
+			return CitySearchStates.SEARCH_NONE
+
 		default:
 		return state
 	}
@@ -145,7 +148,6 @@ function POIs(state = [], action) {
 function MyPOIs(state = [], action) {
 	switch (action.type) {
 		case DRAG_MOVE:
-		console.log(1, state)
 		let myPOIs = state.slice(0, state.length);
 		if(action.fromEl.listType == "MyPOI") {
 			myPOIs.splice(action.fromEl.index, 1)
@@ -153,7 +155,6 @@ function MyPOIs(state = [], action) {
 		if(action.toEl.listType == "MyPOI") {
 			myPOIs.splice(action.toEl.index, 0, action.fromEl.data)
 		}
-		console.log(2, state)
 
 		return myPOIs
 

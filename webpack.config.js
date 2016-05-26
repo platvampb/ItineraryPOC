@@ -6,7 +6,7 @@ var devFlagPlugin = new webpack.DefinePlugin({
 
 module.exports = {
 	entry: [
-		'webpack-dev-server/client?http://0.0.0.0:8080',
+		'webpack-dev-server/client?http://0.0.0.0:8081',
 		'webpack/hot/only-dev-server',
 		"./app/app.js"
 	],
@@ -19,9 +19,19 @@ module.exports = {
 			{ test: /\.js?$/, loaders: ['react-hot', 'babel'], exclude: /node_modules/},
 			{ test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader', query: {presets: ['es2015', 'react']}},
 			{
+				test: /\.css$/,
+				include: /stylesheets/,
+				loader: 'style!css?outputStyle=expanded'
+			},
+			{
 				test: /\.scss$/,
-				exclude: /node_modules/,
-				loader: ExtractTextPlugin.extract('style-loader', 'css!sass?outputStyle=expanded')
+				include: /stylesheets/,
+				//loader: ExtractTextPlugin.extract('style-loader', 'css!sass?outputStyle=expanded')
+				loader: 'style!css!sass?outputStyle=expanded'
+			},
+			{
+				test: /\.(jpg|png|gif|eot|woff|ttf|svg)/,
+				loader: "file"
 			}
 		]
 	},

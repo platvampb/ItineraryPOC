@@ -2,7 +2,7 @@
   "name": "itinerary-POC",
   "version": "0.0.0",
   "description": "A Simple POC for doing an itinerary list with react and redux",
-  "main": "index.js",
+  "main": "app/app.js",
   "scripts": {
     "start": "webpack-dev-server --host 0.0.0.0 --port 8080 --hot --progress --colors",
     "build": "webpack --progress --colors"
@@ -16,6 +16,7 @@
     "jquery": "^2.2.3",
     "morgan": "^1.7.0",
     "react": "^0.14.6",
+    "react-addons-css-transition-group": "^15.1.0",
     "react-dom": "^0.14.6",
     "react-redux": "^4.1.2",
     "react-router": "^2.0.0-rc5",

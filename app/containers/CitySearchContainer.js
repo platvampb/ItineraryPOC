@@ -7,9 +7,9 @@ import CityList from '../components/CityList'
 class CitySearchHandler extends Component {
 	render() {
 		// Injected by connect() call:
-		const { dispatch, cities, searchText, selectedCity } = this.props
+		const { dispatch, cities, searchText, selectedCity, citySearchState } = this.props
 		return (
-			<div>
+			<div className="searchbar-container">
 				<SearchCity
 					searchText={searchText}
 					selectedCity={selectedCity}
@@ -20,10 +20,12 @@ class CitySearchHandler extends Component {
 						dispatch(searchCity(text))
 					} />
 				<CityList
+					citySearchState={citySearchState}
 					Cities={cities}
 					onCityClick={ city =>
 						dispatch(selectCity(city))
 					} />
+				{this.props.children}
 			</div>
 		)
 	}
@@ -42,7 +44,9 @@ function select(state) {
 	return {
 		cities: state.Cities,
 		selectedCity: state.selectedCity,
-		searchText: state.searchText}
+		searchText: state.searchText,
+		citySearchState: state.citySearchState
+	}
 }
 
 // Wrap the component to inject dispatch and state into it
