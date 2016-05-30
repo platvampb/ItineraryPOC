@@ -7,42 +7,48 @@ import MyPOIList from '../components/MyPOIList'
 class ItineraryHandler extends Component {
 	render() {
 		// Injected by connect() call:
-		const { dispatch, selectedCity, POIs, MyPOIs, dragPOI } = this.props
+		const { dispatch, selectedCity, POIs, MyPOIs, dragPOI, cityPhoto } = this.props
+		let divStyle = cityPhoto ? {
+			backgroundImage: 'url(' + cityPhoto + ')'
+		} : {};
 		return (
 			<div className="itinerary-container">
-			<div className="header">Welcome to {selectedCity.description}!</div>
-			<POIList
-				selectedCity={selectedCity}
-				dragPOI={dragPOI}
-				onLoad={ description =>
-					dispatch(searchPOIs(description))
-				}
-				onDragStart = { (index, listType, data) =>
-					dispatch(dragPOIStart(index, listType, data))
-				}
-				onDragEnd = { () =>
-					dispatch(dragPOIEnd())
-				}
-				onDragOver = { (fromEl, toEl) =>
-					dispatch(dragPOIMove(fromEl, toEl))
-				}
-
-				POIs={POIs}
-			/>
-			<MyPOIList
-				dragPOI={dragPOI}
-				onDragStart = { (index, listType, data) =>
-					dispatch(dragPOIStart(index, listType, data))
-				}
-				onDragEnd = { () =>
-					dispatch(dragPOIEnd())
-				}
-				onDragOver = { (fromEl, toEl) =>
-					dispatch(dragPOIMove(fromEl, toEl))
-				}
-
-				MyPOIs={MyPOIs}
-			/>
+			<div className="panel-wrapper">
+				<div className="panel" style={divStyle}/>
+				<div className="header">Welcome to {selectedCity.description}!</div>
+				<POIList
+					listType='POI'
+					selectedCity={selectedCity}
+					dragPOI={dragPOI}
+					onLoad={ description =>
+						dispatch(searchPOIs(description))
+					}
+					onDragStart = { (index, listType, data) =>
+						dispatch(dragPOIStart(index, listType, data))
+					}
+					onDragEnd = { () =>
+						dispatch(dragPOIEnd())
+					}
+					onDragOver = { (fromEl, toEl) =>
+						dispatch(dragPOIMove(fromEl, toEl))
+					}
+					POIs={POIs}
+				/>
+				<POIList
+					listType='MyPOI'
+					dragPOI={dragPOI}
+					onDragStart = { (index, listType, data) =>
+						dispatch(dragPOIStart(index, listType, data))
+					}
+					onDragEnd = { () =>
+						dispatch(dragPOIEnd())
+					}
+					onDragOver = { (fromEl, toEl) =>
+						dispatch(dragPOIMove(fromEl, toEl))
+					}
+					POIs={MyPOIs}
+				/>
+			</div>
 			</div>
 		)
 	}
@@ -61,7 +67,9 @@ function getSelectedCity(state) {
 		selectedCity: state.selectedCity,
 		POIs: state.POIs,
 		MyPOIs: state.MyPOIs,
-		dragPOI: state.dragPOI
+		dragPOI: state.dragPOI,
+		targetPOI: state.targetPOI,
+		cityPhoto: state.cityPhoto
 	}
 }
 

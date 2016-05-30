@@ -1,67 +1,57 @@
 import React, { Component, PropTypes } from 'react'
-import { alternateClass, parsePOIType, openNow } from '../utils/POIHelpers';
+import { alternateClass, parsePOIType, openNow } from '../utils/POIHelpers'
+import POI from '../components/POI'
 
 export default class POIList extends Component {
 	componentWillMount() {
-		this.props.onLoad(this.props.selectedCity.description)
+		if (this.props.listType == 'POI')
+			this.props.onLoad(this.props.selectedCity.description)
 	}
 
 	render() {
+		let myPOIPrefix = (this.props.listType == 'MyPOI') ? 'my-' : ''
+		let headerText = (this.props.listType == "MyPOI") ? 'My Wishlist' : 'Available Attractions'
 
 		return (
-			<div className="poi-list-wrapper">
-			<div className="header">Available Attractions</div>
-			<ul className="poi-list">
+			<div className={myPOIPrefix + "poi-list-wrapper"}>
+			<div className="header">{headerText}</div>
+			<ul
+				className={myPOIPrefix + "poi-list"}
+				onDragOver={(e) => this.handleDragOverList(e)}
+			>
 				{this.props.POIs.map((poi, i) =>
-					<li
-					className={alternateClass(i)}
-					key = {poi.place_id}
-					data-id={poi.place_id}
-					data-index={i}
-					draggable="true"
-					onDragEnd={(e) => this.handleDragEnd(e)}
-					onDragStart={(e) => this.handleDragStart(e)}
-					onDragOver={(e) => this.handleDragOver(e)}
-					>
-					<p className="poi-name">{poi.name}</p>
-					<p className="poi-details">
-						<span className="poi-type">{parsePOIType(poi)}</span>
-						<span className={"opening " + (openNow(poi) ? 'open-now': 'closed')}>{openNow(poi) ? 'Open': 'Closed'}</span>
-					</p>
-					</li>
+					<POI
+						POI={poi}
+						listType={this.props.listType}
+						index={i}
+						key={poi.place_id}
+						dragPOI={this.props.dragPOI}
+						onDragStart={this.props.onDragStart}
+						onDragEnd={this.props.onDragEnd}
+						onDragOver={this.props.onDragOver}
+					/>
 				)}
 			</ul>
 			</div>
 		)
 	}
 
-	handleDragStart(e) {
-		// Firefox requires calling dataTransfer.setData
-		// for the drag to properly work
-		e.dataTransfer.setData("text/html", null)
-
-		e.dataTransfer.effectAllowed = 'move'
-
-		this.props.onDragStart(e.currentTarget.dataset.index, 'POI', this.props.POIs[e.currentTarget.dataset.index])
-	}
-
-	handleDragEnd(e) {
-		this.props.onDragEnd()
-	}
-
-	handleDragOver(e) {
-		e.preventDefault();
-
+	handleDragOverList(e) {
 		var targetEl = e.currentTarget
-		var fromIndex = this.props.dragPOI;
-		var toIndex = targetEl.dataset.index ? Number(targetEl.dataset.index) : 0;
-		if((e.clientY - targetEl.offsetTop) > (targetEl.offsetHeight / 2))
-			toIndex++
+		var fromIndex = this.props.dragPOI.index
+		if (this.isNewPlace(this.props.dragPOI, this.props.POIs)) {
+			e.preventDefault();
+			this.props.onDragOver(this.props.dragPOI, {index: this.props.POIs.length, listType: this.props.listType})
+		}
+	}
 
-		if(fromIndex.index < toIndex)
-			toIndex--
+	isNewPlace(POIEl, POIList) {
+		for (let poi of POIList) {//TODO:look into babel polyfil this with Array.findIndex later
+			if (poi.place_id == POIEl.data.place_id)
+				return false
+		}
 
-		this.props.onDragOver(this.props.dragPOI, {index: toIndex, listType: 'POI'})
+		return true
 	}
 }
 

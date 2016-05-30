@@ -4,7 +4,7 @@ import { Link } from 'react-router'
 export default class SearchCity extends Component {
 	render() {
 		let selectCityButton = (() => {
-			if (this.props.selectedCity.hasOwnProperty('description')) {
+			if (this.props.selectedCity.hasOwnProperty('photo')) {
 				return (
 					<div className="go-button">
 					<Link to={`/places`}>
@@ -30,18 +30,11 @@ export default class SearchCity extends Component {
 		)
 	}
 
-	handleClick(e) {
-		const node = this.refs.input
-		const text = node.value.trim()
-		//this.props.onAddClick(text)
-		node.value = ''
-	}
-
 	handleChange(e) {
 		const node = this.refs.input
 		const text = node.value.trim()
 
-		this.props.onChangeSearchText(text)
+		this.props.onChangeSearchText(node.value)
 		if (text.length > 2) {
 			this.props.onSearchTrigger(text)
 		}

@@ -15,6 +15,7 @@ export const RECEIVE_POIS = 'RECEIVE_POIS'
 export const DRAG_START = 'DRAG_START';
 export const DRAG_END = 'DRAG_END';
 export const DRAG_MOVE = 'DRAG_MOVE';
+export const RECEIVE_CITY_IMAGE = 'RECEIVE_CITY_IMAGE'
 
 /*
 * other constants
@@ -45,7 +46,7 @@ export function searchCity(text) {
 	return dispatch => {
 		dispatch(requestCityAutoComplete())
 
-		$.get("http://192.168.0.16:3000/api/cities", {
+		$.get("http://127.0.0.1:3000/api/cities", {
 			input: text
 		})
 		.done(function(res){
@@ -54,7 +55,7 @@ export function searchCity(text) {
 	}
 }
 
-function requestCityAutoComplete(text) {
+function requestCityAutoComplete() {
 	return { type: REQUEST_SEARCH_CITY }
 }
 
@@ -66,7 +67,28 @@ function receiveCityAutoComplete(response) {
 }
 
 export function selectCity(city) {
-	return { type: SELECT_CITY, city }
+	return dispatch => {
+		dispatch(((city) => {return { type: SELECT_CITY, city }})(city))
+
+		$.get("http://127.0.0.1:3000/api/photo", {
+			place_id: city.place_id,
+			max_width: 1920
+		})
+		.done(function(res){
+			dispatch(receiveCityImage(res));
+		})
+	}
+}
+
+function receiveCityImage(response) {
+	return {
+		type: RECEIVE_CITY_IMAGE,
+		img_url: buildCityImgPath(response.img_path)
+	}
+}
+
+function buildCityImgPath(img_path) {
+	return img_path ? ("http://127.0.0.1:3000/" + img_path) : ''
 }
 
 export function changeSearchText(text) {
@@ -78,7 +100,7 @@ export function searchPOIs(description) {
 	return dispatch => {
 		dispatch(requestPOIs())
 
-		$.get("http://192.168.0.16:3000/api/POIs", {
+		$.get("http://127.0.0.1:3000/api/POIs", {
 			description: description
 		})
 		.done(function(res){

@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { REQUEST_SEARCH_CITY, RECEIVE_SEARCH_CITY,  CitySearchStates, SELECT_CITY, CHANGE_SEARCH_TEXT, RECEIVE_POIS, REQUEST_POIS, DRAG_START, DRAG_END, DRAG_MOVE } from '../actions/actions'
+import { REQUEST_SEARCH_CITY, RECEIVE_SEARCH_CITY,  CitySearchStates, SELECT_CITY, CHANGE_SEARCH_TEXT, RECEIVE_POIS, REQUEST_POIS, DRAG_START, DRAG_END, DRAG_MOVE, RECEIVE_CITY_IMAGE } from '../actions/actions'
 
 function POI(state, action) {
 	switch (action.type) {
@@ -44,9 +44,13 @@ function citySearchState(state = CitySearchStates.SEARCH_NONE, action) {
 			return CitySearchStates.SEARCH_NO_RESULT
 
 		case REQUEST_SEARCH_CITY:
-			return CitySearchStates.SEARCH_IN_PROGRESS
+		return CitySearchStates.SEARCH_IN_PROGRESS
 
 		case SELECT_CITY:
+		return CitySearchStates.SEARCH_NONE
+
+		case CHANGE_SEARCH_TEXT:
+		if (action.text.length < 3)
 			return CitySearchStates.SEARCH_NONE
 
 		default:
@@ -104,6 +108,19 @@ function selectedCity(state = {}, action) {
 		case SELECT_CITY:
 		return action.city
 
+		case RECEIVE_CITY_IMAGE:
+		return Object.assign({}, state, {photo: action.img_url});
+
+		default:
+		return state
+	}
+}
+
+function cityPhoto(state = "", action) {
+	switch (action.type) {
+		case RECEIVE_CITY_IMAGE:
+		return action.img_url;
+
 		default:
 		return state
 	}
@@ -140,6 +157,9 @@ function POIs(state = [], action) {
 
 		return POIs
 
+		case SELECT_CITY:
+		return []
+		
 		default:
 		return state
 	}
@@ -147,6 +167,9 @@ function POIs(state = [], action) {
 
 function MyPOIs(state = [], action) {
 	switch (action.type) {
+		case RECEIVE_POIS:
+		return []
+
 		case DRAG_MOVE:
 		let myPOIs = state.slice(0, state.length);
 		if(action.fromEl.listType == "MyPOI") {
@@ -163,7 +186,7 @@ function MyPOIs(state = [], action) {
 	}
 }
 
-function dragPOI( state = {}, action) {
+function dragPOI(state = {}, action) {
 	switch (action.type) {
 		case DRAG_START:
 		return {
@@ -191,6 +214,7 @@ const CitySearchApp = combineReducers({
 	Cities,
 	citySearchState,
 	selectedCity,
+	cityPhoto,
 	searchText,
 	POIs,
 	MyPOIs,

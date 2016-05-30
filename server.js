@@ -13,6 +13,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(corsFilter());
 app.options('*', corsFilter()); // allow preflight (http.OPTIONS)
+app.use(express.static('public'));
 
 var routes = require('./routes/api');
 app.use('/', routes);

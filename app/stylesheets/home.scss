@@ -10,6 +10,7 @@ body {
 
 .app, .app-container {
 	height: 100%;
+	overflow: hidden;
 }
 
 @-webkit-keyframes moveToLeft {
@@ -28,27 +29,43 @@ body {
 }
 
 .example-enter {
-  animation: moveFromRight 1s ease both;
+  animation: moveFromRight 0.75s ease both;
 }
 
 .example-leave {
-  animation: moveToLeft 1s ease both;
+	position: absolute!important;//keep elements on page from shifting
+	width: 100%;
+	top: 0px;
+  animation: moveToLeft 0.75s ease both;
 }
 
 .searchbar-container {
 	height: 100%;
 	position: relative;
+}
+.search-background-hack {
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	background-size: cover;
+	background-position: center;
+	transition: opacity 0.3s ease-in-out;
+}
+.city-list-wrapper {
+	position: relative;
+	top: 38%;
+	width: 56%;
+	margin: auto;
 	ul {
-		position: relative;
-		top: 38%;
-		width: 50%;
-		margin: auto;
 		padding-left: 0;
 		border: 1px solid #333;
+		border-top: 0;
+		margin: 0 20px;
 		li {
 			list-style: none;
 			font-size: 24px;
 			padding: 3px 36px 3px 56px;
+			background-color: rgba(256, 256, 256, 0.7);
 		}
 		li:hover {
 			background-color: #77bbff;
@@ -57,13 +74,18 @@ body {
 }
 .searchbar {
 	margin: auto;
-	width: 50%;
+	width: 56%;
 	top: 38%;
 	position: relative;
+	padding: 20px;
+	border-radius: 8px;
+	background-color: rgba(256, 256, 256, 0.7);
+	margin-bottom: -20px;
 	input {
 		width: 100%;
 		background-image: url("../assets/search.png");
 		background-size: 48px;
+		background-color: transparent;
 		background-repeat: no-repeat;
 		font-size: 32px;
 		padding: 5px 0 0 56px;
@@ -87,39 +109,83 @@ body {
 }
 
 .itinerary-container {
+	height: 100%;
+	position: relative;
+	padding: 4%;
+	.panel-wrapper {
+		position: relative;
+		height: 100%;
+	}
+	.panel {
+		border-radius: 6px;
+		background-color: rgba(256, 256, 256, 0.7);
+		-webkit-filter: blur(20px);
+		filter: blur(20px);
+		overflow: auto;
+		height: 100%;
+		width: 100%;
+		position: absolute;
+		background-position: center;
+		background-size: 109%;
+		&:before{
+			content: "";
+			position: absolute;
+			height: 100%;
+			width: 100%;
+			background-color: rgba(256, 256, 256, 0.7);
+		}
+	}
 	.header {
-		height: 60px;
-		margin-top: 16px;
-		margin-bottom: 16px;
-		font-size: 32px;
+		height: calc(26px + 2.4vw);
+		padding-top: 0.4vw;
+		font-size: calc(14px + 1.5vw);
 		text-align: center;
+		position: relative;
 	}
 	.poi-list-wrapper, .my-poi-list-wrapper {
-		width: 47%;
+		width: 47.7%;
 		float: left;
-		margin: 20px 1.5%;
+		margin: 0 1.5%;
+		position: relative;
+		height: 90%;
+		.header {
+			text-align: left;
+			padding-top: 0;
+			height: calc(12px + 1.2vw);
+			font-size: calc(12px + 0.6vw);
+		}
+	}
+	.my-poi-list-wrapper {
+		margin-left: 0;
 	}
 	ul {
-		.header {
-			font-size: 24px;
-		}
-		height: 600px;
+		height: calc(95% - 3.5vw);
 		overflow: scroll;
 		border: 2px dashed #666;
 		padding-left: 0;
 		li {
 			list-style: none;
 			padding: 10px 20px;
+			background-color: rgba(256, 256, 256, 0.7);
+			background-size: contain;
+			background-repeat: no-repeat;
+			background-position: right;
 			&.dark-bg {
-				background-color: #eee;
+				background-color: rgba(256, 256, 256, 0.5);
+			}
+
+			@media screen and (max-width: 920px) {
+				background-image: none!important;
 			}
 		}
 	}
 	.poi-details {
 		margin-bottom: 0;
+		font-size: calc(8px + 0.8vw);
 	}
 	.poi-name {
-		font-size: 24px;
+		font-size: calc(8px + 1.5vw);
+		width: 60%;
 	}
 	.poi-type {
 		margin-right: 20px;

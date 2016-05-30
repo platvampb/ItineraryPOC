@@ -13,7 +13,8 @@ export default class CityList extends Component {
 		})()
 
 		return (
-			<ul className={"city-list " + hideClass}>
+			<div className={"city-list-wrapper " + hideClass}>
+			<ul>
 				{this.props.Cities.map(city =>
 					<City
 						key={city.id}
@@ -22,6 +23,7 @@ export default class CityList extends Component {
 					/>
 				)}
 			</ul>
+			</div>
 		)
 	}
 }
