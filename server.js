@@ -14,6 +14,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(corsFilter());
 app.options('*', corsFilter()); // allow preflight (http.OPTIONS)
 app.use(express.static('public'));
+app.use(express.static('build'));
 
 var routes = require('./routes/api');
 app.use('/', routes);

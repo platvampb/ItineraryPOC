@@ -2,7 +2,6 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { searchPOIs, dragPOIStart, dragPOIEnd, dragPOIMove } from '../actions/actions'
 import POIList from '../components/POIList'
-import MyPOIList from '../components/MyPOIList'
 
 class ItineraryHandler extends Component {
 	render() {
