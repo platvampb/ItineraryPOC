@@ -1,12 +1,13 @@
-var webpack = require('webpack');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var devFlagPlugin = new webpack.DefinePlugin({
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const devFlagPlugin = new webpack.DefinePlugin({
   __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'false'))
 });
 
 module.exports = {
 	entry: [
-		'webpack-dev-server/client?http://0.0.0.0:8081',
+		'webpack-dev-server/client?http://0.0.0.0:8080',
 		'webpack/hot/only-dev-server',
 		"./app/app.js"
 	],
@@ -14,6 +15,7 @@ module.exports = {
 		path: './build',
 		filename: "bundle.js"
 	},
+	devtool: 'eval-source-map',
 	module: {
 		loaders: [
 			{ test: /\.js?$/, loaders: ['react-hot', 'babel'], exclude: /node_modules/},
@@ -26,7 +28,6 @@ module.exports = {
 			{
 				test: /\.scss$/,
 				include: /stylesheets/,
-				//loader: ExtractTextPlugin.extract('style-loader', 'css!sass?outputStyle=expanded')
 				loader: 'style!css!sass?outputStyle=expanded'
 			},
 			{
@@ -39,6 +40,9 @@ module.exports = {
 		contentBase: "./build",
 	},
 	plugins: [
+		new HtmlWebpackPlugin({
+			title: 'Itinerary POC'
+		}),
 		new ExtractTextPlugin('[name].css'),
 		devFlagPlugin,
 		new webpack.NoErrorsPlugin()
