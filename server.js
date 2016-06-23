@@ -16,7 +16,15 @@ app.options('*', corsFilter()); // allow preflight (http.OPTIONS)
 app.use(express.static('public'));
 app.use(express.static('build'));
 
-var routes = require('./routes/api');
+var mode =  process.env.MODE || ('');
+
+var routes;
+if (mode === 'fake') {
+	routes = require('./routes/fake_api');
+} else {
+	routes = require('./routes/api');
+}
+
 app.use('/', routes);
 
 app.listen(app.get('port'), function() {
