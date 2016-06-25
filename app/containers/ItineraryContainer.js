@@ -6,7 +6,7 @@ import POIList from '../components/POIList'
 class ItineraryHandler extends Component {
 	render() {
 		// Injected by connect() call:
-		const { dispatch, selectedCity, POIs, MyPOIs, dragPOI, cityPhoto } = this.props
+		const { dispatch, selectedCity, POIs, myPOIs, dragPOI, cityPhoto } = this.props
 		let divStyle = cityPhoto ? {
 			backgroundImage: 'url(' + cityPhoto + ')'
 		} : {};
@@ -45,7 +45,7 @@ class ItineraryHandler extends Component {
 					onDragOver = { (fromEl, toEl) =>
 						dispatch(dragPOIMove(fromEl, toEl))
 					}
-					POIs={MyPOIs}
+					POIs={myPOIs}
 				/>
 			</div>
 			</div>
@@ -65,7 +65,7 @@ function getSelectedCity(state) {
 	return {
 		selectedCity: state.selectedCity,
 		POIs: state.POIs,
-		MyPOIs: state.MyPOIs,
+		myPOIs: state.myPOIs,
 		dragPOI: state.dragPOI,
 		targetPOI: state.targetPOI,
 		cityPhoto: state.cityPhoto

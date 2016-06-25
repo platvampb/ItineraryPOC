@@ -15,7 +15,7 @@ import { createStore, renderDevTools } from './utils/devTools';
 import AppHandler from './containers/AppContainer.js';
 import ItineraryHandler from './containers/ItineraryContainer.js';
 import CitySearchHandler from './containers/CitySearchContainer.js';
-import CitySearchApp from './reducers/reducers';
+import CitySearchApp from './reducers';
 
 let store = createStore(CitySearchApp,
 	applyMiddleware(thunk)

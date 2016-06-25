@@ -22,7 +22,7 @@ class CitySearchHandler extends Component {
 					} />
 				<CityList
 					citySearchState={citySearchState}
-					Cities={cities}
+					cities={cities}
 					onCityClick={ city =>
 						dispatch(selectCity(city))
 					} />
@@ -43,7 +43,7 @@ CitySearchHandler.propTypes = {
 // Note: use https://github.com/faassen/reselect for better performance.
 function select(state) {
 	return {
-		cities: state.Cities,
+		cities: state.cities,
 		selectedCity: state.selectedCity,
 		searchText: state.searchText,
 		citySearchState: state.citySearchState,

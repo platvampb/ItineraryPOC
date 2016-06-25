@@ -15,7 +15,7 @@ export default class CityList extends Component {
 		return (
 			<div className={"city-list-wrapper " + hideClass}>
 			<ul>
-				{this.props.Cities.map(city =>
+				{this.props.cities.map(city =>
 					<City
 						key={city.id}
 						{...city}
@@ -30,7 +30,7 @@ export default class CityList extends Component {
 
 CityList.propTypes = {
 	onCityClick: PropTypes.func.isRequired,
-	Cities: PropTypes.arrayOf(PropTypes.shape({
+	cities: PropTypes.arrayOf(PropTypes.shape({
 		description: PropTypes.string.isRequired,
 	}).isRequired).isRequired
 }
