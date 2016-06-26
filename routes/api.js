@@ -2,10 +2,11 @@ var express = require('express'),
 	router = express.Router(),
 	Promise = require("bluebird"),
 	request = Promise.promisify(require('request')),
-	fs = Promise.promisifyAll(require('fs'));
+	fs = Promise.promisifyAll(require('fs')),
+	config = require('../config/config');
 
-const key = "AIzaSyBafQ3H7ZXVGqbh8Z9Z3h27wQzniA64CJI";
-const host = "https://maps.googleapis.com";
+const key = config.googleAPIKey;
+const host = config.googleAPIEndpoint;
 
 var inMemCache = {};//keep a record for all downloaded images, obviously we can't keep this up for long
 
