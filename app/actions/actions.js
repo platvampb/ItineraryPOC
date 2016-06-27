@@ -12,9 +12,9 @@ export const COMPLETE_TODO = 'COMPLETE_TODO'
 export const CHANGE_SEARCH_TEXT = 'CHANGE_SEARCH_TEXT'
 export const REQUEST_POIS = 'REQUEST_POIS'
 export const RECEIVE_POIS = 'RECEIVE_POIS'
-export const DRAG_START = 'DRAG_START';
-export const DRAG_END = 'DRAG_END';
-export const DRAG_MOVE = 'DRAG_MOVE';
+export const DRAG_START = 'DRAG_START'
+export const DRAG_END = 'DRAG_END'
+export const DRAG_MOVE = 'DRAG_MOVE'
 export const RECEIVE_CITY_IMAGE = 'RECEIVE_CITY_IMAGE'
 
 /*
@@ -25,7 +25,7 @@ export const CitySearchStates = {
 	SEARCH_NONE: 'NONE',
 	SEARCH_IN_PROGRESS: 'IN_PROGRESS',
 	SEARCH_DONE: 'DONE',
-	SEARCH_NO_RESULT: 'NO_RESULT'
+	SEARCH_NO_RESULT: 'NO_RESULT',
 }
 
 /*
@@ -37,7 +37,7 @@ export function searchCity(text) {
 		dispatch(requestCityAutoComplete())
 
 		$.get("http://127.0.0.1:3000/api/cities", {
-			input: text
+			input: text,
 		})
 		.done(function(res){
 			dispatch(receiveCityAutoComplete(res));
@@ -52,7 +52,7 @@ function requestCityAutoComplete() {
 function receiveCityAutoComplete(response) {
 	return {
 		type: RECEIVE_SEARCH_CITY,
-		cities: response
+		cities: response,
 	}
 }
 
@@ -62,7 +62,7 @@ export function selectCity(city) {
 
 		$.get("http://127.0.0.1:3000/api/photo", {
 			place_id: city.place_id,
-			max_width: 1920
+			max_width: 1920,
 		})
 		.done(function(res){
 			dispatch(receiveCityImage(res));
@@ -73,7 +73,7 @@ export function selectCity(city) {
 function receiveCityImage(response) {
 	return {
 		type: RECEIVE_CITY_IMAGE,
-		img_url: buildCityImgPath(response.img_path)
+		img_url: buildCityImgPath(response.img_path),
 	}
 }
 
@@ -91,7 +91,7 @@ export function searchPOIs(description) {
 		dispatch(requestPOIs())
 
 		$.get("http://127.0.0.1:3000/api/POIs", {
-			description: description
+			description: description,
 		})
 		.done(function(res){
 			dispatch(receivePOIs(res));
@@ -106,7 +106,7 @@ function requestPOIs() {
 function receivePOIs(response) {
 	return {
 		type: RECEIVE_POIS,
-		POIs: response.results
+		POIs: response.results,
 	}
 }
 
@@ -115,7 +115,7 @@ export function dragPOIStart (index, listType, data) {
 		type: DRAG_START,
 		index,
 		listType,
-		data
+		data,
 	}
 }
 
@@ -128,6 +128,6 @@ export function dragPOIMove (fromEl, toEl) {
 	return {
 		type: DRAG_MOVE,
 		fromEl,
-		toEl
+		toEl,
 	}
 }

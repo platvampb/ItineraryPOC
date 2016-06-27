@@ -128,7 +128,6 @@ router.get('/api/photo', function(req, res, next) {
 	.catch(function(error) {
 		console.log(error);
 	});
-	res.json({img_path: ''})
 });
 
 module.exports = router;

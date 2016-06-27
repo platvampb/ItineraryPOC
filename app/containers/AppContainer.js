@@ -1,11 +1,11 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import { connect } from 'react-redux'
 
 export default class AppHandler extends Component {
 	render() {
 		// Injected by connect() call:
-		const { dispatch, selectedCity, cityPhoto } = this.props
+		const { selectedCity, cityPhoto } = this.props
 
 		let fetchingPhoto = ((selectedCity, cityPhoto) => {
 			return (selectedCity.id && !selectedCity.photo)
@@ -13,10 +13,8 @@ export default class AppHandler extends Component {
 
 		let divStyle = cityPhoto ? {
 			backgroundImage: 'url(' + cityPhoto + ')',
-			opacity: fetchingPhoto ? '0' : '1'
-		} : {
-			opacity: '0'
-		};
+			opacity: fetchingPhoto ? '0' : '1',
+		} : { opacity: '0' };
 
 		return (
 			<div className="app-container">
@@ -27,7 +25,7 @@ export default class AppHandler extends Component {
 				transitionLeaveTimeout={1000}
 			>
 				{React.cloneElement(this.props.children, {
-					key: this.props.location.pathname
+					key: this.props.location.pathname,
 				})}
 			</ReactCSSTransitionGroup>
 			</div>
@@ -35,17 +33,10 @@ export default class AppHandler extends Component {
 	}
 }
 
-AppHandler.propTypes = {
-	/*
-	visibleTodos: PropTypes.arrayOf(PropTypes.shape({
-		text: PropTypes.string.isRequired
-	}).isRequired).isRequired*/
-}
-
 function select(state) {
 	return {
 		selectedCity: state.selectedCity,
-		cityPhoto: state.cityPhoto
+		cityPhoto: state.cityPhoto,
 	}
 }
 

@@ -16,6 +16,6 @@ export default combineReducers({
 	myPOIs,
 	POIs,
 	searchText,
-	selectedCity
+	selectedCity,
 })
 //export default CitySearchApp

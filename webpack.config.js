@@ -19,7 +19,14 @@ module.exports = {
 	module: {
 		loaders: [
 			{ test: /\.js?$/, loaders: ['react-hot', 'babel'], exclude: /node_modules/},
-			{ test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader', query: {presets: ['es2015', 'react']}},
+			{
+				test: /\.js$/,
+				exclude: /node_modules/,
+				loaders: [
+					'babel-loader?' +  JSON.stringify({presets: ['es2015', 'react']}),
+					'eslint-loader'
+				]
+			},
 			{
 				test: /\.css$/,
 				include: /stylesheets/,
@@ -35,6 +42,9 @@ module.exports = {
 				loader: "file"
 			}
 		]
+	},
+	eslint: {
+		configFile: './.eslintrc'
 	},
 	devServer: {
 		contentBase: "./build",

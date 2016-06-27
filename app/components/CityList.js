@@ -6,7 +6,7 @@ export default class CityList extends Component {
 
 	render() {
 		let hideClass = (() => {
-			if (this.props.citySearchState == CitySearchStates.SEARCH_NONE)
+			if (this.props.citySearchState === CitySearchStates.SEARCH_NONE)
 				return 'hidden'
 
 			return ''
@@ -32,5 +32,5 @@ CityList.propTypes = {
 	onCityClick: PropTypes.func.isRequired,
 	cities: PropTypes.arrayOf(PropTypes.shape({
 		description: PropTypes.string.isRequired,
-	}).isRequired).isRequired
+	}).isRequired).isRequired,
 }

@@ -1,5 +1,5 @@
 export function alternateClass (index) {
-	return index % 2 == 1 ? "dark-bg" : ""
+	return index % 2 === 1 ? "dark-bg" : ""
 }
 
 export function openNow (poi) {

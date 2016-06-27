@@ -3,7 +3,7 @@ require('./stylesheets/vendor/bootstrap/css/bootstrap.css');
 
 import React from 'react';
 import { render } from 'react-dom';
-import { Link, Route, Router } from 'react-router';
+import { Route, Router } from 'react-router';
 
 //redux stuff
 import { Provider } from 'react-redux';

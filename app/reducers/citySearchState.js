@@ -1,12 +1,17 @@
-import { REQUEST_SEARCH_CITY, RECEIVE_SEARCH_CITY,  CitySearchStates, SELECT_CITY, CHANGE_SEARCH_TEXT } from '../actions/actions'
+import {
+	REQUEST_SEARCH_CITY,
+	RECEIVE_SEARCH_CITY,
+	CitySearchStates,
+	SELECT_CITY,
+	CHANGE_SEARCH_TEXT,
+} from '../actions/actions'
 
 export default (state = CitySearchStates.SEARCH_NONE, action) => {
 	switch (action.type) {
 		case RECEIVE_SEARCH_CITY:
 		if (action.cities > 0)
 			return CitySearchStates.SEARCH_DONE
-		else
-			return CitySearchStates.SEARCH_NO_RESULT
+		return CitySearchStates.SEARCH_NO_RESULT
 
 		case REQUEST_SEARCH_CITY:
 		return CitySearchStates.SEARCH_IN_PROGRESS

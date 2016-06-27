@@ -32,5 +32,5 @@ export default class City extends Component {
 }
 
 City.propTypes = {
-	description: PropTypes.string.isRequired
+	description: PropTypes.string.isRequired,
 }

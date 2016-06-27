@@ -6,7 +6,7 @@ export default (state = {}, action) => {
 		return {
 			listType: action.listType,
 			index: Number(action.index),
-			data: action.data
+			data: action.data,
 		}
 
 		case DRAG_END:
@@ -16,7 +16,7 @@ export default (state = {}, action) => {
 		return {
 			listType: action.toEl.listType,
 			index: Number(action.toEl.index),
-			data: state.data
+			data: state.data,
 		}
 
 		default:

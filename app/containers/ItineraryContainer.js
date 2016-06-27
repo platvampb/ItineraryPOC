@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { searchPOIs, dragPOIStart, dragPOIEnd, dragPOIMove } from '../actions/actions'
 import POIList from '../components/POIList'
@@ -8,7 +8,7 @@ class ItineraryHandler extends Component {
 		// Injected by connect() call:
 		const { dispatch, selectedCity, POIs, myPOIs, dragPOI, cityPhoto } = this.props
 		let divStyle = cityPhoto ? {
-			backgroundImage: 'url(' + cityPhoto + ')'
+			backgroundImage: 'url(' + cityPhoto + ')',
 		} : {};
 		return (
 			<div className="itinerary-container">
@@ -53,12 +53,6 @@ class ItineraryHandler extends Component {
 	}
 }
 
-ItineraryHandler.propTypes = {
-	/*
-	visibleTodos: PropTypes.arrayOf(PropTypes.shape({
-		text: PropTypes.string.isRequired
-	}).isRequired).isRequired*/
-}
 // Which props do we want to inject, given the global state?
 // Note: use https://github.com/faassen/reselect for better performance.
 function getSelectedCity(state) {
@@ -68,7 +62,7 @@ function getSelectedCity(state) {
 		myPOIs: state.myPOIs,
 		dragPOI: state.dragPOI,
 		targetPOI: state.targetPOI,
-		cityPhoto: state.cityPhoto
+		cityPhoto: state.cityPhoto,
 	}
 }
 

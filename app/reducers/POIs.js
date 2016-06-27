@@ -7,16 +7,17 @@ export default (state = [], action) => {
 			City(c, action)
 		)*/
 
-		case DRAG_MOVE:
-		let POIs = state.slice(0, state.length);
-		if(action.fromEl.listType == "POI") {
-			POIs.splice(action.fromEl.index, 1)
-		}
-		if(action.toEl.listType == "POI") {
-			POIs.splice(action.toEl.index, 0, action.fromEl.data)
-		}
+		case DRAG_MOVE: {
+			let POIs = state.slice(0, state.length)
+			if(action.fromEl.listType === "POI") {
+				POIs.splice(action.fromEl.index, 1)
+			}
+			if(action.toEl.listType === "POI") {
+				POIs.splice(action.toEl.index, 0, action.fromEl.data)
+			}
 
-		return POIs
+			return POIs
+		}
 
 		case SELECT_CITY:
 		return []

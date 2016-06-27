@@ -1,16 +1,15 @@
 import React, { Component, PropTypes } from 'react'
-import { alternateClass, parsePOIType, openNow } from '../utils/POIHelpers'
 import POI from '../components/POI'
 
 export default class POIList extends Component {
 	componentWillMount() {
-		if (this.props.listType == 'POI')
+		if (this.props.listType === 'POI')
 			this.props.onLoad(this.props.selectedCity.description)
 	}
 
 	render() {
-		let myPOIPrefix = (this.props.listType == 'MyPOI') ? 'my-' : ''
-		let headerText = (this.props.listType == "MyPOI") ? 'My Wishlist' : 'Available Attractions'
+		let myPOIPrefix = (this.props.listType === 'MyPOI') ? 'my-' : ''
+		let headerText = (this.props.listType === "MyPOI") ? 'My Wishlist' : 'Available Attractions'
 
 		return (
 			<div className={myPOIPrefix + "poi-list-wrapper"}>
@@ -22,10 +21,10 @@ export default class POIList extends Component {
 				{this.props.POIs.map((poi, i) =>
 					<POI
 						POI={poi}
+						dragPOI={this.props.dragPOI}
 						listType={this.props.listType}
 						index={i}
 						key={poi.place_id}
-						dragPOI={this.props.dragPOI}
 						onDragStart={this.props.onDragStart}
 						onDragEnd={this.props.onDragEnd}
 						onDragOver={this.props.onDragOver}
@@ -37,8 +36,6 @@ export default class POIList extends Component {
 	}
 
 	handleDragOverList(e) {
-		var targetEl = e.currentTarget
-		var fromIndex = this.props.dragPOI.index
 		if (this.isNewPlace(this.props.dragPOI, this.props.POIs)) {
 			e.preventDefault();
 			this.props.onDragOver(this.props.dragPOI, {index: this.props.POIs.length, listType: this.props.listType})
@@ -47,7 +44,7 @@ export default class POIList extends Component {
 
 	isNewPlace(POIEl, POIList) {
 		for (let poi of POIList) {//TODO:look into babel polyfil this with Array.findIndex later
-			if (poi.place_id == POIEl.data.place_id)
+			if (poi.place_id === POIEl.data.place_id)
 				return false
 		}
 
@@ -56,7 +53,25 @@ export default class POIList extends Component {
 }
 
 POIList.propTypes = {
-	/*POIs: PropTypes.arrayOf(PropTypes.shape({
+	listType: PropTypes.string.isRequired,
+	selectedCity: PropTypes.shape({
 		description: PropTypes.string.isRequired,
-	}).isRequired).isRequired*/
+	}),
+	dragPOI: PropTypes.shape({
+		listType: PropTypes.string.isRequired,
+		index: PropTypes.number.isRequired,
+		data: PropTypes.object.isRequired,
+	}).isRequired,
+	POIs: PropTypes.arrayOf(PropTypes.shape({
+		name: PropTypes.string.isRequired,
+		place_id: PropTypes.string.isRequired,
+		thumbnail_path: PropTypes.string,
+		opening_hours: PropTypes.shape({
+			open_now: PropTypes.boolean,
+		}),
+		types: PropTypes.arrayOf(PropTypes.string),
+	}).isRequired).isRequired,
+	onDragStart: PropTypes.func.isRequired,
+	onDragOver: PropTypes.func.isRequired,
+	onDragEnd: PropTypes.func.isRequired,
 }
