@@ -3,8 +3,9 @@ import { Link } from 'react-router'
 
 export default class SearchCity extends Component {
 	render() {
+		const { searchText, selectedCity } = this.props
 		let selectCityButton = (() => {
-			if ({}.hasOwnProperty.call(this.props.selectedCity, 'photo')) {
+			if ({}.hasOwnProperty.call(selectedCity, 'photo')) {
 				return (
 					<div className="go-button">
 					<Link to={`/places`}>
@@ -22,7 +23,7 @@ export default class SearchCity extends Component {
 			<div className="searchbar">
 				<input type='text' ref='input' id="searchCity"
 					placeholder="Enter a place you fancy:"
-					value={this.props.searchText}
+					value={searchText}
 					onChange={(e) => this.handleChange(e)}
 					/>
 				{selectCityButton}

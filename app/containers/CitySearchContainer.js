@@ -9,11 +9,21 @@ class CitySearchHandler extends Component {
 		// Injected by connect() call:
 		const { dispatch, cities, searchText, selectedCity, citySearchState } = this.props
 
+		let sticky = (() => {
+			if ({}.hasOwnProperty.call(selectedCity, 'description'))
+				return 'sticky'
+
+			return ''
+		})()
+
 		return (
-			<div className="searchbar-container">
+			<div className={"searchbar-container " + sticky}>
 				<SearchCity
 					searchText={searchText}
 					selectedCity={selectedCity}
+					onCityClick={ city =>
+						dispatch(selectCity(city))
+					}
 					onChangeSearchText={ text =>
 						dispatch(changeSearchText(text))
 					}
