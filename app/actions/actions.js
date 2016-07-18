@@ -1,9 +1,11 @@
 import $ from 'jquery'
 
+import { moveToTop } from './searchbarActions'
 /*
 * action types
 */
 
+export const SCROLL_WINDOW = 'SCROLL_WINDOW'
 export const ADD_TODO = 'ADD_TODO'
 export const REQUEST_SEARCH_CITY = 'REQUEST_SEARCH_CITY'
 export const RECEIVE_SEARCH_CITY = 'RECEIVE_SEARCH_CITY'
@@ -32,11 +34,18 @@ export const CitySearchStates = {
 * action creators
 */
 
+export function scrollWindow(window) {
+	return {
+		type: SCROLL_WINDOW,
+		window: window,
+	}
+}
+
 export function searchCity(text) {
 	return dispatch => {
 		dispatch(requestCityAutoComplete())
 
-		$.get("http://127.0.0.1:3000/api/cities", {
+		$.get("http://192.168.0.13:3000/api/cities", {
 			input: text,
 		})
 		.done(function(res){
@@ -65,7 +74,8 @@ export function selectCity(city) {
 			max_width: 1920,
 		})
 		.done(function(res){
-			dispatch(receiveCityImage(res));
+			dispatch(receiveCityImage(res))
+			dispatch(searchPOIs(city.description))
 		})
 	}
 }
@@ -94,6 +104,7 @@ export function searchPOIs(description) {
 			description: description,
 		})
 		.done(function(res){
+			dispatch(moveToTop());
 			dispatch(receivePOIs(res));
 		})
 	}

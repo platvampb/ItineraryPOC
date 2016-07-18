@@ -31,10 +31,12 @@ router.get('/api/POIs', function(req, res, next) {
 	request(host+path, function(error, apiRes, body){
 		var bodyObj = JSON.parse(body);
 
-		bodyObj.results.filter(function(place) {
+		bodyObj.results = bodyObj.results.filter(function(place) {
 		//bodyTemp.results.filter(function(place) {
-			if (place.types.indexOf('travel_agency') == -1)
+			if (place.types.indexOf('travel_agency') == -1) {
+				console.log(place.types);
 				return true;
+			}
 		});
 		Promise.map(bodyObj.results, function(place) {
 			// Promise.map awaits for returned promises as well.
@@ -49,7 +51,6 @@ router.get('/api/POIs', function(req, res, next) {
 			}
 		}).then(function() {
 			res.json(bodyObj);
-			console.log(bodyObj);
 		});
 		//res.json(bodyTemp);
 	});

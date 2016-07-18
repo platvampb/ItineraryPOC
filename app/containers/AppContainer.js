@@ -1,8 +1,19 @@
 import React, { Component } from 'react'
+import { findDOMNode } from 'react-dom';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import { connect } from 'react-redux'
+import { findPosRelativeToViewport } from '../utils/domHelpers'
+import { scrollWindow } from '../actions/actions'
 
 export default class AppHandler extends Component {
+	componentDidMount () {
+		window.addEventListener('scroll', this.onScroll, false);
+	}
+
+	componentWillUnmount () {
+		window.removeEventListener('scroll', this.onScroll, false);
+	}
+
 	render() {
 		// Injected by connect() call:
 		const { selectedCity, cityPhoto } = this.props
@@ -30,6 +41,17 @@ export default class AppHandler extends Component {
 			</ReactCSSTransitionGroup>
 			</div>
 		)
+	}
+}
+
+function onScroll() {
+	scrollWindow(findDOMNode(this))
+	var pos = findPosRelativeToViewport(findDOMNode(this));
+
+	if (pos[1]<=this.props.offsetTop){
+			this.setState({fix: true});
+	} else {
+			this.setState({fix: false});
 	}
 }
 

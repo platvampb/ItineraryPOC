@@ -2,6 +2,7 @@ import { combineReducers } from 'redux'
 import cities from './cities'
 import cityPhoto from './cityPhoto'
 import citySearchState from './citySearchState'
+import searchbarState from './searchbarState'
 import dragPOI from './dragPOI'
 import myPOIs from './myPOIs'
 import POIs from './POIs'
@@ -17,5 +18,6 @@ export default combineReducers({
 	POIs,
 	searchText,
 	selectedCity,
+	searchbarState,
 })
 //export default CitySearchApp

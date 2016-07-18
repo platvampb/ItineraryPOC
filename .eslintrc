@@ -159,6 +159,8 @@
     'require': true,
     'document': true,
     '__DEV__': true,
-    'window': true
+    'window': true,
+    'setTimeout': true,
+    'console': true,
   }
 }

@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import { alternateClass, parsePOIType, openNow } from '../utils/POIHelpers';
+import POIComponent from './POI'
 
-export default class POI extends Component {
+export default class POIDragable extends Component {
 
 	render() {
 		const { POI, index } = this.props
@@ -23,13 +24,10 @@ export default class POI extends Component {
 				onDragOver={(e) => this.handleDragOver(e)}
 				style={divStyle(POI.thumbnail_path)}
 				>
-					<p className="poi-name">{POI.name}</p>
-					<p className="poi-details">
-						<span className="poi-type">{parsePOIType(POI)}</span>
-						<span className={"opening " + (openNow(POI) ? 'open-now': 'closed')}>
-							{openNow(POI) ? 'Open': 'Closed'}
-						</span>
-					</p>
+				<POIComponent
+					POI={POI.place_id}
+					index={index}
+				/>
 				</li>
 		)
 	}

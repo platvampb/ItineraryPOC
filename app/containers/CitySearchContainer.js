@@ -1,23 +1,38 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { searchCity, selectCity, changeSearchText} from '../actions/actions'
+import { searchCity, selectCity, changeSearchText } from '../actions/actions'
+import { SearchbarStates } from '../actions/searchbarActions'
 import SearchCity from '../components/SearchCity'
 import CityList from '../components/CityList'
+import POIListContainer from '../components/POI/POIListContainer'
 
 class CitySearchHandler extends Component {
 	render() {
 		// Injected by connect() call:
-		const { dispatch, cities, searchText, selectedCity, citySearchState } = this.props
+		const { dispatch, cities, searchText, selectedCity,
+			citySearchState, searchbarState, POIs } = this.props
 
 		let containerClass = (() => {
-			if ({}.hasOwnProperty.call(selectedCity, 'description')) {
-				if ({}.hasOwnProperty.call(selectedCity, 'photo'))
-					return 'sticky'
+			if (searchbarState === SearchbarStates.MOVING_UP
+				|| searchbarState === SearchbarStates.STICKY) {
+				return 'sticky'
+			}
 
+			if (searchbarState === SearchbarStates.LOCKED) {
 				return 'selected'
 			}
 
 			return ''
+		})()
+
+		let POIList = (() => {
+			if (searchbarState === SearchbarStates.STICKY) {
+				return (
+					<POIListContainer
+						POIs={POIs}
+					/>
+				)
+			}
 		})()
 
 		return (
@@ -25,10 +40,7 @@ class CitySearchHandler extends Component {
 				<SearchCity
 					searchText={searchText}
 					selectedCity={selectedCity}
-					sticky={containerClass}
-					onCityClick={ city =>
-						dispatch(selectCity(city))
-					}
+					searchbarState={searchbarState}
 					onChangeSearchText={ text =>
 						dispatch(changeSearchText(text))
 					}
@@ -41,6 +53,7 @@ class CitySearchHandler extends Component {
 					onCityClick={ city =>
 						dispatch(selectCity(city))
 					} />
+				{POIList}
 				{this.props.children}
 			</div>
 		)
@@ -55,7 +68,9 @@ function select(state) {
 		selectedCity: state.selectedCity,
 		searchText: state.searchText,
 		citySearchState: state.citySearchState,
+		searchbarState: state.searchbarState,
 		cityPhoto: state.cityPhoto,
+		POIs: state.POIs,
 	}
 }
 

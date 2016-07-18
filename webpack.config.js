@@ -16,11 +16,14 @@ module.exports = {
 		filename: "bundle.js"
 	},
 	devtool: 'eval-source-map',
+	resolve: {
+    extensions: ['', '.js', '.jsx']
+  },
 	module: {
 		loaders: [
-			{ test: /\.js?$/, loaders: ['react-hot', 'babel'], exclude: /node_modules/},
+			{ test: /\.jsx|\.js?$/, loaders: ['react-hot', 'babel'], exclude: /node_modules/},
 			{
-				test: /\.js$/,
+				test: /\.jsx|\.js$/,
 				exclude: /node_modules/,
 				loaders: [
 					'babel-loader?' +  JSON.stringify({presets: ['es2015', 'react']}),

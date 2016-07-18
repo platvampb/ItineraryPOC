@@ -63,7 +63,7 @@ body {
 		padding-left: 0;
 		border: 1px solid #333;
 		border-top: 0;
-		margin: 20px 0;
+		margin: 0;
 		li {
 			list-style: none;
 			font-size: 24px;
@@ -102,13 +102,21 @@ body {
 	-webkit-animation: expandHeight 0.5s ease-in-out;
 }
 
+.searchbar-wrapper {
+	position: relative;
+	top: 38%;
+}
+
+.searchbar.dummy {
+	display: none;
+	visibility: hidden;
+	position: static;
+}
 .searchbar {
 	margin: auto;
 	width: 56%;
-	top: 38%;
 	position: relative;
 	background-color: rgba(256, 256, 256, 0.7);
-	margin-bottom: -20px;
 	transition: all 0.5s ease-in-out;
 	border-bottom: 2px solid #333;
 	input {
@@ -153,6 +161,10 @@ body {
 		opacity: 0;
 		transition: opacity 0.3s ease-in-out;
 		margin-left: -48px;
+	}
+	.searchbar.dummy {
+		display: block;
+		position: static; //stay on top to keep the height
 	}
 	.searchbar {
 		width: 100%;
@@ -203,95 +215,42 @@ body {
 	}
 }
 
-.itinerary-container {
-	height: 100%;
-	position: relative;
-	padding: 4%;
-	.panel-wrapper {
-		position: relative;
-		height: 100%;
-	}
-	.panel {
-		border-radius: 6px;
-		background-color: rgba(256, 256, 256, 0.7);
-		-webkit-filter: blur(20px);
-		filter: blur(20px);
-		overflow: auto;
-		height: 100%;
-		width: 100%;
-		position: absolute;
-		background-position: center;
-		background-size: 109%;
-		&:before {
-			content: "";
-			position: absolute;
-			height: 100%;
-			width: 100%;
-			background-color: rgba(256, 256, 256, 0.7);
-		}
-	}
-	.header {
-		height: calc(26px + 2.4vw);
-		padding-top: 0.4vw;
-		font-size: calc(14px + 1.5vw);
-		text-align: center;
-		position: relative;
-	}
-	.poi-list-wrapper, .my-poi-list-wrapper {
-		width: 47.7%;
-		float: left;
-		margin: 0 1.5%;
-		position: relative;
-		height: 90%;
-		.header {
-			text-align: left;
-			padding-top: 0;
-			height: calc(12px + 1.2vw);
-			font-size: calc(12px + 0.6vw);
-		}
-	}
-	.my-poi-list-wrapper {
-		margin-left: 0;
-	}
-	ul {
-		height: calc(95% - 3.5vw);
-		overflow: scroll;
-		border: 2px dashed #666;
-		padding-left: 0;
-		li {
-			list-style: none;
-			padding: 10px 20px;
-			background-color: rgba(256, 256, 256, 0.7);
-			background-size: contain;
-			background-repeat: no-repeat;
-			background-position: right;
-			&.dark-bg {
-				background-color: rgba(256, 256, 256, 0.5);
-			}
+.poi-list .poi-wrapper {
+	width: 340px;
+	height: 320px;
+	float: left;
+}
+.poi {
+	width: 320px;
+	margin: 0 auto;
+	background-color: #ddd;
+	padding-bottom: 10px;
+}
 
-			@media screen and (max-width: 920px) {
-				background-image: none!important;
-			}
-		}
+.poi-image {
+	width: 320px;
+	background-color: #000;
+	img {
+		height: 200px;
+		max-width: 100%;
 	}
-	.poi-details {
-		margin-bottom: 0;
-		font-size: calc(8px + 0.8vw);
+}
+.poi-details {
+	margin-bottom: 0;
+	font-size: calc(6px + 0.6vw);
+}
+.poi-name {
+	font-size: calc(6px + 1.2vw);
+}
+.poi-type {
+	margin-right: 20px;
+}
+.opening {
+	font-weight: bold;
+	&.open-now {
+		color: green;
 	}
-	.poi-name {
-		font-size: calc(8px + 1.5vw);
-		width: 60%;
-	}
-	.poi-type {
-		margin-right: 20px;
-	}
-	.opening {
-		font-weight: bold;
-		&.open-now {
-			color: green;
-		}
-		&.closed {
-			color: red;
-		}
+	&.closed {
+		color: red;
 	}
 }

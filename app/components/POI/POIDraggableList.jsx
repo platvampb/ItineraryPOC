@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import POI from '../components/POI'
 
-export default class POIList extends Component {
+export default class POIDraggableList extends Component {
 	componentWillMount() {
 		if (this.props.listType === 'POI')
 			this.props.onLoad(this.props.selectedCity.description)
@@ -52,13 +52,13 @@ export default class POIList extends Component {
 	}
 }
 
-POIList.propTypes = {
+POIDraggableList.propTypes = {
 	listType: PropTypes.string.isRequired,
 	selectedCity: PropTypes.shape({
-		description: PropTypes.string.isRequired,
+		description: PropTypes.string,
 	}),
 	dragPOI: PropTypes.shape({
-		listType: PropTypes.string.isRequired,
+		listType: PropTypes.string,
 		index: PropTypes.number.isRequired,
 		data: PropTypes.object.isRequired,
 	}).isRequired,
