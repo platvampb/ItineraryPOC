@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
-import SearchBar from '../components/SearchBar'
-import DummySearchBar from '../components/DummySearchBar'
+import SearchBar from './SearchBar'
+import CityList from './CityList'
+import NextStepButtonWrapper from './NextStepButtonWrapper'
 
 export default class SearchCity extends Component {
 
@@ -22,9 +23,8 @@ export default class SearchCity extends Component {
 					selectedCity={selectedCity}
 					searchbarState={searchbarState}
 				/>
-				<DummySearchBar
-					selectedCity={selectedCity}
-				/>
+				<CityList/>
+				<NextStepButtonWrapper/>
 			</div>
 		)
 	}
@@ -35,4 +35,8 @@ SearchCity.propTypes = {
 	onSearchTrigger: PropTypes.func.isRequired,
 	onChangeSearchText: PropTypes.func.isRequired,
 	searchText: PropTypes.string.isRequired,
+	searchbarState: PropTypes.string.isRequired,
+	selectedCity: PropTypes.shape({
+		description: PropTypes.string,
+	}).isRequired,
 }

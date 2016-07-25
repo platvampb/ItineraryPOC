@@ -1,25 +1,29 @@
-require('./stylesheets/home.scss');
-require('./stylesheets/vendor/bootstrap/css/bootstrap.css');
+require('./stylesheets/home.scss')
+require('./stylesheets/vendor/bootstrap/css/bootstrap.css')
 
-import React from 'react';
-import { render } from 'react-dom';
-import { Route, Router } from 'react-router';
+import React from 'react'
+import { render } from 'react-dom'
+import { Route, Router } from 'react-router'
 
 //redux stuff
-import { Provider } from 'react-redux';
-import { applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
+import { Provider } from 'react-redux'
+import { applyMiddleware, compose } from 'redux'
+import thunk from 'redux-thunk'
 
-import { createStore, renderDevTools } from './utils/devTools';
+import { createStore, renderDevTools } from './utils/devTools'
 
-import AppHandler from './containers/AppContainer.js';
-import ItineraryHandler from './containers/ItineraryContainer.js';
-import CitySearchHandler from './containers/CitySearchContainer.js';
-import CitySearchApp from './reducers';
+import AppHandler from './containers/AppContainer.js'
+import POIListHandler from './containers/POIListContainer'
+import CitySearchHandler from './containers/CitySearchContainer'
+import CityList from './components/searchCity/CityList'
+import CitySearchApp from './reducers'
 
 let store = createStore(CitySearchApp,
-	applyMiddleware(thunk)
-);
+	compose(
+		applyMiddleware(thunk),
+		window.devToolsExtension ? window.devToolsExtension() : f => f
+	)
+)
 
 let routes = (
 	<div className="app">
@@ -27,6 +31,7 @@ let routes = (
 	<Router>
 		<Route name="main" component={AppHandler}>
 			<Route name="search" path="/" component={CitySearchHandler}/>
+			<Route name="cityList" component={CityList}/>
 			<Route name="itinerary" path="/places" component={ItineraryHandler}/>
 		</Route>
 	</Router>
@@ -34,6 +39,6 @@ let routes = (
 
 	{renderDevTools(store)}
 	</div>
-);
+)
 
-render(routes, document.body);
+render(routes, document.body)

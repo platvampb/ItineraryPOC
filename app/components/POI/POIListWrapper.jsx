@@ -1,7 +1,10 @@
 import React, { Component, PropTypes } from 'react'
 import POI from './POI'
 
-export default class POIListContainer extends Component {
+export default class POIListWrapper extends Component {
+	componentWillMount() {
+		this.props.onLoad(this.props.selectedCity.description)
+	}
 
 	render() {
 
@@ -22,7 +25,7 @@ export default class POIListContainer extends Component {
 
 }
 
-POIListContainer.propTypes = {
+POIListWrapper.propTypes = {
 	POIs: PropTypes.arrayOf(PropTypes.shape({
 		name: PropTypes.string.isRequired,
 		place_id: PropTypes.string.isRequired,

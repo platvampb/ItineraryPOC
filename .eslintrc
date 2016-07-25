@@ -47,7 +47,7 @@
     "no-unused-vars": [1, {"vars": "local", "args": "none"}],
 
     // require variable to be delcared
-    "no-undef": 2,
+    "no-undef": 1,
 
     // Prevent React to be incorrectly marked as unused
     // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-uses-react.md

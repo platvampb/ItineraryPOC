@@ -1,13 +1,14 @@
 import React, { Component, PropTypes } from 'react'
 import { Link } from 'react-router'
-import searchIcon from '../assets/search.png'
-import loadingIcon from '../assets/350.gif'
-import SearchLabel from '../components/SearchLabel'
-import { SearchbarStates } from '../actions/searchbarActions'
+import searchIcon from '../../assets/search.png'
+import loadingIcon from '../../assets/350.gif'
+import SearchLabel from './SearchLabel'
+import { SearchbarStates } from '../../actions/searchbarActions'
 
 export default class SearchBar extends Component {
 	componentDidUpdate() {
-		this.refs.input.focus()
+		if (this.refs.input)
+			this.refs.input.focus()
 	}
 
 	render() {
@@ -26,6 +27,10 @@ export default class SearchBar extends Component {
 			return ""
 		})()
 
+		let hideSearchInput = (() => {
+			return searchbarState === SearchbarStates.READ_ONLY
+		})
+
 		let searchInput = (() => {
 			return (
 				<input type="text" ref="input" id="searchCity"
@@ -36,19 +41,12 @@ export default class SearchBar extends Component {
 			)
 		})()
 
-		let searchbarStyle = (() => {
-			return (searchbarState === SearchbarStates.STICKY) ? {
-				position: 'fixed',
-			} : {}
-		})
-
 		return (
 			<div
 				className="searchbar"
-				style={searchbarStyle()}
 				onClick={(e) => this.handleLabelClick(e)}>
 				<img src={searchIcon} alt="search" className="search-icon"></img>
-				<img src={loadingIcon} alt="search" className="loading-icon"></img>
+				<img src={loadingIcon} alt="loading" className="loading-icon"></img>
 				{searchInput}
 				<SearchLabel
 					selectedCity={selectedCity}
@@ -68,14 +66,9 @@ export default class SearchBar extends Component {
 		}
 	}
 
-	handleFocus(e) {
-		if (this.props.searchbarState === SearchbarStates.STICKY) this.props.onChangeSearchText('')
-	}
-
 	handleLabelClick(e) {
 		const node = this.refs.input
-		if (this.props.searchbarState === SearchbarStates.LOCKED || this.props.searchbarState === SearchbarStates.STICKY)
-			this.props.onChangeSearchText(node.value)
+		this.props.onChangeSearchText(node.value)
 	}
 }
 
@@ -83,8 +76,8 @@ SearchBar.propTypes = {
 	onSearchTrigger: PropTypes.func.isRequired,
 	onChangeSearchText: PropTypes.func.isRequired,
 	searchText: PropTypes.string.isRequired,
+	searchbarState: PropTypes.string.isRequired,
 	selectedCity: PropTypes.shape({
 		description: PropTypes.string,
-	}),
-	searchbarState: PropTypes.string.isRequired,
+	}).isRequired,
 }

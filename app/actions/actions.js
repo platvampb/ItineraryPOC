@@ -1,6 +1,6 @@
 import $ from 'jquery'
 
-import { moveToTop } from './searchbarActions'
+import { setSearchbarReadOnly } from './searchbarActions'
 /*
 * action types
 */
@@ -45,7 +45,7 @@ export function searchCity(text) {
 	return dispatch => {
 		dispatch(requestCityAutoComplete())
 
-		$.get("http://192.168.0.13:3000/api/cities", {
+		$.get("http://127.0.0.1:3000/api/cities", {
 			input: text,
 		})
 		.done(function(res){
@@ -75,7 +75,7 @@ export function selectCity(city) {
 		})
 		.done(function(res){
 			dispatch(receiveCityImage(res))
-			dispatch(searchPOIs(city.description))
+			dispatch(setSearchbarReadOnly())
 		})
 	}
 }
@@ -104,7 +104,6 @@ export function searchPOIs(description) {
 			description: description,
 		})
 		.done(function(res){
-			dispatch(moveToTop());
 			dispatch(receivePOIs(res));
 		})
 	}

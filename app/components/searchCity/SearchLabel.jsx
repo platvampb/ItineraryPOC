@@ -7,6 +7,7 @@ export default class SearchLabel extends Component {
 		return (
 			<label ref="label">
 				{selectedCity.description}
+				<a><i className="glyphicon glyphicon-remove-sign glyphicon-white"></i></a>
 			</label>
 		)
 	}
@@ -14,6 +15,6 @@ export default class SearchLabel extends Component {
 
 SearchLabel.propTypes = {
 	selectedCity: PropTypes.shape({
-		description: PropTypes.string.isRequired,
+		description: PropTypes.string,
 	}).isRequired,
 }

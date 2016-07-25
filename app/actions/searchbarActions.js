@@ -3,6 +3,7 @@
 */
 export const MOVE_UP_SEARCHBAR = 'MOVE_UP_SEARCHBAR'
 export const STICK_SEARCHBAR = 'STICK_SEARCHBAR'
+export const SET_SEARCHBAR_READ_ONLY = 'SET_SEARCHBAR_READ_ONLY'
 
 /*
 * other constants
@@ -10,30 +11,15 @@ export const STICK_SEARCHBAR = 'STICK_SEARCHBAR'
 
 export const SearchbarStates = {
 	DEFAULT: 'DEFAULT', //center of the screen
-	LOCKED: 'LOCKED', //user selected city, waiting for response
-	MOVING_UP: 'MOVING_UP', //animation in progress
-	STICKY: 'STICY', //sticky
+	PENDING: 'PENDING', //user selected city, waiting for response
+	READ_ONLY: 'READ_ONLY', //user selected city, waiting for response
 }
 /*
 * action creators
 */
 
-export function moveToTop() {
-	return dispatch => {
-		dispatch((() => {
-			return {
-				type: MOVE_UP_SEARCHBAR,
-			}
-		})())
-
-		setTimeout(() => {
-			dispatch(stickToTop());
-		}, 500)
-	}
-}
-
-function stickToTop(text) {
+export function setSearchbarReadOnly () {
 	return {
-		type: STICK_SEARCHBAR,
+		type: SET_SEARCHBAR_READ_ONLY,
 	}
 }

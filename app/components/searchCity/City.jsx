@@ -33,4 +33,5 @@ export default class City extends Component {
 
 City.propTypes = {
 	description: PropTypes.string.isRequired,
+	onClick: PropTypes.func.isRequired,
 }

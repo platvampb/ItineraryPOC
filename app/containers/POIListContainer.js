@@ -1,51 +1,34 @@
+require('../stylesheets/POIList.scss')
+
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { searchPOIs, dragPOIStart, dragPOIEnd, dragPOIMove } from '../actions/actions'
-import POIList from '../components/POIList'
+import POIListWrapper from '../components/POI/POIListWrapper'
 
-class ItineraryHandler extends Component {
+class POIListHandler extends Component {
 	render() {
 		// Injected by connect() call:
-		const { dispatch, selectedCity, POIs, myPOIs, dragPOI, cityPhoto } = this.props
-		let divStyle = cityPhoto ? {
-			backgroundImage: 'url(' + cityPhoto + ')',
-		} : {};
+		const { dispatch, selectedCity, POIs, myPOIs, dragPOI } = this.props
 		return (
 			<div className="itinerary-container">
 			<div className="panel-wrapper">
-				<div className="panel" style={divStyle}/>
 				<div className="header">Welcome to {selectedCity.description}!</div>
-				<POIList
-					listType='POI'
+				<POIListWrapper
 					selectedCity={selectedCity}
 					dragPOI={dragPOI}
-					onLoad={ description =>
+					onLoad={description =>
 						dispatch(searchPOIs(description))
 					}
-					onDragStart = { (index, listType, data) =>
+					onDragStart = {(index, listType, data) =>
 						dispatch(dragPOIStart(index, listType, data))
 					}
-					onDragEnd = { () =>
+					onDragEnd = {() =>
 						dispatch(dragPOIEnd())
 					}
-					onDragOver = { (fromEl, toEl) =>
+					onDragOver = {(fromEl, toEl) =>
 						dispatch(dragPOIMove(fromEl, toEl))
 					}
 					POIs={POIs}
-				/>
-				<POIList
-					listType='MyPOI'
-					dragPOI={dragPOI}
-					onDragStart = { (index, listType, data) =>
-						dispatch(dragPOIStart(index, listType, data))
-					}
-					onDragEnd = { () =>
-						dispatch(dragPOIEnd())
-					}
-					onDragOver = { (fromEl, toEl) =>
-						dispatch(dragPOIMove(fromEl, toEl))
-					}
-					POIs={myPOIs}
 				/>
 			</div>
 			</div>
@@ -67,4 +50,4 @@ function getSelectedCity(state) {
 }
 
 // Wrap the component to inject dispatch and state into it
-export default connect(getSelectedCity)(ItineraryHandler)
+export default connect(getSelectedCity)(POIListHandler)
