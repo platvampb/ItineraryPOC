@@ -1,0 +1,83 @@
+body {
+	background-color: #ddd;
+}
+
+h3 {
+	margin-top: 0;
+}
+
+.badge {
+	background-color: #777;
+}
+
+.tabs-left { margin-top: 3rem; }
+
+.tabs-left .nav-tabs {
+	border-bottom: 0;
+	float:left;
+	>li {
+		float:none;
+		margin: 0;
+
+		>a {
+			margin-right: 0;
+			border: 0;
+			background-color: #E8FCFD;
+			padding: 5px 20px;
+			border-radius: 0px;
+			color: #999;
+			transition: background-color 0.1s linear;
+
+			&:hover, &:focus {
+				color: #197584;
+				background-color: #ACF6FF;
+			}
+		}
+		&:first-child a {
+			border-radius: 12px 0 0 0;
+		}
+		&:last-child a {
+			border-radius: 0 0 0 12px;
+		}
+		&.active a {
+			border: 0;
+			background-color: #ACF6FF;
+			&:hover, &:focus {
+				border: 0;
+				background-color: #ACF6FF;
+			}
+		}
+	}
+
+	.day {
+		font-size: 16px;
+	}
+
+	.day-number {
+		font-size: 26px;
+	}
+
+	.active a {
+		color: #197584;
+	}
+}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
+	border:0;
+}
+
+.tab-content {
+	margin-left: 20px;
+	.tab-pane {
+		display: none;
+		background-color: #fff;
+		overflow-y: auto;
+	}
+	.active { display: block; }
+}
+
+.itinerary-poi {
+	width: 100%;
+	height: 50px;
+	border: 1px solid #aaa;
+}

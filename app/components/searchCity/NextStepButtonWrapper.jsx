@@ -14,7 +14,11 @@ export default class NextStepButtonWrapper extends Component {
 		})()
 		let autoButton = (() => {
 			return (
-				<button type="button" className="btn auto btn-primary">Generate a trip for me >></button>
+				<div className="btn-wrapper">
+				<Link to={`/itinerary`} type="button" className="btn auto btn-primary">
+					<span >Generate a trip for me >></span>
+				</Link>
+				</div>
 			)
 		})()
 

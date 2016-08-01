@@ -131,4 +131,9 @@ router.get('/api/photo', function(req, res, next) {
 	});
 });
 
+router.get('/api/trips', function(req, res, next) {
+	data = require('../config/trip_id_2.json');
+	return res.json(data);
+});
+
 module.exports = router;

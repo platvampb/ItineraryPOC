@@ -8,6 +8,9 @@ import myPOIs from './myPOIs'
 import POIs from './POIs'
 import searchText from './searchText'
 import selectedCity from './selectedCity'
+import tripItinerary from './tripItinerary'
+import tripRequestState from './tripRequestState'
+import activeDay from './activeDay'
 
 export default combineReducers({
 	cities,
@@ -19,5 +22,8 @@ export default combineReducers({
 	searchText,
 	selectedCity,
 	searchbarState,
+	tripItinerary,
+	tripRequestState,
+	activeDay,
 })
 //export default CitySearchApp

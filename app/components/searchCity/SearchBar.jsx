@@ -1,9 +1,7 @@
 import React, { Component, PropTypes } from 'react'
-import { Link } from 'react-router'
 import searchIcon from '../../assets/search.png'
 import loadingIcon from '../../assets/350.gif'
 import SearchLabel from './SearchLabel'
-import { SearchbarStates } from '../../actions/searchbarActions'
 
 export default class SearchBar extends Component {
 	componentDidUpdate() {
@@ -12,24 +10,7 @@ export default class SearchBar extends Component {
 	}
 
 	render() {
-		const { searchText, selectedCity, searchbarState } = this.props
-		let selectCityButton = (() => {
-			if ({}.hasOwnProperty.call(selectedCity, 'photo')) {
-				return (
-					<div className="go-button">
-					<Link to={`/places`}>
-						Let's go!
-						<span className="glyphicon glyphicon-chevron-right"/>
-					</Link>
-					</div>
-				)
-			}
-			return ""
-		})()
-
-		let hideSearchInput = (() => {
-			return searchbarState === SearchbarStates.READ_ONLY
-		})
+		const { searchText, selectedCity } = this.props
 
 		let searchInput = (() => {
 			return (
@@ -51,7 +32,6 @@ export default class SearchBar extends Component {
 				<SearchLabel
 					selectedCity={selectedCity}
 				/>
-				{selectCityButton}
 			</div>
 		)
 	}

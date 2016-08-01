@@ -8,7 +8,7 @@ import POIListWrapper from '../components/POI/POIListWrapper'
 class POIListHandler extends Component {
 	render() {
 		// Injected by connect() call:
-		const { dispatch, selectedCity, POIs, myPOIs, dragPOI } = this.props
+		const { dispatch, selectedCity, POIs, dragPOI } = this.props
 		return (
 			<div className="itinerary-container">
 			<div className="panel-wrapper">
@@ -42,7 +42,6 @@ function getSelectedCity(state) {
 	return {
 		selectedCity: state.selectedCity,
 		POIs: state.POIs,
-		myPOIs: state.myPOIs,
 		dragPOI: state.dragPOI,
 		targetPOI: state.targetPOI,
 		cityPhoto: state.cityPhoto,

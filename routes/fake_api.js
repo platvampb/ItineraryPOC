@@ -236,4 +236,9 @@ router.get('/api/photo', function(req, res, next) {
 	res.json({img_path: ''})
 });
 
+router.get('/api/trip', function() {
+	data = require('../config/trip_id_2.json');
+	return res.json(data);
+})
+
 module.exports = router;

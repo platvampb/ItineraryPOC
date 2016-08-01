@@ -14,6 +14,7 @@ import { createStore, renderDevTools } from './utils/devTools'
 
 import AppHandler from './containers/AppContainer.js'
 import POIListHandler from './containers/POIListContainer'
+import ItineraryHandler from './containers/ItineraryContainer'
 import CitySearchHandler from './containers/CitySearchContainer'
 import CityList from './components/searchCity/CityList'
 import CitySearchApp from './reducers'
@@ -32,7 +33,8 @@ let routes = (
 		<Route name="main" component={AppHandler}>
 			<Route name="search" path="/" component={CitySearchHandler}/>
 			<Route name="cityList" component={CityList}/>
-			<Route name="itinerary" path="/places" component={ItineraryHandler}/>
+			<Route name="poi" path="/places" component={POIListHandler}/>
+			<Route name="itinerary" path="/itinerary" component={ItineraryHandler}/>
 		</Route>
 	</Router>
 	</Provider>
