@@ -20,7 +20,7 @@ export default class DayMenu extends Component {
 					key={day}
 					dayNumber={day}
 					active={day === activeDay}
-					clickHandler={onChangeDays}
+					changeDayHandler={onChangeDays}
 				/>
 			)}
 			</ul>

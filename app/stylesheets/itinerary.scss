@@ -10,8 +10,6 @@ h3 {
 	background-color: #777;
 }
 
-.tabs-left { margin-top: 3rem; }
-
 .tabs-left .nav-tabs {
 	border-bottom: 0;
 	float:left;
@@ -29,7 +27,6 @@ h3 {
 			transition: background-color 0.1s linear;
 
 			&:hover, &:focus {
-				color: #197584;
 				background-color: #ACF6FF;
 			}
 		}
@@ -67,11 +64,12 @@ h3 {
 }
 
 .tab-content {
-	margin-left: 20px;
+	float: left;
+	width: calc(100% - 70px);
 	.tab-pane {
+		position: relative;
 		display: none;
 		background-color: #fff;
-		overflow-y: auto;
 	}
 	.active { display: block; }
 }
