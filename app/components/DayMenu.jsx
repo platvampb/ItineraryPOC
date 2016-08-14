@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import DayTab from './dayTab'
+import DayTab from './DayTab'
 
 export default class DayMenu extends Component {
 	constructor(props) {

@@ -3,12 +3,8 @@ require('../stylesheets/itinerary.scss')
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { requestTrip, changeActiveDay, tripRequestStates, movePOI } from '../actions/itineraryActions'
-import DayMenu from '../components/itinerary/dayMenu'
-import DayItinerary from '../components/itinerary/DayItinerary'
-import HTML5Backend from 'react-dnd-html5-backend'
-import TouchBackend from 'react-dnd-touch-backend'
-import { DragDropContext } from 'react-dnd'
-//import DragPreviewLayer from '../components/itinerary/DragPreviewLayer'
+import DayMenu from '../components/DayMenu'
+import DayItinerary from '../components/DayItinerary'
 
 class ItineraryHandler extends Component {
 	componentWillMount() {
@@ -77,5 +73,4 @@ function select(state) {
 }
 
 // Wrap the component to inject dispatch and state into it
-ItineraryHandler = DragDropContext(TouchBackend({ enableMouseEvents: true }))(ItineraryHandler)
 export default connect(select)(ItineraryHandler)

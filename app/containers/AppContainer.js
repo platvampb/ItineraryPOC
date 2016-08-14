@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import { connect } from 'react-redux'
 
 export default class AppHandler extends Component {
@@ -7,15 +6,7 @@ export default class AppHandler extends Component {
 	render() {
 		return (
 			<div className="app-container">
-			<ReactCSSTransitionGroup
-				transitionName="example"
-				transitionEnterTimeout={1000}
-				transitionLeaveTimeout={1000}
-			>
-				{React.cloneElement(this.props.children, {
-					key: this.props.location.pathname,
-				})}
-			</ReactCSSTransitionGroup>
+				{this.props.children}
 			</div>
 		)
 	}

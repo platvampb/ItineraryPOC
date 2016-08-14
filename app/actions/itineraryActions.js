@@ -26,7 +26,7 @@ export function requestTrip() {
 	return dispatch => {
 		dispatch(requestTripStart())
 
-		$.get("http://192.168.0.13:3000/api/trips")
+		$.get("http://127.0.0.1:3000/api/trips")
 		.done(function(res){
 			dispatch(receiveTrip(res.values[0]));
 		})

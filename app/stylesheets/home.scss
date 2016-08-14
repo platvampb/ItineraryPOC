@@ -13,11 +13,6 @@ body {
 	overflow: hidden;
 }
 
-.itinerary-container {
-	height: 100%;
-	overflow: scroll;
-}
-
 @-webkit-keyframes moveToLeft {
 	from { }
 	to { -webkit-transform: translateX(-100%); }

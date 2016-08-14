@@ -13,10 +13,7 @@ import thunk from 'redux-thunk'
 import { createStore, renderDevTools } from './utils/devTools'
 
 import AppHandler from './containers/AppContainer.js'
-import POIListHandler from './containers/POIListContainer'
 import ItineraryHandler from './containers/ItineraryContainer'
-import CitySearchHandler from './containers/CitySearchContainer'
-import CityList from './components/searchCity/CityList'
 import CitySearchApp from './reducers'
 
 let store = createStore(CitySearchApp,
@@ -31,10 +28,7 @@ let routes = (
 	<Provider store={store}>
 	<Router>
 		<Route name="main" component={AppHandler}>
-			<Route name="search" path="/" component={CitySearchHandler}/>
-			<Route name="cityList" component={CityList}/>
-			<Route name="poi" path="/places" component={POIListHandler}/>
-			<Route name="itinerary" path="/itinerary" component={ItineraryHandler}/>
+			<Route name="itinerary" path="/" component={ItineraryHandler}/>
 		</Route>
 	</Router>
 	</Provider>
