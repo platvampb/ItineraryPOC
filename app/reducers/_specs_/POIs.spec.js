@@ -1,6 +1,5 @@
 import { expect } from 'chai'
 import reducer from '../../../app/reducers/POIs'
-import { SELECT_CITY, RECEIVE_POIS, DRAG_MOVE } from '../../../app/actions/actions'
 
 describe('.POI', () => {
 	describe('case:default', () => {

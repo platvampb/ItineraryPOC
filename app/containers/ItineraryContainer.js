@@ -14,7 +14,7 @@ class ItineraryHandler extends Component {
 	}
 	render() {
 		// Injected by connect() call:
-		const { dispatch, selectedCity, cityPhoto, tripItinerary, activeDay, tripRequestState } = this.props
+		const { dispatch, selectedCity, tripItinerary, activeDay, tripRequestState } = this.props
 
 		let renderDayMenu = (tripRequestState) => {
 			if (tripRequestState === tripRequestStates.REQUEST_DONE)
@@ -48,11 +48,15 @@ class ItineraryHandler extends Component {
 
 		return (
 			<div className={"itinerary-outer-container"}>
-				<div className="row">
-					<div className="col-md-8 col-md-offset-2 col-sm-12">
-						{renderDayMenu(tripRequestState)}
-						{renderDayItinerary(tripRequestState)}
-					</div>
+				<div className="header row">
+				<div className="col-sm-8 col-sm-offset-2 col-xs-12">
+					<img src="https://www.wewherego.com/img/logo/logo_wherego.png"/>
+					<h1>Dudemaster's 3-day trip to Abaquerque.</h1>
+				</div>
+				</div>
+				<div className="content col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
+					{renderDayMenu(tripRequestState)}
+					{renderDayItinerary(tripRequestState)}
 				</div>
 				{this.props.children}
 			</div>
@@ -65,7 +69,6 @@ class ItineraryHandler extends Component {
 function select(state) {
 	return {
 		selectedCity: state.selectedCity,
-		cityPhoto: state.cityPhoto,
 		tripItinerary: state.tripItinerary,
 		activeDay: state.activeDay,
 		tripRequestState: state.tripRequestState,

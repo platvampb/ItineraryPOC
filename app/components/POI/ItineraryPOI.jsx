@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
-import BackgroundImage from './BackgroundImage'
-import TimeButton from './TimeButton'
+import POIImage from './POIImage'
+import POIInfo from './POIInfo'
 
 export default class ItineraryPOI extends Component {
 	render() {
@@ -10,13 +10,8 @@ export default class ItineraryPOI extends Component {
 		return (
 			<div className="itinerary-poi-wrapper">
 			<div className="itinerary-poi">
-				<BackgroundImage poi={poi}/>
-				<h3 className="poi-name">{poi.poi.name}</h3>
-				<div className="start-time-wrapper">
-					<TimeButton poi={poi}/>
-					<span className="start-time">11:30 am</span>
-				</div>
-				<p className="cost">cost: $20</p>
+				<POIImage poi={poi}/>
+				<POIInfo poi={poi}/>
 			</div>
 			</div>
 		)

@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import ItineraryPOI from './POI/ItineraryPOI'
+import Timeline from './POI/Timeline'
 
 export default class DayItinerary extends Component {
 	render() {
@@ -7,9 +8,7 @@ export default class DayItinerary extends Component {
 		return (
 			<div className="tab-content">
 			<div className="tab-pane active" ref="tabPane">
-				<div className="timeline-wrapper">
-					<div className="timeline"/>
-				</div>
+			<div>
 				{dayItinerary.map((poi, i) =>
 					<ItineraryPOI
 						key={poi.poi.id}
@@ -17,6 +16,8 @@ export default class DayItinerary extends Component {
 						day={poi.day}
 					/>
 				)}
+			</div>
+			<Timeline addClass={"timeline-under"}/>
 			</div>
 			</div>
 		)
