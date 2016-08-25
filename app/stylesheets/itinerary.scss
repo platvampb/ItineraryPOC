@@ -10,6 +10,11 @@ h3 {
 	background-color: #777;
 }
 
+.itinerary-outer-container {
+	height: 100%;
+	overflow: scroll;
+}
+
 .tabs-left .nav-tabs {
 	border-bottom: 0;
 	float:left;
@@ -69,13 +74,56 @@ h3 {
 	.tab-pane {
 		position: relative;
 		display: none;
-		background-color: #fff;
+		background-color: transparent;
+		overflow: hidden;
 	}
 	.active { display: block; }
+}
+
+.itinerary-poi-wrapper {
+	border-bottom: 20px solid white;
+	width: 700px;
+
+	&:first-child {
+		border-top: 20px solid white;
+	}
 }
 
 .itinerary-poi {
 	width: 100%;
 	height: 50px;
 	border: 1px solid #aaa;
+	font-family: 'Overlock', sans-serif;
+	color: white;
+	width: 680px;
+	height: 150px;
+	padding-left: 48px;
+	overflow: hidden;
+	background-color: rgba(0, 0, 0, 0.5);
+	background: -webkit-linear-gradient(left,rgba(0,0,0,0.9), rgba(0,0,0,0.2), transparent); /*Safari 5.1-6*/
+	background: -o-linear-gradient(right,rgba(0,0,0,0.9), rgba(0,0,0,0.2), transparent); /*Opera 11.1-12*/
+	background: -moz-linear-gradient(right,rgba(0,0,0,0.9), rgba(0,0,0,0.2), transparent); /*Fx 3.6-15*/
+	background: linear-gradient(to right, rgba(0,0,0,0.9), rgba(0,0,0,0.2), transparent); /*Standard*/
+	&.dragging {
+		background: white;
+		border: none;
+	}
+	h3 {
+		font-size: 21px;
+		margin: 10px 0;
+	}
+	p {
+		font-size: 16px;
+		margin-top: 10px;
+	}
+}
+
+.itinerary-poi-background {
+	width: 680px;
+	height: 510px;
+	left: 0;
+	background-size: cover;
+	position: absolute;
+	background-position-y: -175px;
+	z-index: -1;
 }

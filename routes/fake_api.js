@@ -236,9 +236,17 @@ router.get('/api/photo', function(req, res, next) {
 	res.json({img_path: ''})
 });
 
-router.get('/api/trip', function() {
+router.get('/api/trips', function(req, res, next) {
 	data = require('../config/trip_id_2.json');
+	var images_path = 'poi_images/';
+	var image_index = 0;
+	data.values[0].destinations.map(function(day) {
+		day.map(function(poi){
+			poi.photo_url = images_path + (image_index % 10 + 1).toString() + '.jpeg';
+			image_index ++;
+		});
+	});
 	return res.json(data);
-})
+});
 
 module.exports = router;

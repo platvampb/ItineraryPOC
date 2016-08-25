@@ -18,7 +18,7 @@ export default class POIPreview extends React.Component {
 		}
 
 		return (
-			<div className="itinerary-poi"
+			<div
 				style={this.getItemStyles()}
 			>
 			{this.props.item.name}

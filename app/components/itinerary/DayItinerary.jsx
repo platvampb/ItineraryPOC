@@ -26,7 +26,6 @@ export default class DayItinerary extends Component {
 
 	render() {
 		const { dayItinerary, movePOI } = this.props
-		window.console.log(this.state.offset)
 		return (
 			<div className="tab-content">
 			<div className="tab-pane active" ref="tabPane">
@@ -35,7 +34,7 @@ export default class DayItinerary extends Component {
 				<ItineraryPOI
 					key={poi.poi.id}
 					id={poi.poi.id}
-					poi={poi.poi}
+					poi={poi}
 					index={i}
 					movePOI={movePOI}
 					day={poi.day}

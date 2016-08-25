@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { findDOMNode } from 'react-dom'
 import { DragSource, DropTarget } from 'react-dnd'
+import BackgroundImage from './BackgroundImage'
 
 class ItineraryPOI extends Component {
 	render() {
@@ -8,12 +9,13 @@ class ItineraryPOI extends Component {
 			isDragging, poi } = this.props
 
 		//FIX: dragging property gets lost when drag to a different day
-		const opacity = isDragging ? 0 : 1
+		const styleClass = isDragging ? 'dragging' : ''
 		let content = (
-			<div className="itinerary-poi"
-				style={{opacity}}
+			<div className="itinerary-poi-wrapper">
+			<div className={"itinerary-poi " + styleClass}
 			>
-				{poi.name}
+				<h3 className="poi-name">{poi.poi.name}</h3>
+			</div>
 			</div>
 		)
 
@@ -45,6 +47,7 @@ const POITarget = {
 		const dragIndex = dragItem.index
 		const hoverIndex = props.index
 
+		window.console.log(props.poi.poi.name);
 		if (dragIndex === hoverIndex) return
 
 		// Determine rectangle on screen
@@ -52,8 +55,10 @@ const POITarget = {
 		const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2
 
 		const clientOffset = monitor.getClientOffset()
+		window.console.log(clientOffset)
 		const hoverClientY = clientOffset.y - hoverBoundingRect.top
 
+		window.console.log(hoverMiddleY, hoverClientY)
 		// Dragging downwards
 		if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) return
 
