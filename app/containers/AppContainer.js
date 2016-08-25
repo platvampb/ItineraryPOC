@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import { connect } from 'react-redux'
 
-export default class AppHandler extends Component {
+class AppHandler extends Component {
 
 	render() {
 		return (

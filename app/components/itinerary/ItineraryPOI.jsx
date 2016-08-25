@@ -14,6 +14,7 @@ class ItineraryPOI extends Component {
 			<div className="itinerary-poi-wrapper">
 			<div className={"itinerary-poi " + styleClass}
 			>
+				<BackgroundImage poi={poi}/>
 				<h3 className="poi-name">{poi.poi.name}</h3>
 			</div>
 			</div>

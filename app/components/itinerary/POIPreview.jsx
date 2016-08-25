@@ -11,7 +11,7 @@ function collect (monitor) {
 }
 
 
-export default class POIPreview extends React.Component {
+class POIPreview extends React.Component {
 	render () {
 		if (!this.props.isDragging) {
 			return (<div></div>)
