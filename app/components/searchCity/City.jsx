@@ -4,23 +4,20 @@ export default class City extends Component {
 	render() {
 
 		let highlightSearchResult = function(city) {
-			let desc = city.description,
-				tokens = []
+			let desc = city.name.toLowerCase(),
+				name = city.name,
+				searchText = city.searchText,
+				tokens = {}
 
-			var	noMatchStart = 0
+			var	matchStart = desc.indexOf(searchText)
 
-			for (var match of city.matched_substrings) {
-				tokens.push( desc.substring(noMatchStart, match.offset) )
-				tokens.push( <b key={match.offset}>{desc.substr(match.offset, match.length)}</b> )
-
-				noMatchStart = match.offset + match.length
-			}
-
-			if (noMatchStart < desc.length) {
-				tokens.push( desc.substring(noMatchStart, desc.length) )
-			}
-
-			return tokens
+			return (
+				<span>
+					{name.substring(0, matchStart)}
+					<b>{name.substring(matchStart, matchStart + searchText.length)}</b>
+					{name.substring(matchStart + searchText.length)}
+				</span>
+			)
 		}
 
 		return (
@@ -32,6 +29,6 @@ export default class City extends Component {
 }
 
 City.propTypes = {
-	description: PropTypes.string.isRequired,
 	onClick: PropTypes.func.isRequired,
+	searchText: PropTypes.string.isRequired,
 }

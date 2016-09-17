@@ -2,11 +2,15 @@ import React, { Component, PropTypes } from 'react'
 
 export default class SearchLabel extends Component {
 	render() {
-		const { selectedCity } = this.props
+		const { selectedCity, closeHandler } = this.props
 
 		return (
-			<label ref="label">
-				{selectedCity.description}
+			<label
+				ref="label"
+				onClick={closeHandler}
+				className="selected-city"
+			>
+				{selectedCity.name}
 				<a><i className="glyphicon glyphicon-remove-sign glyphicon-white"></i></a>
 			</label>
 		)

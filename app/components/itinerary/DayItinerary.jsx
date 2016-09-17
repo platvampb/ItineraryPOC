@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import ItineraryPOI from './itineraryPOI'
-import POIPreview from './POIPreview'
+import ItineraryPOI from '../POI/itineraryPOI'
 
 export default class DayItinerary extends Component {
 	constructor(props) {
@@ -29,7 +28,6 @@ export default class DayItinerary extends Component {
 		return (
 			<div className="tab-content">
 			<div className="tab-pane active" ref="tabPane">
-			<POIPreview containerOffset={this.state.offset}/>
 			{dayItinerary.map((poi, i) =>
 				<ItineraryPOI
 					key={poi.poi.id}
@@ -48,5 +46,4 @@ export default class DayItinerary extends Component {
 
 DayItinerary.propTypes = {
 	dayItinerary: PropTypes.array.isRequired,
-	movePOI: PropTypes.func.isRequired,
 }

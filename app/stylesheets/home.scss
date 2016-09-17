@@ -1,3 +1,6 @@
+$orange: #FC9806;
+$yellow: #FEC53C;
+
 html {
   font-family: sans-serif;
 	font-size: 20px;
@@ -10,7 +13,6 @@ body {
 
 .app, .app-container {
 	height: 100%;
-	overflow: hidden;
 }
 
 .itinerary-container {
@@ -42,4 +44,50 @@ body {
 	width: 100%;
 	top: 0px;
   animation: moveToLeft 0.75s ease both;
+}
+
+.header.row {
+	margin: 0;
+	background: white;
+	color: $orange;
+	padding: 20px 0;
+	box-shadow: 0 1px 5px 3px rgba(0,0,0,0.2);
+}
+.header {
+	img {
+		width: 180px;
+		margin-right: 16px;
+		float: left;
+	}
+
+	h1 {
+		font-size: 20px;
+		font-weight: normal;
+		display: inline-block;
+		margin: 10px 0 0;
+	}
+}
+
+.back-button {
+	width: 48px;
+	height: 48px;
+	background-color: $yellow;
+	border-radius: 50%;
+	position: absolute;
+	right: 8px;
+	top: -4px;
+	background-image: url('../assets/arrow_back_white.png');
+	background-size: contain;
+	transition: background-color 0.2s ease-in-out;
+	&:hover {
+		background-color: $orange;
+	}
+}
+
+@media (max-width: 768px) {
+	.back-button {
+		float: left;
+		position: relative;
+		margin: 0 1em;
+	}
 }

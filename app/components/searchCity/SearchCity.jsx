@@ -1,9 +1,35 @@
 import React, { Component, PropTypes } from 'react'
 import SearchBar from './SearchBar'
-import CityList from './CityList'
 import NextStepButtonWrapper from './NextStepButtonWrapper'
 
 export default class SearchCity extends Component {
+	constructor(props) {
+		super(props)
+
+		this.state = {
+			validator: {
+				valid: false,
+				errors: {},
+				setValid: (valid, field) => {
+					let errors = Object.assign(this.state.validator.errors, {})
+					if (valid)
+						delete errors[field]
+					else
+						errors[field] = true
+
+					this.setState({
+						validator: Object.assign(
+							this.state.validator,
+							{
+								valid: valid,
+								errors: errors,
+							},
+						),
+					})
+				},
+			},
+		}
+	}
 
 	render() {
 		const {
@@ -12,6 +38,8 @@ export default class SearchCity extends Component {
 			searchbarState,
 			onSearchTrigger,
 			onChangeSearchText,
+			onCloseNextStep,
+			onNextStep,
 		} = this.props
 
 		return (
@@ -22,9 +50,16 @@ export default class SearchCity extends Component {
 					searchText={searchText}
 					selectedCity={selectedCity}
 					searchbarState={searchbarState}
+					onCloseNextStep={onCloseNextStep}
 				/>
-				<CityList/>
-				<NextStepButtonWrapper/>
+				<div className="error-message">
+					Oops, something went wrong. Please try again...
+				</div>
+				<NextStepButtonWrapper
+					validator={this.state.validator}
+					setValid={this.state.validator.setValid.bind(this)}
+					handelNextStep={onNextStep}
+				/>
 			</div>
 		)
 	}

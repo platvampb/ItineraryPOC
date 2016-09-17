@@ -246,6 +246,13 @@ router.get('/api/trips', function(req, res, next) {
 			image_index ++;
 		});
 	});
+	var days = data.values[0].destinations;
+	data.values[0].length_in_days = 30;
+	for (var i = 0, length = data.values[0].length_in_days; i < length; i++) {
+		if (days[i] == undefined ) {
+			days[i] = [];
+		}
+	}
 	return res.json(data);
 });
 

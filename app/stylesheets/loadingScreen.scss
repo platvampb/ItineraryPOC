@@ -1,0 +1,40 @@
+$blue: #4FB9D9;
+.loading-screen {
+	text-align: center;
+	margin: 0 auto;
+	position: relative;
+	top: 50%;
+	transform: translateY(-100%);
+	h2 {
+		margin-bottom: 38px;
+		font-size: 24px;
+	}
+	.bead {
+		display: inline-block;
+		width: 16px;
+		height: 16px;
+		margin: 8px;
+		border-radius: 50px;
+		background-color: $blue;
+		-webkit-animation: jump 3s infinite ease-in-out;
+		-moz-animation: jump 3s infinite ease-in-out;
+		animation: jump 3s infinite ease-in-out;
+	}
+}
+
+@-webkit-keyframes jump {
+	0%, 50%, 100% {
+		-webkit-transform: translateY(0px);
+	}
+	25% {
+		-webkit-transform: translateY(-36px);
+	}
+}
+@keyframes jump {
+	0%, 50%, 100% {
+		transform: translateY(0px);
+	}
+	25% {
+		transform: translateY(-36px);
+	}
+}

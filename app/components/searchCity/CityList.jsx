@@ -6,7 +6,7 @@ import City from './City'
 class CityListContainer extends Component {
 
 	render() {
-		const { dispatch, cities, citySearchState } = this.props
+		const { dispatch, cities, citySearchState, searchText } = this.props
 
 		let hideClass = (() => {
 			if (citySearchState === CitySearchStates.SEARCH_NONE)
@@ -20,6 +20,7 @@ class CityListContainer extends Component {
 				{cities.map(city =>
 					<City
 						key={city.id}
+						searchText={searchText}
 						{...city}
 						onClick={() => {
 							dispatch(selectCity(city))
@@ -36,6 +37,7 @@ function select(state) {
 	return {
 		cities: state.cities,
 		citySearchState: state.citySearchState,
+		searchText: state.searchText,
 	}
 }
 

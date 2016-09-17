@@ -3,7 +3,6 @@ require('../stylesheets/POIList.scss')
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { searchPOIs, dragPOIStart, dragPOIEnd, dragPOIMove } from '../actions/actions'
-import POIListWrapper from '../components/POI/POIListWrapper'
 
 class POIListHandler extends Component {
 	render() {
@@ -13,23 +12,7 @@ class POIListHandler extends Component {
 			<div className="itinerary-container">
 			<div className="panel-wrapper">
 				<div className="header">Welcome to {selectedCity.description}!</div>
-				<POIListWrapper
-					selectedCity={selectedCity}
-					dragPOI={dragPOI}
-					onLoad={description =>
-						dispatch(searchPOIs(description))
-					}
-					onDragStart = {(index, listType, data) =>
-						dispatch(dragPOIStart(index, listType, data))
-					}
-					onDragEnd = {() =>
-						dispatch(dragPOIEnd())
-					}
-					onDragOver = {(fromEl, toEl) =>
-						dispatch(dragPOIMove(fromEl, toEl))
-					}
-					POIs={POIs}
-				/>
+
 			</div>
 			</div>
 		)

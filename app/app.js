@@ -3,7 +3,7 @@ require('./stylesheets/vendor/bootstrap/css/bootstrap.css')
 
 import React from 'react'
 import { render } from 'react-dom'
-import { Route, Router } from 'react-router'
+import { Route, Router, hashHistory } from 'react-router'
 
 //redux stuff
 import { Provider } from 'react-redux'
@@ -29,12 +29,12 @@ let store = createStore(CitySearchApp,
 let routes = (
 	<div className="app">
 	<Provider store={store}>
-	<Router>
+	<Router history={hashHistory}>
 		<Route name="main" component={AppHandler}>
 			<Route name="search" path="/" component={CitySearchHandler}/>
 			<Route name="cityList" component={CityList}/>
 			<Route name="poi" path="/places" component={POIListHandler}/>
-			<Route name="itinerary" path="/itinerary" component={ItineraryHandler}/>
+			<Route name="itinerary" path="/itinerary/:tripId" component={ItineraryHandler}/>
 		</Route>
 	</Router>
 	</Provider>
