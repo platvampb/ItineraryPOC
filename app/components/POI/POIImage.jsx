@@ -1,12 +1,13 @@
 import React, { Component, PropTypes } from 'react'
 import FadeInImage from './FadeInImage'
+import { mallocApi } from '../../config/config.js'
 
 export default class POIImage extends Component {
 	render() {
 		const { poi } = this.props
 
 		let getImageUrl = (poi) => {
-			return poi.photoUrls[0].url
+			return mallocApi.cdnUrl + "/" + poi.photoUrls[0].url
 		}
 
 		let photoOrName = () => {

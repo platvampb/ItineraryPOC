@@ -37,20 +37,16 @@ export function requestTrip(placeId, duration) {
 			contentType: "application/json",
 			dataType: 'json',
 		}).done(function(res){
-			/*
-			return $.get("http://127.0.0.1:3000/api/trips", {
-				id: res.data,
-			})*/
 			let retryFetchTrip = (id, counter) => {
 				fetchTripById(id)
-				.done(function(res){
+				.done(function(res) {
 					if (!res.values || res.values.length > 0) {
 						dispatch(receiveTrip(res.values[0]))
 						return
 					}
 					if (counter < 3) {
 						counter++
-						setTimeout(retryFetchTrip, 3000, id, counter)
+						setTimeout(retryFetchTrip, 4000, id, counter)
 					} else {
 						dispatch(receiveTripError())
 					}
@@ -58,7 +54,7 @@ export function requestTrip(placeId, duration) {
 			}
 
 			retryFetchTrip(res.data, 0)
-		}).fail(function(){
+		}).fail(function(error) {
 			dispatch(receiveTripError())
 		})
 	}
@@ -81,10 +77,6 @@ function fetchTripById(id) {
 	return $.get(mallocApi.baseUrl + mallocApi.tripGet, {
 		id: id,
 	})
-	/*
-	$.get("http://127.0.0.1:3000/api/trips", {
-		id: id,
-	})}*/
 }
 
 function requestTripStart() {

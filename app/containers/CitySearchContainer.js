@@ -2,16 +2,31 @@ require('../stylesheets/search.scss')
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { searchCity, changeSearchText, changePageHeader } from '../actions/actions'
+import { selectCity, searchCity, changeSearchText, changePageHeader } from '../actions/actions'
 import { SearchbarStates, closeNextStep } from '../actions/searchbarActions'
 import { requestTrip, tripRequestStates, resetTripRequestState } from '../actions/itineraryActions'
 import SearchCity from '../components/searchCity/SearchCity'
 import Loading from '../components/searchCity/Loading'
 
 class CitySearchHandler extends Component {
+	constructor(props) {
+		super(props)
+		this.state = {
+			torontoSample: false,
+		}
+	}
 
 	componentWillMount() {
 		this.props.dispatch(changePageHeader("Let's get started!"))
+		let mode = this.props.location.query.mode
+		if (mode && mode === 'tor_sample')
+			this.setState({
+				torontoSample: true,
+			})
+			this.props.dispatch(selectCity({
+				id: 4089,
+				name: "Toronto - Ontario - Canada",
+			}))
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -30,7 +45,11 @@ class CitySearchHandler extends Component {
 			citySearchState, searchbarState, tripRequestState,
 			cityPhoto, tripDuration } = this.props
 
-		let containerClass = (() => {
+		let divStyle = cityPhoto ? {
+			backgroundImage: 'url(' + cityPhoto + ')',
+		} : { opacity: '0' };
+
+		let searchbarStateClass = () => {
 			if (searchbarState === SearchbarStates.PENDING) {
 				return 'selected'
 			}
@@ -45,10 +64,22 @@ class CitySearchHandler extends Component {
 			}
 
 			return ''
+		}
+
+		let containerClass = (() => {
+			let className = ''
+			if (this.state.torontoSample) {
+				className += ' sample'
+			}
+
+			className += ' ' + searchbarStateClass()
+			return className
 		})()
 
+
 		return (
-			<div className={"search-outer-container " + containerClass}>
+			<div className={"search-outer-container" + containerClass}>
+				<div className="search-background-hack" style={divStyle}/>
 				<SearchCity
 					searchText={searchText}
 					selectedCity={selectedCity}
