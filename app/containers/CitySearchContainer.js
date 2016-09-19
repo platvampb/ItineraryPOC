@@ -19,7 +19,7 @@ class CitySearchHandler extends Component {
 	componentWillMount() {
 		this.props.dispatch(changePageHeader("Let's get started!"))
 		let mode = this.props.location.query.mode
-		if (mode && mode === 'tor_sample')
+		if (mode && mode === 'tor_sample') {
 			this.setState({
 				torontoSample: true,
 			})
@@ -27,16 +27,15 @@ class CitySearchHandler extends Component {
 				id: 4089,
 				name: "Toronto - Ontario - Canada",
 			}))
+		}
 	}
 
 	componentWillReceiveProps(nextProps) {
-		if (nextProps.tripRequestState === tripRequestStates.REQUEST_DONE) {
+		if (nextProps.tripRequestState === tripRequestStates.REQUEST_DONE)
 			this.context.router.push('/itinerary/' + nextProps.tripItinerary.id)
-		}
 
-		if (nextProps.searchbarState === SearchbarStates.PENDING) {
+		if (nextProps.searchbarState === SearchbarStates.PENDING)
 			this.props.dispatch(resetTripRequestState())
-		}
 	}
 
 	render() {
@@ -50,16 +49,15 @@ class CitySearchHandler extends Component {
 		} : { opacity: '0' };
 
 		let searchbarStateClass = () => {
-			if (searchbarState === SearchbarStates.PENDING) {
+			if (searchbarState === SearchbarStates.PENDING)
 				return 'selected'
-			}
+
 			if (searchbarState === SearchbarStates.READ_ONLY) {
-				if (tripRequestState === tripRequestStates.REQUEST_IN_PROGRESS) {
+				if (tripRequestState === tripRequestStates.REQUEST_IN_PROGRESS)
 					return 'loading'
-				}
-				if (tripRequestState === tripRequestStates.REQUEST_ERROR) {
+				if (tripRequestState === tripRequestStates.REQUEST_ERROR)
 					return 'error'
-				}
+
 				return 'next'
 			}
 
@@ -68,9 +66,8 @@ class CitySearchHandler extends Component {
 
 		let containerClass = (() => {
 			let className = ''
-			if (this.state.torontoSample) {
+			if (this.state.torontoSample) 
 				className += ' sample'
-			}
 
 			className += ' ' + searchbarStateClass()
 			return className
