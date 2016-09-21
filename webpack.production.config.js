@@ -15,10 +15,12 @@ module.exports = {
 		filename: '[name].js'
 	},
 	devtool: 'source-map',
+  resolve: {
+    extensions: ['', '.js', '.jsx']
+  },
 	module: {
 		loaders: [
-			{ test: /\.js?$/, loader: 'babel', exclude: /node_modules/},
-			{ test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader', query: {presets: ['es2015', 'react']}},
+			{ test: /\.jsx|\.js$/, exclude: /node_modules/, loader: 'babel', query: {presets: ['es2015', 'react']}},
 			{
 				test: /\.css$/,
 				include: /stylesheets/,
@@ -38,7 +40,7 @@ module.exports = {
 	plugins: [
 		new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js'),
 		new HtmlWebpackPlugin({
-			title: 'Itinerary POC'
+			title: 'Wherego Trip Planner'
 		}),
 		new ExtractTextPlugin('[name].css'),
 		devFlagPlugin

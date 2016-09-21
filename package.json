@@ -5,7 +5,7 @@
   "main": "app/app.js",
   "scripts": {
     "start": "webpack-dev-server --host 0.0.0.0 --port 8080 --hot --progress --colors",
-    "build": "webpack --progress --colors",
+    "build": "webpack --progress --colors --config webpack.production.config.js",
     "test": "./node_modules/mocha/bin/mocha --opts ./mocha.opts"
   },
   "author": "Bo Zhang",
