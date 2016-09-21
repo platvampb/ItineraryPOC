@@ -66,7 +66,7 @@ class CitySearchHandler extends Component {
 
 		let containerClass = (() => {
 			let className = ''
-			if (this.state.torontoSample) 
+			if (this.state.torontoSample)
 				className += ' sample'
 
 			className += ' ' + searchbarStateClass()
@@ -82,8 +82,10 @@ class CitySearchHandler extends Component {
 					selectedCity={selectedCity}
 					searchbarState={searchbarState}
 					citySearchState={citySearchState}
-					onCloseNextStep={ () =>
-						dispatch(closeNextStep())
+					onCloseNextStep={ () => {
+							if (!this.state.torontoSample) 
+								dispatch(closeNextStep())
+						}
 					}
 					onChangeSearchText={ text =>
 						dispatch(changeSearchText(text))
