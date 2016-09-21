@@ -3,5 +3,5 @@ export const mallocApi = {
 	regionSearch: "/regions/places/search",
 	tripGet: "/trips/get",
 	command: "/command/index",
-	cdnUrl: "http://wherego-cdn.s3-website-us-east-1.amazonaws.com",
+	cdnUrl: "https://s3.amazonaws.com",
 }
