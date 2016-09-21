@@ -18,7 +18,3 @@ export default class Overlay extends Component {
 		)
 	}
 }
-
-Overlay.propTypes = {
-	poi: PropTypes.object.isRequired,
-}

@@ -26,5 +26,5 @@ export default class DayMenuMobile extends Component {
 DayMenuMobile.propTypes = {
 	activeDay: PropTypes.number.isRequired,
 	onChangeDays: PropTypes.func.isRequired,
-	days: PropTypes.number.isRequired,
+	days: PropTypes.array.isRequired,
 }
