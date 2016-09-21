@@ -1,7 +1,7 @@
-$search-icon-width: 36px;
+@import "variables";
 
 .search-outer-container {
-	height: calc(100% - 82px);
+	height: calc(100% - 80px);
 	position: relative;
 	.loading-screen {
 		display: none;
@@ -14,6 +14,8 @@ $search-icon-width: 36px;
 	background-size: cover;
 	background-position: center;
 	transition: opacity 0.3s ease-in-out;
+	opacity: 0.3;
+	display: none;
 }
 .search-icon {
 	width: $search-icon-width;
@@ -21,8 +23,9 @@ $search-icon-width: 36px;
 }
 .city-list-wrapper {
 	width: calc(100% - 36px);
-	float: right;
 	margin: auto;
+	position: absolute;
+	left: 36px;
 	ul {
 		padding-left: 0;
 		border: 1px solid #333;
@@ -143,7 +146,7 @@ $search-icon-width: 36px;
 
 .searchbar, .error-message {
 	margin: auto;
-	width: 42%;
+	width: 620px;
 	transition: all 0.2s ease-in-out;
 }
 
@@ -241,6 +244,17 @@ $search-icon-width: 36px;
 	}
 }
 
+.search-outer-container.sample {
+	.selected-city {
+		i {
+			display: none;
+		}
+	}
+	.search-background-hack {
+		display: initial;
+	}
+}
+
 .next-step-label {
 	text-align: center;
 	margin-top: 25px;
@@ -271,5 +285,23 @@ $search-icon-width: 36px;
 		&.manual {
 			animation: hide 0.1s linear, moveFromBelow 0.3s linear 0.1s;
 		}
+	}
+}
+
+@media (max-width: 768px) {
+	.searchbar, .error-message {
+		width: 90%;
+	}
+}
+
+@media (max-width: 600px) {
+	.city-list-wrapper ul li, .group input {
+		font-size: 1.4em;
+	}
+}
+
+@media (max-width: 460px) {
+	.city-list-wrapper ul li, .group input {
+		font-size: 1.2em;
 	}
 }

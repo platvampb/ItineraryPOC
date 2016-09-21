@@ -33,7 +33,7 @@ class Duration extends Component {
 		if (this.validate(number))
 			valid = true
 
-		this.props.dispatch(setDuration(number)) //Oh look, I'm Javascript, I don't care about types!
+		this.props.dispatch(setDuration(number)) //Oh look! I'm Javascript! I don't care about types!
 		this.props.setValid(valid, "duration")
 	}
 
