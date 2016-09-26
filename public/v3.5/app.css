@@ -276,6 +276,7 @@ h3 {
   margin-bottom: 20px;
   float: left;
   background-color: white;
+  width: 100%;
 }
 
 .itinerary-poi {
@@ -450,11 +451,41 @@ h3 {
   background-color: #FDDB60;
   opacity: 1;
 }
+/*color pallete*/
+.app-container .tooltip {
+  font-size: 14px;
+  background: #019FAB;
+  display: none;
+  padding: 0.4em 1em;
+  color: white;
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.app-container .tooltip:after {
+  bottom: 100%;
+  left: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-bottom-color: #019FAB;
+  border-width: 0.7em;
+  margin-left: -15px;
+}
+
+.app-container .tooltip.visible {
+  display: block;
+  opacity: 1;
+}
 .loading-screen {
   text-align: center;
   margin: 0 auto;
-  position: absolute;
-  width: 100%;
+  position: relative;
   top: 50%;
   transform: translateY(-100%);
 }
@@ -523,7 +554,7 @@ h3 {
   width: calc(100% - 36px);
   margin: auto;
   position: absolute;
-  left: 36px;
+  z-index: 1;
 }
 
 .city-list-wrapper ul {
@@ -535,12 +566,20 @@ h3 {
 
 .city-list-wrapper ul li {
   list-style: none;
-  font-size: 24px;
+  font-size: 20px;
+  font-weight: bold;
   padding: 3px 36px 3px 8px;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: white;
+  cursor: default;
 }
 
-.city-list-wrapper ul li:hover {
+.city-list-wrapper ul li.selectable {
+  cursor: pointer;
+  font-weight: normal;
+  padding-left: 24px;
+}
+
+.city-list-wrapper ul li.selectable:hover {
   background-color: #77bbff;
 }
 
@@ -552,7 +591,7 @@ h3 {
 
 .group input {
   background-color: transparent;
-  font-size: 28px;
+  font-size: 24px;
   padding: 5px 0 5px 5px;
   border: 0;
   vertical-align: bottom;
@@ -565,7 +604,7 @@ h3 {
 
 .group label {
   font-weight: normal;
-  font-size: 28px;
+  font-size: 24px;
   margin: 5px 0 0 8px;
   vertical-align: bottom;
 }
@@ -614,42 +653,51 @@ h3 {
 }
 
 .group.error input {
-  border-bottom: 1px solid red;
+  border-bottom: 1px solid #ca0449;
 }
 
 .group.error .bar:before, .group.error .bar:after {
-  background: red;
+  background: #ca0449;
   width: 50%;
 }
 
+.group.error label.placeholder {
+  color: #e40452;
+}
+
 .duration-wrapper {
+  position: relative;
+  width: 400px;
+  margin: 0 auto;
+}
+
+.duration-wrapper .tooltip {
+  margin-top: -30px;
+  z-index: 0;
+}
+
+.duration {
+  margin-top: 48px;
   width: 280px;
 }
 
-.duration-wrapper label.placeholder {
-  left: 0;
+.duration label.placeholder {
+  left: 24px;
   top: 0;
 }
 
-.duration-wrapper input {
+.duration input {
   text-align: center;
   width: 280px;
 }
 
-.duration-wrapper input:valid ~ label.placeholder, .duration-wrapper input:focus ~ label.placeholder {
+.duration input:valid ~ label.placeholder, .duration input:focus ~ label.placeholder {
   top: -24px;
 }
 
 .searchbar-wrapper {
   position: relative;
-  top: 45%;
-  transform: translateY(-50%);
-}
-
-.searchbar.dummy {
-  display: none;
-  visibility: hidden;
-  position: static;
+  margin-top: 80px;
 }
 
 .searchbar, .error-message {
@@ -661,51 +709,55 @@ h3 {
 .error-message {
   font-size: 24px;
   text-align: center;
-  color: red;
+  color: #ca0449;
   margin-top: 1em;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
+  margin-top: 80px;
   z-index: -1;
   display: none;
 }
 
-.searchbar input {
-  width: calc(100% - 36px);
+.select-city {
+  width: 360px;
 }
 
-.searchbar .bar {
+.select-city input {
+  width: calc(100% - 36px);
+  text-align: center;
+}
+
+.select-city .bar {
   margin-left: 36px;
 }
 
-.searchbar label.placeholder {
-  left: 36px;
+.select-city label.placeholder {
+  left: 50px;
 }
 
-.searchbar label.selected-city {
-  display: none;
-  vertical-align: bottom;
-  margin: 5px 0 0 8px;
-  border-radius: 3px;
-  padding: 0 15px;
-  background-color: rgba(255, 255, 255, 0.7);
+.select-city .arrow-down {
+  position: absolute;
+  top: 24px;
+  right: 36px;
+  /* Styling the down arrow */
+  width: 0;
+  height: 0;
+  padding: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 10px solid #888;
+  pointer-events: none;
 }
 
-.searchbar label.selected-city .glyphicon:before {
-  vertical-align: middle;
-  margin-left: 12px;
-  margin-right: -8px;
+.select-city.error .arrow-down {
+  border-top-color: #e40452;
 }
 
-.searchbar .loading-icon {
-  display: none;
-  width: 42px;
-  margin: 3px;
-}
-
-.searchbar input:valid ~ label.placeholder, .searchbar input:focus ~ label.placeholder {
-  top: -36px;
-  left: 0;
+.select-city label.placeholder.selected, .select-city input:focus ~ label.placeholder {
+  top: -24px;
+  font-size: 18px;
+  color: initial;
 }
 
 .search-outer-container.error .error-message {
@@ -721,33 +773,7 @@ h3 {
   opacity: 0;
 }
 
-.search-outer-container.next .searchbar {
-  border-bottom: 0;
-  background-color: transparent;
-  text-align: center;
-}
-
-.search-outer-container.next .searchbar input, .search-outer-container.next .searchbar label.placeholder {
-  display: none;
-}
-
-.search-outer-container.next .searchbar label.selected-city {
-  display: inline-block;
-}
-
-.search-outer-container.next .searchbar .search-icon {
-  display: none;
-}
-
-.search-outer-container.next .next-step-label, .search-outer-container.next .next-step-buttons-wrapper {
-  display: block;
-}
-
-.search-outer-container.loading .searchbar {
-  display: none;
-}
-
-.search-outer-container.loading .next-step-label, .search-outer-container.loading .next-step-buttons-wrapper {
+.search-outer-container.loading .searchbar-wrapper {
   display: none;
 }
 
@@ -755,19 +781,8 @@ h3 {
   display: block;
 }
 
-.search-outer-container.sample .selected-city i {
-  display: none;
-}
-
 .search-outer-container.sample .search-background-hack {
   display: initial;
-}
-
-.next-step-label {
-  text-align: center;
-  margin-top: 25px;
-  font-size: 24px;
-  display: none;
 }
 
 @-webkit-keyframes moveFromBelow {
@@ -792,20 +807,19 @@ h3 {
   }
 }
 
-.next-step-buttons-wrapper {
+.generate {
   text-align: center;
   margin-top: 48px;
-  display: none;
 }
 
-.next-step-buttons-wrapper .btn {
+.generate .btn {
   animation: moveFromBelow 0.3s;
   margin: 20px auto;
   font-size: 24px;
   display: inline-block;
 }
 
-.next-step-buttons-wrapper .btn.manual {
+.generate .btn.manual {
   animation: hide 0.1s linear, moveFromBelow 0.3s linear 0.1s;
 }
 
@@ -816,14 +830,45 @@ h3 {
 }
 
 @media (max-width: 600px) {
-  .city-list-wrapper ul li, .group input {
+  .city-list-wrapper ul li,
+  .group input,
+  .group label.placeholder {
     font-size: 1.4em;
+  }
+  .select-city .arrow-down {
+    top: 18px;
+    right: 28px;
   }
 }
 
 @media (max-width: 460px) {
-  .city-list-wrapper ul li, .group input {
-    font-size: 1.2em;
+  .duration label.placeholder {
+    left: 42px;
+  }
+  .duration input:valid ~ label.placeholder, .duration input:focus ~ label.placeholder {
+    top: -24px;
+  }
+  .generate .btn {
+    font-size: 18px;
+  }
+  .group input:valid ~ label.placeholder, .group input:focus ~ label.placeholder {
+    font-size: 14px;
+    color: initial;
+  }
+  .select-city input {
+    width: 100%;
+  }
+  .select-city label.placeholder {
+    left: 80px;
+  }
+  .select-city input:valid ~ label.placeholder, .select-city label.placeholder.selected, .select-city input:focus ~ label.placeholder {
+    top: -24px;
+    font-size: 14px;
+    color: initial;
+  }
+  .city-list-wrapper {
+    width: 100%;
+    background-color: white;
   }
 }
 /*color pallete*/
