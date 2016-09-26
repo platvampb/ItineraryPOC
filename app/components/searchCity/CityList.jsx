@@ -4,27 +4,66 @@ import { CitySearchStates, selectCity } from '../../actions/actions'
 import City from './City'
 
 class CityListContainer extends Component {
-
+	constructor(props) {
+		super(props)
+		this.state = {
+			cities: [
+				{
+					description: 'US',
+					selectable: false,
+				},
+				{
+					description: 'New York',
+					selectable: true,
+					id: '2621',
+				},
+				{
+					description: 'Canada',
+					selectable: false,
+				},
+				{
+					description: 'Toronto',
+					selectable: true,
+					id: '4089',
+				},
+				{
+					description: 'Vancouver',
+					selectable: true,
+					id: '4106',
+				},
+				{
+					description: 'Montreal',
+					selectable: true,
+					id: '4005',
+				},
+				{
+					description: '...more coming soon!',
+					selectable: false,
+					id: '-1',
+				},
+			],
+		}
+	}
 	render() {
-		const { dispatch, cities, citySearchState, searchText } = this.props
+		const { dispatch, visible, toggleDropdown } = this.props
 
 		let hideClass = (() => {
-			if (citySearchState === CitySearchStates.SEARCH_NONE)
+			if (!visible)
 				return 'hidden'
 
 			return ''
 		})()
+
 		return (
 			<div className={"city-list-wrapper " + hideClass}>
 			<ul>
-				{cities.map(city =>
+				{this.state.cities.map((city, i) =>
 					<City
-						key={city.id}
-						searchText={searchText}
-						{...city}
-						onClick={() => {
+						key={i}
+						onSelectCity={ () => {
 							dispatch(selectCity(city))
 						}}
+						{...city}
 					/>
 				)}
 			</ul>
@@ -35,9 +74,7 @@ class CityListContainer extends Component {
 
 function select(state) {
 	return {
-		cities: state.cities,
 		citySearchState: state.citySearchState,
-		searchText: state.searchText,
 	}
 }
 

@@ -13,7 +13,6 @@ export const REQUEST_SEARCH_CITY = 'REQUEST_SEARCH_CITY'
 export const RECEIVE_SEARCH_CITY = 'RECEIVE_SEARCH_CITY'
 export const SELECT_CITY = 'SELECT_CITY'
 export const COMPLETE_TODO = 'COMPLETE_TODO'
-export const CHANGE_SEARCH_TEXT = 'CHANGE_SEARCH_TEXT'
 export const REQUEST_POIS = 'REQUEST_POIS'
 export const RECEIVE_POIS = 'RECEIVE_POIS'
 export const DRAG_START = 'DRAG_START'
@@ -69,17 +68,7 @@ function receiveCityAutoComplete(response) {
 }
 
 export function selectCity(city) {
-	return dispatch => {
-		dispatch(((city) => {return { type: SELECT_CITY, city }})(city))
-
-		setTimeout(() => {
-			dispatch(setSearchbarReadOnly())
-		}, 200)
-	}
-}
-
-export function changeSearchText(text) {
-	return { type: CHANGE_SEARCH_TEXT, text }
+	return { type: SELECT_CITY, city }
 }
 
 export function changePageHeader(text) {

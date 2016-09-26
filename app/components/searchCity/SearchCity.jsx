@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
-import SearchBar from './SearchBar'
+import DestinationSelect from './DestinationSelect'
 import NextStepButtonWrapper from './NextStepButtonWrapper'
+import Duration from './Duration.jsx'
 
 export default class SearchCity extends Component {
 	constructor(props) {
@@ -35,22 +36,24 @@ export default class SearchCity extends Component {
 		const {
 			searchText,
 			selectedCity,
-			searchbarState,
-			onSearchTrigger,
-			onChangeSearchText,
 			onCloseNextStep,
 			onNextStep,
+			dropdownVisible,
+			showHideDropdown,
 		} = this.props
 
 		return (
 			<div className="searchbar-wrapper">
-				<SearchBar
-					onSearchTrigger={onSearchTrigger}
-					onChangeSearchText={onChangeSearchText}
-					searchText={searchText}
+				<DestinationSelect
+					showHideDropdown={showHideDropdown}
 					selectedCity={selectedCity}
-					searchbarState={searchbarState}
-					onCloseNextStep={onCloseNextStep}
+					dropdownVisible={dropdownVisible}
+					validator={this.state.validator}
+					setValid={this.state.validator.setValid.bind(this)}
+				/>
+				<Duration
+					validator={this.state.validator}
+					setValid={this.state.validator.setValid.bind(this)}
 				/>
 				<div className="error-message">
 					Oops, something went wrong. Please try again...
@@ -63,14 +66,10 @@ export default class SearchCity extends Component {
 			</div>
 		)
 	}
-
 }
 
 SearchCity.propTypes = {
-	onSearchTrigger: PropTypes.func.isRequired,
-	onChangeSearchText: PropTypes.func.isRequired,
 	searchText: PropTypes.string.isRequired,
-	searchbarState: PropTypes.string.isRequired,
 	selectedCity: PropTypes.shape({
 		description: PropTypes.string,
 	}).isRequired,

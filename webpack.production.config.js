@@ -1,5 +1,4 @@
 const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const devFlagPlugin = new webpack.DefinePlugin({
   __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'false'))
@@ -39,9 +38,12 @@ module.exports = {
 	},
 	plugins: [
 		new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js'),
+<<<<<<< Updated upstream
 		new HtmlWebpackPlugin({
 			title: 'Wherego Trip Planner'
 		}),
+=======
+>>>>>>> Stashed changes
 		new ExtractTextPlugin('[name].css'),
 		devFlagPlugin
 	]

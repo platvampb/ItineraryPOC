@@ -39,7 +39,6 @@ class ItineraryHandler extends Component {
 			})
 
 			let itinerary = nextProps.tripItinerary
-			window.console.log(itinerary)
 			this.props.dispatch(changePageHeader(
 				itinerary.length_in_days + " day trip to " + itinerary.place.name
 			))
