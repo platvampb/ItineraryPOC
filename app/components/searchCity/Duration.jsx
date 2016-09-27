@@ -1,17 +1,30 @@
-import React, { Component, PropTypes } from 'react'
+require('../../stylesheets/tooltip.scss')
+
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { setDuration } from '../../actions/searchbarActions'
+import Tooltip from './Tooltip'
 
 class Duration extends Component {
+	constructor(props) {
+		super(props)
+		this.state = {
+			showTooltip: false,
+		}
+	}
+
 	render() {
-		const { validator, setValid, tripDuration } = this.props
+		const { validator, tripDuration } = this.props
 
 		let errorClass = () => {
 			return validator.errors['duration'] ? ' error' : ''
 		}
 
+		let tooltipMsg = "Our tool currently works best for short trips. Trips longer than 5 days will take slightly more time to generate."
+
 		return (
-			<div className={"duration-wrapper group" + errorClass()}>
+			<div className={"duration-wrapper"}>
+			<div className={"duration group" + errorClass()}>
 				<input type="number" required
 					ref="duration"
 					onBlur={this.handleEvent.bind(this)}
@@ -20,6 +33,11 @@ class Duration extends Component {
 				/>
 				<label className="placeholder">Trip duration (days):</label>
 				<span className="bar"></span>
+			</div>
+			<Tooltip
+				message={tooltipMsg}
+				show={this.state.showTooltip}
+			/>
 			</div>
 		)
 	}
@@ -33,6 +51,8 @@ class Duration extends Component {
 		if (this.validate(number))
 			valid = true
 
+		this.showDurationTooltip(number)
+
 		this.props.dispatch(setDuration(number)) //Oh look! I'm Javascript! I don't care about types!
 		this.props.setValid(valid, "duration")
 	}
@@ -41,9 +61,24 @@ class Duration extends Component {
 		var sanitized = node.value.trim()
 		return sanitized.replace(/[^0-9.]/g, '')
 	}
+
 	validate(number) {
 		let regex  = /^[1-9]([0-9]+)?$/
 		return regex.test(number)
+	}
+
+	showHideTooltip(show) {
+		this.setState({
+			showTooltip: show,
+		})
+	}
+
+	showDurationTooltip(days) {
+		let show = false
+		if (days > 5)
+			show = true
+
+		this.showHideTooltip(show)
 	}
 }
 

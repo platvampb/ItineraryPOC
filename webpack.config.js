@@ -1,5 +1,4 @@
 const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const devFlagPlugin = new webpack.DefinePlugin({
   __DEV__: JSON.stringify(JSON.parse(process.env.DEBUG || 'false'))
@@ -53,9 +52,6 @@ module.exports = {
 		contentBase: "./build",
 	},
 	plugins: [
-		new HtmlWebpackPlugin({
-			title: 'Itinerary POC'
-		}),
 		new ExtractTextPlugin('[name].css'),
 		devFlagPlugin,
 		new webpack.NoErrorsPlugin()
