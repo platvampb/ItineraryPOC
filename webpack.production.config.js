@@ -38,12 +38,6 @@ module.exports = {
 	},
 	plugins: [
 		new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js'),
-<<<<<<< Updated upstream
-		new HtmlWebpackPlugin({
-			title: 'Wherego Trip Planner'
-		}),
-=======
->>>>>>> Stashed changes
 		new ExtractTextPlugin('[name].css'),
 		devFlagPlugin
 	]

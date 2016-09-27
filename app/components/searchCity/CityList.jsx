@@ -9,15 +9,6 @@ class CityListContainer extends Component {
 		this.state = {
 			cities: [
 				{
-					description: 'US',
-					selectable: false,
-				},
-				{
-					description: 'New York',
-					selectable: true,
-					id: '2621',
-				},
-				{
 					description: 'Canada',
 					selectable: false,
 				},
@@ -37,9 +28,17 @@ class CityListContainer extends Component {
 					id: '4005',
 				},
 				{
+					description: 'US',
+					selectable: false,
+				},
+				{
+					description: 'New York',
+					selectable: true,
+					id: '2621',
+				},
+				{
 					description: '...more coming soon!',
 					selectable: false,
-					id: '-1',
 				},
 			],
 		}
