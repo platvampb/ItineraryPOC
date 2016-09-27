@@ -1,7 +1,7 @@
-# ItineraryPOC
-A Simple POC for doing an itinerary list with react and redux
+# Embark
+Front end project for planner.
 
-Setup steps for demo:
+Setup steps:
 
 1, run `npm install`
 2, launch server with 'node server.js'
