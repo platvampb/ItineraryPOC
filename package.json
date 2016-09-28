@@ -1,7 +1,7 @@
 {
-  "name": "itinerary-POC",
+  "name": "Wherego-embark",
   "version": "0.0.0",
-  "description": "A Simple POC for doing an itinerary list with react and redux",
+  "description": "A trip planner developed by Wherego.",
   "main": "app/app.js",
   "scripts": {
     "start": "webpack-dev-server --host 0.0.0.0 --port 8080 --hot --progress --colors",

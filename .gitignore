@@ -4,6 +4,5 @@ node_modules/
 **/*.DS_Store
 **/._*
 config/config.js
-public/poi_images
 public/
 npm-debug.log
