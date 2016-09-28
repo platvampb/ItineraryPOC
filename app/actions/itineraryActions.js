@@ -33,7 +33,7 @@ export function requestTrip(placeId, duration) {
 		$.ajax({
 			type: 'POST',
 			url: mallocApi.baseUrl + mallocApi.command,
-			data: '{"cmd":"create trip", "data":{"user_id":"1", "commute":"driving", "pace":"REGULAR", "place_id":"' + placeId + '", "number_of_days":"' + duration + '", "page_number":"1"}}', // or JSON.stringify ({name: 'jonas'}),
+			data: '{"cmd":"create trip", "data":{"user_id":"1", "preferred_commute":"driving", "pace":"REGULAR", "place_id":"' + placeId + '", "number_of_days":"' + duration + '", "page_number":"1"}}', // or JSON.stringify ({name: 'jonas'}),
 			contentType: "application/json",
 			dataType: 'json',
 		}).done(function(res){
