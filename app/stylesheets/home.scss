@@ -45,16 +45,18 @@ body {
   animation: moveToLeft 0.75s ease both;
 }
 
-.header.row {
+.top-nav.row {
 	margin: 0;
 	background: white;
 	color: $orange;
-	padding: 20px 0;
 	box-shadow: 0 1px 5px 3px rgba(0,0,0,0.2);
 }
-.header {
+
+.top-nav .header {
+	padding-top: 12px;
 	img {
 		width: 180px;
+		margin-top: 4px;
 		margin-right: 16px;
 		float: left;
 	}
@@ -63,30 +65,38 @@ body {
 		font-size: 20px;
 		font-weight: normal;
 		display: inline-block;
-		margin: 10px 0 0;
+		margin: 12px 2em 12px 0;
 	}
 }
 
-.back-button {
+.nav-button {
 	width: 48px;
-	height: 48px;
-	background-color: $yellow;
-	border-radius: 50%;
-	position: absolute;
-	right: 8px;
-	top: -4px;
+	height: 100%;
+	margin: 12px 6px;
+	float: right;
+	color: $orange;
+	cursor: pointer;
+	&:hover {
+		text-decoration: none!important;
+		color: $deep-orange;
+	}
+	.icon-text {
+		text-decoration: none!important;
+		&:hover {
+			text-decoration: none!important;
+		}
+	}
+}
+.back-button {
 	background-image: url('../assets/arrow_back_white.png');
 	background-size: contain;
-	transition: background-color 0.2s ease-in-out;
-	&:hover {
-		background-color: $orange;
-	}
 }
-
-@media (max-width: 768px) {
-	.back-button {
-		float: left;
-		position: relative;
-		margin: 0 1em;
+.user-button {
+	text-align: center;
+	i:before {
+		font-size: 26px;
+	}
+	i.glyphicon-log-in {
+		margin-left: -5px;
 	}
 }

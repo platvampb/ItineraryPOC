@@ -9,6 +9,7 @@ import tripRequestState from './tripRequestState'
 import activeDay from './activeDay'
 import tripDuration from './tripDuration'
 import pageHeader from './pageHeader'
+import user from './user'
 
 export default combineReducers({
 	cityPhoto,
@@ -21,5 +22,6 @@ export default combineReducers({
 	activeDay,
 	tripDuration,
 	pageHeader,
+	user,
 })
 //export default CitySearchApp

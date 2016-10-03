@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { Link } from 'react-router'
 
-export default class POIHeader extends Component {
+export default class BackButton extends Component {
 	render() {
 		const { pathname } = this.props
 
@@ -9,13 +9,13 @@ export default class POIHeader extends Component {
 
 		return (
 			<Link
-				className={"back-button" + displayClass}
+				className={"nav-button back-button" + displayClass}
 				to="/"
 			/>
 		)
 	}
 }
 
-POIHeader.propTypes = {
+BackButton.propTypes = {
 	pathname: PropTypes.string.isRequired,
 }
