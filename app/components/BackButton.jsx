@@ -11,7 +11,10 @@ export default class BackButton extends Component {
 			<Link
 				className={"nav-button back-button" + displayClass}
 				to="/"
-			/>
+			>
+				<i className="glyphicon glyphicon-chevron-left"/>
+				<div className="icon-text">Back</div>
+			</Link>
 		)
 	}
 }

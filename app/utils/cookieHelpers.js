@@ -6,7 +6,7 @@ export function readCookie(name) {
 	let cookies = document.cookie.split(';');
 	for (let c of cookies) {
 		c = c.trim()
-		if (c.indexOf(nameEQ) == 0)
+		if (c.indexOf(nameEQ) === 0)
 			return c.substring(nameEQ.length, c.length);
 	}
 	return null;
@@ -19,7 +19,7 @@ function createCookie(name, value, days) {
 	if (days) {
 		let date = new Date()
 		date.setTime(date.getTime() + (days * dayInMs))
-		var expires = "; expires=" + date.toGMTString()
+		expires = "; expires=" + date.toGMTString()
 	}
 
 	document.cookie = name + "=" + value + expires + "; path=/"

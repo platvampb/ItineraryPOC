@@ -32,7 +32,6 @@ let routes = (
 	<Router history={hashHistory}>
 		<Route name="main" component={AppHandler}>
 			<Route name="search" path="/" component={CitySearchHandler}/>
-			<Route name="cityList" component={CityList}/>
 			<Route name="poi" path="/places" component={POIListHandler}/>
 			<Route name="itinerary" path="/itinerary/:tripId" component={ItineraryHandler}/>
 		</Route>

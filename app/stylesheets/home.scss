@@ -72,7 +72,7 @@ body {
 .nav-button {
 	width: 48px;
 	height: 100%;
-	margin: 12px 6px;
+	margin: 12px 9px;
 	float: right;
 	color: $orange;
 	cursor: pointer;
@@ -87,11 +87,7 @@ body {
 		}
 	}
 }
-.back-button {
-	background-image: url('../assets/arrow_back_white.png');
-	background-size: contain;
-}
-.user-button {
+.user-button, .back-button {
 	text-align: center;
 	i:before {
 		font-size: 26px;
