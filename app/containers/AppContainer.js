@@ -2,10 +2,24 @@ import React, { Component } from 'react'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import { connect } from 'react-redux'
 
+import { authUser } from '../utils/loginHelpers'
+import { login, logout } from '../actions/userActions'
+
 import BackButton from '../components/BackButton'
 import UserNavContainer from '../components/UserNavContainer'
 
 class AppHandler extends Component {
+	componentWillMount() {
+		authUser(this.authSuccess.bind(this), this.authFail.bind(this))
+	}
+
+	authSuccess(profile) {
+		this.props.dispatch(login(profile))
+	}
+
+	authFail() {
+		this.props.dispatch(logout())
+	}
 
 	render() {
 		return (
