@@ -25,6 +25,6 @@ function createCookie(name, value, days) {
 	document.cookie = name + "=" + value + expires + "; path=/"
 }
 
-function eraseCookie(name) {
+export function eraseCookie(name) {
 	createCookie(name,"",-1);
 }

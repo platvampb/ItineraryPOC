@@ -1,4 +1,4 @@
-import { SET_USER_PROFILE } from '../actions/userActions'
+import { SET_USER_PROFILE, CLEAR_USER_PROFILE } from '../actions/userActions'
 
 export default (state = {
 	loggedIn: false,
@@ -8,6 +8,11 @@ export default (state = {
 		return {
 			loggedIn: true,
 			profile: action.profile,
+		}
+
+		case CLEAR_USER_PROFILE:
+		return {
+			loggedIn: false,
 		}
 
 		default:

@@ -1,12 +1,21 @@
 import React, { Component, PropTypes } from 'react'
 
-export default class LoginButton extends Component {
+export default class AvatarButton extends Component {
 	render() {
+		const { toggleMenu, showHideMenu } = this.props
+
 		return (
-			<a className="user-button nav-button avatar-button">
+			<a className="user-button nav-button avatar-button"
+				onClick={toggleMenu}
+				onBlur={this.hideMenu.bind(this)}
+			>
 				<i className="glyphicon glyphicon-user"/>
 				<div className="icon-text">Derp</div>
 			</a>
 		)
+	}
+
+	hideMenu() {
+		this.props.showHideMenu(false)
 	}
 }

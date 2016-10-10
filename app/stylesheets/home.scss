@@ -69,6 +69,10 @@ body {
 	}
 }
 
+.user-nav {
+	float: right;
+	position: relative;
+}
 .nav-button {
 	width: 48px;
 	height: 100%;
@@ -95,4 +99,36 @@ body {
 	i.glyphicon-log-in {
 		margin-left: -5px;
 	}
+}
+
+.user-action-menu {
+	position: absolute;
+	top: 72px;
+	right: 0;
+	width: 200px;
+	z-index: 2;
+	ul {
+		margin-bottom: 0;
+		background: white;
+		box-shadow: 0 1px 5px 3px rgba(0,0,0,0.2);
+		padding-left: 0;
+	}
+	li {
+		text-align: center;
+		padding: 10px;
+		list-style: none;
+		cursor: pointer;
+		&:hover {
+			background: #eaeaea;
+		}
+	}
+}
+
+.menu-layer {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 1;
 }

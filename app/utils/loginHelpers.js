@@ -1,11 +1,10 @@
-import { readCookie } from './cookieHelpers'
+import { readCookie, eraseCookie } from './cookieHelpers'
 
 export function authUser(loginCb, logoutCb) {
 	const userId = readCookie('wg_el_id')
 	const sessionId = readCookie('wg_sk_el')
 	const email = readCookie('wg_el')
 
-	console.log(userId, sessionId, email)
 	if (!(userId && sessionId && email)) {
 		logoutCb()
 		return
@@ -21,4 +20,14 @@ function fetchUserProfile(cb) {
 		userName: "Derp",
 		userSavedTrips: 5,
 	})
+}
+
+export function signoutUser() {
+	const userId = readCookie('wg_el_id')
+	const sessionId = readCookie('wg_sk_el')
+	const email = readCookie('wg_el')
+
+	for (const c of ['wg_el', 'wg_el_id', 'wg_sk_el']) {
+		eraseCookie(c)
+	}
 }

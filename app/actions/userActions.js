@@ -1,3 +1,4 @@
+import { signoutUser } from '../utils/loginHelpers'
 /*
 * action types
 */
@@ -16,6 +17,8 @@ export function login(profile) {
 }
 
 export function logout() {
+	signoutUser()
+	
 	return {
 		type: CLEAR_USER_PROFILE,
 	}
