@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { logout } from '../actions/userActions'
 
+import { homeApi } from '../config/config'
 import LoginButton from './LoginButton'
 import AvatarButton from './AvatarButton'
 import UserMenu from './UserMenu'
@@ -14,10 +15,10 @@ class UserNavContainer extends Component {
 		}
 	}
 	render() {
-		const { dispatch, user } = this.props
+		const { dispatch, user, pathname } = this.props
 		if (!user.loggedIn)
 			return (
-				<LoginButton/>
+				<LoginButton pathname={pathname}/>
 			)
 
 		return (
@@ -36,7 +37,12 @@ class UserNavContainer extends Component {
 	}
 
 	logout() {
-		this.props.dispatch(logout())
+		//redirect to homesite to do signout
+		window.location =
+			homeApi.baseUrl
+			+ homeApi.signOut
+			+ "?callback="
+			+ window.location.href
 	}
 
 	toggleMenu() {

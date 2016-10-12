@@ -29,7 +29,9 @@ class AppHandler extends Component {
 					<BackButton
 						pathname={this.props.location.pathname}
 					/>
-					<UserNavContainer/>
+					<UserNavContainer
+						pathname={this.props.location.pathname}
+					/>
 					<div className="header">
 						<img src="https://www.wewherego.com/img/logo/logo_wherego.png"/>
 						<h1>{this.props.pageHeader}</h1>

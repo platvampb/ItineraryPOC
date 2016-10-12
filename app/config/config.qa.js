@@ -5,3 +5,9 @@ export const mallocApi = {
 	command: "/command/index",
 	cdnUrl: "https://s3.amazonaws.com",
 }
+
+export const homeApi = {
+	baseUrl: "https://www.wewherego.com",
+	signIn: "/user/signin",
+	signOut: "/user/signout",
+}

@@ -44,7 +44,4 @@ export default class UserMenu extends Component {
 		)
 	}
 
-	logoutHandler() {
-		this.props.logoutHandler()
-	}
 }
