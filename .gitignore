@@ -3,6 +3,6 @@ build/
 node_modules/
 **/*.DS_Store
 **/._*
-config/config.js
+app/config/config.js
 public/
 npm-debug.log
