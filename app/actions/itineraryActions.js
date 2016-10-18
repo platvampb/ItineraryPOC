@@ -1,5 +1,6 @@
 import $ from 'jquery'
 import { mallocApi } from '../config/config.js'
+import { readCookie } from '../utils/cookieHelpers.js'
 
 /*
 * action types
@@ -30,10 +31,23 @@ export function requestTrip(placeId, duration) {
 	return dispatch => {
 		dispatch(requestTripStart())
 
+		let userId = readCookie('wg_el_id')
+		let sessionId = readCookie('wg_sk_el')
+		let email = readCookie('wg_el')
+
+		userId = userId == null ? "1" : userId;
+		sessionId = sessionId == null ? "" : sessionId;
+		email = email == null ? "" : email;
+
 		$.ajax({
 			type: 'POST',
 			url: mallocApi.baseUrl + mallocApi.command,
-			data: '{"cmd":"create trip", "data":{"user_id":"1", "preferred_commute":"driving", "pace":"REGULAR", "place_id":"' + placeId + '", "number_of_days":"' + duration + '", "page_number":"1"}}', // or JSON.stringify ({name: 'jonas'}),
+			headers: {
+				"wg_el_id":userId,
+				"wg_el":email,
+				"wg_sk_el":sessionId,
+			},
+			data: '{"cmd":"create trip", "data":{"user_id":"' + userId + '", "preferred_commute":"driving", "pace":"REGULAR", "place_id":"' + placeId + '", "number_of_days":"' + duration + '", "page_number":"1"}}', // or JSON.stringify ({name: 'jonas'}),
 			contentType: "application/json",
 			dataType: 'json',
 		}).done(function(res){
