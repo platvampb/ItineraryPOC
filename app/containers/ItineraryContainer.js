@@ -3,7 +3,8 @@ require('../stylesheets/itinerary.scss')
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { changePageHeader } from '../actions/actions'
-import { requestTrip, changeActiveDay, tripRequestStates, resetTripRequestState, retrieveTrip } from '../actions/itineraryActions'
+import { changeActiveDay, tripRequestStates, resetTripRequestState,
+	retrieveTrip } from '../actions/itineraryActions'
 import DayMenu from '../components/itinerary/dayMenu'
 import DayItinerary from '../components/itinerary/DayItinerary'
 //import DragPreviewLayer from '../components/itinerary/DragPreviewLayer'
@@ -46,7 +47,7 @@ class ItineraryHandler extends Component {
 	}
 	render() {
 		// Injected by connect() call:
-		const { dispatch, selectedCity, cityPhoto, tripItinerary, activeDay, tripRequestState } = this.props
+		const { dispatch, tripItinerary, activeDay, tripRequestState } = this.props
 
 		let renderDayMenu = (tripRequestState) => {
 			if (this.state.tripLoaded)
@@ -91,8 +92,6 @@ class ItineraryHandler extends Component {
 // Note: use https://github.com/faassen/reselect for better performance.
 function select(state) {
 	return {
-		selectedCity: state.selectedCity,
-		cityPhoto: state.cityPhoto,
 		tripItinerary: state.tripItinerary,
 		activeDay: state.activeDay,
 		tripRequestState: state.tripRequestState,

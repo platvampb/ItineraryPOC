@@ -34,9 +34,7 @@ export default class SearchCity extends Component {
 
 	render() {
 		const {
-			searchText,
 			selectedCity,
-			onCloseNextStep,
 			onNextStep,
 			dropdownVisible,
 			showHideDropdown,
@@ -69,7 +67,6 @@ export default class SearchCity extends Component {
 }
 
 SearchCity.propTypes = {
-	searchText: PropTypes.string.isRequired,
 	selectedCity: PropTypes.shape({
 		description: PropTypes.string,
 	}).isRequired,

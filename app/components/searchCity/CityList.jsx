@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { CitySearchStates, selectCity } from '../../actions/actions'
+import { selectCity } from '../../actions/actions'
 import City from './City'
 
 class CityListContainer extends Component {
@@ -36,7 +36,7 @@ class CityListContainer extends Component {
 		}
 	}
 	render() {
-		const { dispatch, visible, toggleDropdown } = this.props
+		const { dispatch, visible } = this.props
 
 		let hideClass = (() => {
 			if (!visible)

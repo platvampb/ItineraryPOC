@@ -1,5 +1,4 @@
-import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
+import React, { Component } from 'react'
 import { homeApi } from '../config/config'
 
 export default class LoginButton extends Component {

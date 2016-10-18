@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux'
-import cityPhoto from './cityPhoto'
 import citySearchState from './citySearchState'
 import searchbarState from './searchbarState'
 import searchText from './searchText'
@@ -12,7 +11,6 @@ import pageHeader from './pageHeader'
 import user from './user'
 
 export default combineReducers({
-	cityPhoto,
 	citySearchState,
 	searchText,
 	selectedCity,

@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react'
-import { DropTarget } from 'react-dnd'
 
 export default class DayTab extends Component {
 	displayDay(dayNumber) {
@@ -10,7 +9,7 @@ export default class DayTab extends Component {
 	}
 
 	render() {
-		const { connectDropTarget, active, dayNumber, changeDayHandler } = this.props
+		const { active, dayNumber, changeDayHandler } = this.props
 
 		return (
 				<li className={active ? 'active' : ''}>

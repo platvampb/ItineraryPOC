@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 
 export default class AvatarButton extends Component {
 	render() {
-		const { toggleMenu, showHideMenu } = this.props
+		const { toggleMenu } = this.props
 
 		return (
 			<a className="user-button nav-button avatar-button"

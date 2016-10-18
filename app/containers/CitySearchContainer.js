@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { searchCity, changePageHeader } from '../actions/actions'
 import { closeNextStep } from '../actions/searchbarActions'
-import { requestTrip, tripRequestStates, resetTripRequestState } from '../actions/itineraryActions'
+import { requestTrip, tripRequestStates } from '../actions/itineraryActions'
 import SearchCity from '../components/searchCity/SearchCity'
 import Loading from '../components/searchCity/Loading'
 

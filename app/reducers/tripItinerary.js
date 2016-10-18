@@ -1,5 +1,4 @@
-import { RECEIVE_TRIP, MOVE_POI } from '../actions/itineraryActions'
-import update from 'react/lib/update'
+import { RECEIVE_TRIP } from '../actions/itineraryActions'
 
 export default (state = {}, action) => {
 	switch (action.type) {

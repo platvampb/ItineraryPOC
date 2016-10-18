@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router'
 
 export default class NextStepButtonWrapper extends Component {
 	render() {
-		const { validator, setValid } = this.props
+		const { validator } = this.props
 
 		let autoButton = (() => {
 			let disabled = validator.valid ? '' : ' disabled'

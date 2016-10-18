@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { logout } from '../actions/userActions'
 
 import { homeApi } from '../config/config'
 import LoginButton from './LoginButton'
@@ -15,7 +14,7 @@ class UserNavContainer extends Component {
 		}
 	}
 	render() {
-		const { dispatch, user, pathname } = this.props
+		const { user, pathname } = this.props
 		if (!user.loggedIn)
 			return (
 				<LoginButton pathname={pathname}/>

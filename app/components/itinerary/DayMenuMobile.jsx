@@ -3,7 +3,7 @@ import DayTab from './DayTab'
 
 export default class DayMenuMobile extends Component {
 	render() {
-		const { days, activeDay, onChangeDays } = this.props
+		const { activeDay, onChangeDays } = this.props
 
 		return (
 			<div className="mobile-nav-menu-wrapper">
@@ -26,5 +26,4 @@ export default class DayMenuMobile extends Component {
 DayMenuMobile.propTypes = {
 	activeDay: PropTypes.number.isRequired,
 	onChangeDays: PropTypes.func.isRequired,
-	days: PropTypes.array.isRequired,
 }

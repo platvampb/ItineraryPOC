@@ -8,7 +8,7 @@ export default class DestinationSelect extends Component {
 	}
 
 	render() {
-		const { selectedCity, dropdownVisible, showHideDropdown, validator } = this.props
+		const { selectedCity, dropdownVisible, validator } = this.props
 
 		let errorClass = () => {
 			return validator.errors['destination'] ? ' error' : ''

@@ -1,4 +1,4 @@
-import { SELECT_CITY, CHANGE_SEARCH_TEXT } from '../actions/actions'
+import { CHANGE_SEARCH_TEXT } from '../actions/actions'
 
 export default (state = "", action) => {
 	switch (action.type) {

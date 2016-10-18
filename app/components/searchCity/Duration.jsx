@@ -20,7 +20,8 @@ class Duration extends Component {
 			return validator.errors['duration'] ? ' error' : ''
 		}
 
-		let tooltipMsg = "Our tool currently works best for short trips. Trips longer than 5 days will take slightly more time to generate."
+		let tooltipMsg = "Our tool currently works best for short trips.\
+		 Trips longer than 5 days will take slightly more time to generate."
 
 		return (
 			<div className={"duration-wrapper"}>

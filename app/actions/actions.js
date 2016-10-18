@@ -1,6 +1,5 @@
 import $ from 'jquery'
 
-import { setSearchbarReadOnly } from './searchbarActions'
 import { mallocApi } from '../config/config.js'
 /*
 * action types
@@ -15,10 +14,6 @@ export const SELECT_CITY = 'SELECT_CITY'
 export const COMPLETE_TODO = 'COMPLETE_TODO'
 export const REQUEST_POIS = 'REQUEST_POIS'
 export const RECEIVE_POIS = 'RECEIVE_POIS'
-export const DRAG_START = 'DRAG_START'
-export const DRAG_END = 'DRAG_END'
-export const DRAG_MOVE = 'DRAG_MOVE'
-export const RECEIVE_CITY_IMAGE = 'RECEIVE_CITY_IMAGE'
 
 /*
 * other constants
