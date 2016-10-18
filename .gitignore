@@ -1,5 +1,6 @@
-build/
+build/*
 !build/index.html
+!build/index_prod.html
 node_modules/
 **/*.DS_Store
 **/._*
