@@ -63,11 +63,5 @@ class CityListContainer extends Component {
 	}
 }
 
-function select(state) {
-	return {
-		citySearchState: state.citySearchState,
-	}
-}
-
 // Wrap the component to inject dispatch and state into it
-export default connect(select)(CityListContainer)
+export default connect()(CityListContainer)
