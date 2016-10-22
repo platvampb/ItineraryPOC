@@ -26,4 +26,6 @@ export default class City extends Component {
 
 City.propTypes = {
 	onSelectCity: PropTypes.func.isRequired,
+	selectable: PropTypes.bool.isRequired,
+	description: PropTypes.string.isRequired,
 }

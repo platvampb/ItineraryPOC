@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import SimpleLayer from './SimpleLayer'
 
 export default class UserMenu extends Component {
@@ -15,7 +15,7 @@ export default class UserMenu extends Component {
 		}
 	}
 	render() {
-		const { visible } = this.props
+		const { visible, hideMenu } = this.props
 
 		let hideClass = (() => {
 			if (!visible)
@@ -38,10 +38,15 @@ export default class UserMenu extends Component {
 				</ul>
 				<SimpleLayer
 					className={"menu-layer " + hideClass}
-					onClick={this.props.hideMenu}
+					onClick={hideMenu}
 				/>
 			</div>
 		)
 	}
+}
 
+UserMenu.propTypes = {
+	visible: PropTypes.bool.isRequired,
+	hideMenu: PropTypes.func.isRequired,
+	logoutHandler: PropTypes.func.isRequired,
 }

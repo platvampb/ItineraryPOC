@@ -55,6 +55,13 @@ class UserNavContainer extends Component {
 	}
 }
 
+UserNavContainer.propTypes = {
+	pathname: PropTypes.string.isRequired,
+	user: PropTypes.shape ({
+		loggedIn: PropTypes.bool.isRequired,
+	}),
+}
+
 function select(state) {
 	return {
 		user: state.user,

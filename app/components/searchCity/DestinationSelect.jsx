@@ -61,4 +61,11 @@ DestinationSelect.propTypes = {
 	selectedCity: PropTypes.shape({
 		description: PropTypes.string,
 	}).isRequired,
+	dropdownVisible: PropTypes.bool.isRequired,
+	showHideDropdown: PropTypes.func.isRequired,
+	validator: PropTypes.shape({
+		errors: PropTypes.object.isRequired,
+		valid: PropTypes.bool.isRequired,
+	}).isRequired,
+	setValid: PropTypes.func.isRequired,
 }

@@ -1,6 +1,6 @@
 require('../../stylesheets/tooltip.scss')
 
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { setDuration } from '../../actions/searchbarActions'
 import Tooltip from './Tooltip'
@@ -81,6 +81,14 @@ class Duration extends Component {
 
 		this.showHideTooltip(show)
 	}
+}
+
+Duration.propTypes = {
+	validator: PropTypes.shape({
+		errors: PropTypes.object.isRequired,
+		valid: PropTypes.bool.isRequired,
+	}).isRequired,
+	setValid: PropTypes.func.isRequired,
 }
 
 function select(state) {

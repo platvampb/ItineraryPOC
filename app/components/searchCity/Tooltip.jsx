@@ -1,6 +1,6 @@
 require('../../stylesheets/tooltip.scss')
 
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 
 export default class Tooltip extends Component {
 	render() {
@@ -11,4 +11,9 @@ export default class Tooltip extends Component {
 			</div>
 		)
 	}
+}
+
+Tooltip.propTypes = {
+	message: PropTypes.string.isRequired,
+	show: PropTypes.bool.isRequired,
 }

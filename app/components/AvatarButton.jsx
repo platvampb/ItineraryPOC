@@ -19,3 +19,8 @@ export default class AvatarButton extends Component {
 		this.props.showHideMenu(false)
 	}
 }
+
+AvatarButton.propTypes = {
+	toggleMenu: PropTypes.func.isRequired,
+	showHideMenu: PropTypes.func.isRequired,
+}
