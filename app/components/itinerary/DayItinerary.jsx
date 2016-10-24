@@ -24,7 +24,7 @@ export default class DayItinerary extends Component {
 	}
 
 	render() {
-		const { dayItinerary, movePOI } = this.props
+		const { dayItinerary } = this.props
 		return (
 			<div className="tab-content">
 			<div className="tab-pane active" ref="tabPane">
@@ -34,7 +34,6 @@ export default class DayItinerary extends Component {
 					id={poi.poi.id}
 					poi={poi}
 					index={i}
-					movePOI={movePOI}
 					day={poi.day}
 				/>
 			)}

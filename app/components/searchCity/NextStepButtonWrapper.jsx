@@ -1,9 +1,8 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router'
+import React, { Component, PropTypes } from 'react'
 
 export default class NextStepButtonWrapper extends Component {
 	render() {
-		const { validator, setValid } = this.props
+		const { validator } = this.props
 
 		let autoButton = (() => {
 			let disabled = validator.valid ? '' : ' disabled'
@@ -24,4 +23,13 @@ export default class NextStepButtonWrapper extends Component {
 			</div>
 		)
 	}
+}
+
+
+NextStepButtonWrapper.propTypes = {
+	validator: PropTypes.shape({
+		errors: PropTypes.object.isRequired,
+		valid: PropTypes.bool.isRequired,
+	}).isRequired,
+	handelNextStep: PropTypes.func.isRequired,
 }

@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react'
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import DayTab from './DayTab'
 import Overlay from './Overlay'
 import DayMenuMobile from './DayMenuMobile'

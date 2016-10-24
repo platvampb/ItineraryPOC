@@ -31,23 +31,31 @@ export function requestTrip(placeId, duration) {
 	return dispatch => {
 		dispatch(requestTripStart())
 
-		let userId = readCookie('wg_el_id')
-		let sessionId = readCookie('wg_sk_el')
-		let email = readCookie('wg_el')
-
-		userId = userId == null ? "1" : userId;
-		sessionId = sessionId == null ? "" : sessionId;
-		email = email == null ? "" : email;
+		//we can do || because readCookie doesn't return number 0
+		let userId = readCookie('wg_el_id') || "1"
+		let sessionId = readCookie('wg_sk_el') || ""
+		let email = readCookie('wg_el') || ""
 
 		$.ajax({
 			type: 'POST',
 			url: mallocApi.baseUrl + mallocApi.command,
 			headers: {
-				"wg_el_id":userId,
-				"wg_el":email,
-				"wg_sk_el":sessionId,
+				"wg_el_id": userId,
+				"wg_el": email,
+				"wg_sk_el": sessionId,
 			},
-			data: '{"cmd":"create trip", "data":{"user_id":"' + userId + '", "preferred_commute":"driving", "pace":"REGULAR", "place_id":"' + placeId + '", "number_of_days":"' + duration + '", "page_number":"1"}}', // or JSON.stringify ({name: 'jonas'}),
+			data: '{\
+				"cmd": "create trip",\
+				"data":\
+					{\
+						"user_id": "'+ userId + '",\
+						"preferred_commute": "driving",\
+						"pace": "REGULAR",\
+						"place_id": "' + placeId + '", "number_of_days":"' + duration + '",\
+						"page_number": "1"\
+					}\
+				}', //TODO: JSON.stringify ({name: 'jonas'}),
+
 			contentType: "application/json",
 			dataType: 'json',
 		}).done(function(res){
@@ -119,15 +127,5 @@ export function changeActiveDay(day) {
 	return {
 		type: CHANGE_ACTIVE_DAY,
 		day: day,
-	}
-}
-
-export function movePOI(fromDay, fromIndex, toDay, toIndex) {
-	return {
-		type: MOVE_POI,
-		fromDay,
-		fromIndex,
-		toDay,
-		toIndex,
 	}
 }

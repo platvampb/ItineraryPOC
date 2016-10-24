@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
-import TimeButton from './TimeButton'
-import Timeline from './Timeline'
+//import TimeButton from './TimeButton'
+//import Timeline from './Timeline'
 
 export default class POIInfo extends Component {
 	render() {

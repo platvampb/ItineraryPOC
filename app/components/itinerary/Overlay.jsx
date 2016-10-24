@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import closeButton from "../../assets/close-button.png"
 
-
 export default class Overlay extends Component {
 	render() {
 		const { closeHandler } = this.props
@@ -17,4 +16,8 @@ export default class Overlay extends Component {
 			</div>
 		)
 	}
+}
+
+Overlay.propTypes = {
+	closeHandler: PropTypes.func.isRequired,
 }

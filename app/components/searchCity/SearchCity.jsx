@@ -34,9 +34,7 @@ export default class SearchCity extends Component {
 
 	render() {
 		const {
-			searchText,
 			selectedCity,
-			onCloseNextStep,
 			onNextStep,
 			dropdownVisible,
 			showHideDropdown,
@@ -60,7 +58,6 @@ export default class SearchCity extends Component {
 				</div>
 				<NextStepButtonWrapper
 					validator={this.state.validator}
-					setValid={this.state.validator.setValid.bind(this)}
 					handelNextStep={onNextStep}
 				/>
 			</div>
@@ -69,8 +66,10 @@ export default class SearchCity extends Component {
 }
 
 SearchCity.propTypes = {
-	searchText: PropTypes.string.isRequired,
 	selectedCity: PropTypes.shape({
 		description: PropTypes.string,
 	}).isRequired,
+	onNextStep: PropTypes.func.isRequired,
+	dropdownVisible: PropTypes.bool.isRequired,
+	showHideDropdown: PropTypes.func.isRequired,
 }

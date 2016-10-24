@@ -2,9 +2,9 @@ require('../stylesheets/search.scss')
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { searchCity, changePageHeader } from '../actions/actions'
+import { changePageHeader } from '../actions/actions'
 import { closeNextStep } from '../actions/searchbarActions'
-import { requestTrip, tripRequestStates, resetTripRequestState } from '../actions/itineraryActions'
+import { requestTrip, tripRequestStates } from '../actions/itineraryActions'
 import SearchCity from '../components/searchCity/SearchCity'
 import Loading from '../components/searchCity/Loading'
 
@@ -28,9 +28,8 @@ class CitySearchHandler extends Component {
 
 	render() {
 		// Injected by connect() call:
-		const { dispatch, searchText, selectedCity,
-			citySearchState, tripRequestState,
-			cityPhoto, tripDuration } = this.props
+		const { dispatch, selectedCity,
+			tripRequestState, cityPhoto, tripDuration } = this.props
 
 		let divStyle = cityPhoto ? {
 			backgroundImage: 'url(' + cityPhoto + ')',
@@ -59,15 +58,10 @@ class CitySearchHandler extends Component {
 			<div className={"search-outer-container" + containerClass}>
 				<div className="search-background-hack" style={divStyle}/>
 				<SearchCity
-					searchText={searchText}
 					selectedCity={selectedCity}
-					citySearchState={citySearchState}
 					dropdownVisible={this.state.dropdownVisible}
 					onCloseNextStep={ () =>
 						dispatch(closeNextStep())
-					}
-					onSearchTrigger={ text =>
-						dispatch(searchCity(text))
 					}
 					onNextStep={ () =>
 						dispatch(requestTrip(selectedCity.id, tripDuration))
@@ -98,8 +92,6 @@ CitySearchHandler.contextTypes = {
 function select(state) {
 	return {
 		selectedCity: state.selectedCity,
-		searchText: state.searchText,
-		citySearchState: state.citySearchState,
 		cityPhoto: state.cityPhoto,
 		tripRequestState: state.tripRequestState,
 		tripItinerary: state.tripItinerary,

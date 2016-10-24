@@ -8,7 +8,7 @@ export default class DestinationSelect extends Component {
 	}
 
 	render() {
-		const { selectedCity, dropdownVisible, showHideDropdown, validator } = this.props
+		const { selectedCity, dropdownVisible, validator } = this.props
 
 		let errorClass = () => {
 			return validator.errors['destination'] ? ' error' : ''
@@ -61,4 +61,11 @@ DestinationSelect.propTypes = {
 	selectedCity: PropTypes.shape({
 		description: PropTypes.string,
 	}).isRequired,
+	dropdownVisible: PropTypes.bool.isRequired,
+	showHideDropdown: PropTypes.func.isRequired,
+	validator: PropTypes.shape({
+		errors: PropTypes.object.isRequired,
+		valid: PropTypes.bool.isRequired,
+	}).isRequired,
+	setValid: PropTypes.func.isRequired,
 }
