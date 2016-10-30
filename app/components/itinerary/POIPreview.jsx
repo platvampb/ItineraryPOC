@@ -53,11 +53,12 @@ class POIPreview extends React.Component {
 			WebkitTransform: transform,
 			color: 'black',
 			zIndex: 999,
-			position: 'absolute',
+			position: 'fixed',
 			opacity: 0.5,
 			width: '680px',
 			height: '150px',
 			overflow: 'hidden',
+			border: '1px solid black',
 		}
 	}
 }
