@@ -4,10 +4,11 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { changePageHeader } from '../actions/actions'
 import { changeActiveDay, tripRequestStates, resetTripRequestState,
-	retrieveTrip } from '../actions/itineraryActions'
+	retrieveTrip, movePOI } from '../actions/itineraryActions'
 import DayMenu from '../components/itinerary/dayMenu'
 import DayItinerary from '../components/itinerary/DayItinerary'
-//import DragPreviewLayer from '../components/itinerary/DragPreviewLayer'
+import TouchBackend from 'react-dnd-touch-backend'
+import { DragDropContext } from 'react-dnd'
 
 class ItineraryHandler extends Component {
 	constructor(props) {
@@ -53,11 +54,11 @@ class ItineraryHandler extends Component {
 			if (this.state.tripLoaded)
 				return (
 					<DayMenu
-					days={tripItinerary.length_in_days}
-					activeDay={activeDay}
-					onChangeDays={day =>
-						dispatch(changeActiveDay(day))
-					}/>
+						days={tripItinerary.length_in_days}
+						activeDay={activeDay}
+						onChangeDays={day =>
+							dispatch(changeActiveDay(day))
+						}/>
 				)
 
 			return ''
@@ -67,9 +68,11 @@ class ItineraryHandler extends Component {
 			if (this.state.tripLoaded) {
 				return (
 					<DayItinerary
-					activeDay={activeDay}
-					dayItinerary={tripItinerary.destinations[activeDay - 1]}
-					/>
+						activeDay={activeDay}
+						dayItinerary={tripItinerary.destinations[activeDay - 1]}
+						movePOI={(fromDay, fromIndex, toIndex) =>
+							dispatch(movePOI(fromDay, fromIndex, activeDay, toIndex))
+						}/>
 				)
 			}
 
@@ -100,4 +103,5 @@ function select(state) {
 }
 
 // Wrap the component to inject dispatch and state into it
+ItineraryHandler = DragDropContext(TouchBackend({ enableMouseEvents: true }))(ItineraryHandler)
 export default connect(select)(ItineraryHandler)

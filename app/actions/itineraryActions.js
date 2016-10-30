@@ -129,3 +129,13 @@ export function changeActiveDay(day) {
 		day: day,
 	}
 }
+
+export function movePOI(fromDay, fromIndex, toDay, toIndex) {
+	return {
+		type: MOVE_POI,
+		fromDay,
+		fromIndex,
+		toDay,
+		toIndex,
+	}
+}
