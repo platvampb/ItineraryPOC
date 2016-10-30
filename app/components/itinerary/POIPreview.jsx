@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
 import DragLayer from 'react-dnd/lib/DragLayer'
+import BackgroundImage from './BackgroundImage'
 
 function collect (monitor) {
 		return {
@@ -20,8 +21,14 @@ class POIPreview extends React.Component {
 		return (
 			<div
 				style={this.getItemStyles()}
+				className="poi-preview"
 			>
-			{this.props.item.name}
+				<div className="itinerary-poi-wrapper">
+				<div className="itinerary-poi">
+					<BackgroundImage poi={this.props.item.poi}/>
+					<h3 className="poi-name">{this.props.item.name}</h3>
+				</div>
+				</div>
 			</div>
 		)
 	}
@@ -47,6 +54,10 @@ class POIPreview extends React.Component {
 			color: 'black',
 			zIndex: 999,
 			position: 'absolute',
+			opacity: 0.5,
+			width: '680px',
+			height: '150px',
+			overflow: 'hidden',
 		}
 	}
 }

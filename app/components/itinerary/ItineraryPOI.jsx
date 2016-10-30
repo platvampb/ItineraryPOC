@@ -36,9 +36,13 @@ const POISource = {
 		return {
 			id: props.id,
 			index: props.index,
-			name: props.poi.name,
+			name: props.poi.poi.name,
 			day: props.day,
+			poi: props.poi,
 		}
+	},
+	isDragging(props, monitor) {
+		return props.id === monitor.getItem().id
 	},
 }
 
@@ -48,18 +52,18 @@ const POITarget = {
 		const dragIndex = dragItem.index
 		const hoverIndex = props.index
 
-		window.console.log(props.poi.poi.name);
-		if (dragIndex === hoverIndex) return
+		//window.console.log(props.poi.poi.name);
+		if (dragItem.id === props.id) return
 
 		// Determine rectangle on screen
 		const hoverBoundingRect = findDOMNode(component).getBoundingClientRect()
 		const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2
 
 		const clientOffset = monitor.getClientOffset()
-		window.console.log(clientOffset)
+		//window.console.log(clientOffset)
 		const hoverClientY = clientOffset.y - hoverBoundingRect.top
 
-		window.console.log(hoverMiddleY, hoverClientY)
+		//window.console.log(hoverMiddleY, hoverClientY)
 		// Dragging downwards
 		if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) return
 
