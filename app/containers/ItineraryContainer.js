@@ -11,6 +11,7 @@ import { DragDropContext } from 'react-dnd'
 //import DragPreviewLayer from '../components/itinerary/DragPreviewLayer'
 
 class ItineraryHandler extends Component {
+
 	componentWillMount() {
 		if (this.props.tripRequestState === tripRequestStates.REQUEST_NONE) {
 			this.props.dispatch(requestTrip())
@@ -43,6 +44,7 @@ class ItineraryHandler extends Component {
 					movePOI={(fromDay, fromIndex, toIndex) =>
 						dispatch(movePOI(fromDay, fromIndex, activeDay, toIndex))
 					}
+					scrollContainer={this.scrollBy.bind(this)}
 					/>
 				)
 			}
@@ -51,7 +53,7 @@ class ItineraryHandler extends Component {
 		}
 
 		return (
-			<div className={"itinerary-outer-container"}>
+			<div className={"itinerary-outer-container"} ref="container">
 				<div className="row">
 					<div className="col-md-8 col-md-offset-2 col-sm-12">
 						{renderDayMenu(tripRequestState)}
@@ -61,6 +63,9 @@ class ItineraryHandler extends Component {
 				{this.props.children}
 			</div>
 		)
+	}
+	scrollBy(hScroll) {
+		this.refs.container.scrollTop += hScroll
 	}
 }
 

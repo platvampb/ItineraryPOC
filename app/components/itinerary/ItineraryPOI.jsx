@@ -5,25 +5,36 @@ import BackgroundImage from './BackgroundImage'
 
 class ItineraryPOI extends Component {
 	render() {
-		const { connectDragSource, connectDropTarget, connectDragPreview,
-			isDragging, poi } = this.props
+		const { connectDropTarget, poi } = this.props
 
-		//FIX: dragging property gets lost when drag to a different day
-		const styleClass = isDragging ? 'dragging' : ''
 		let content = (
 			<div className="itinerary-poi-wrapper">
-			<div className={"itinerary-poi " + styleClass}
-			>
+			<InnerBar
+				{...this.props}
+			/>
+			</div>
+		)
+
+		// Connect as drop target
+		content = connectDropTarget(content)
+		return content
+	}
+}
+
+class InnerBar extends Component {
+	render() {
+		const { connectDragPreview, connectDragSource, isDragging, poi } = this.props
+
+		const styleClass = isDragging ? 'dragging' : ''
+		let content = (
+			<div className={"itinerary-poi " + styleClass}>
 				<BackgroundImage poi={poi}/>
 				<h3 className="poi-name">{poi.poi.name}</h3>
-			</div>
 			</div>
 		)
 
 		// Connect as drag source
 		content = connectDragSource(content, { dropEffect: 'move' })
-		// Connect as drop target
-		content = connectDropTarget(content)
 		// Connect to drag layer
 		content = connectDragPreview(content)
 
@@ -32,13 +43,15 @@ class ItineraryPOI extends Component {
 }
 
 const POISource = {
-	beginDrag(props, monitor) {
+	beginDrag(props, monitor, component) {
+		window.console.log(component)
 		return {
 			id: props.id,
 			index: props.index,
 			name: props.poi.poi.name,
 			day: props.day,
 			poi: props.poi,
+			dimensions: findDOMNode(component).getBoundingClientRect(),
 		}
 	},
 	isDragging(props, monitor) {
@@ -99,5 +112,5 @@ ItineraryPOI.propTypes = {
 	movePOI: PropTypes.func.isRequired,
 }
 
-ItineraryPOI = DropTarget('POI', POITarget, DndTargetCollect)(ItineraryPOI)
-export default DragSource('POI', POISource, DndSourceCollect)(ItineraryPOI)
+InnerBar = DragSource('POI', POISource, DndSourceCollect)(InnerBar)
+export default DropTarget('POI', POITarget, DndTargetCollect)(ItineraryPOI)
