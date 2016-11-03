@@ -72,7 +72,9 @@ class ItineraryHandler extends Component {
 						dayItinerary={tripItinerary.destinations[activeDay - 1]}
 						movePOI={(fromDay, fromIndex, toIndex) =>
 							dispatch(movePOI(fromDay, fromIndex, activeDay, toIndex))
-						}/>
+						}
+						scrollContainer={this.scrollBy.bind(this)}
+					/>
 				)
 			}
 
@@ -80,7 +82,10 @@ class ItineraryHandler extends Component {
 		}
 
 		return (
-			<div className={"itinerary-outer-container"}>
+			<div
+				ref="container"
+				className={"itinerary-outer-container"}
+			>
 				<div className="content col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
 					{renderDayMenu(tripRequestState)}
 					{renderDayItinerary(tripRequestState)}
@@ -88,6 +93,9 @@ class ItineraryHandler extends Component {
 				{this.props.children}
 			</div>
 		)
+	}
+	scrollBy(hScroll) {//We have committed mortal sin! At least keep it on top level
+		document.querySelector('body').scrollTop += hScroll
 	}
 }
 

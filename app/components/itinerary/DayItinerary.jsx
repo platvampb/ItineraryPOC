@@ -1,8 +1,11 @@
 import React, { Component, PropTypes } from 'react'
+import { findDOMNode } from 'react-dom'
+import { DropTarget } from 'react-dnd'
+
 import POIBar from '../POI/POIBar'
 import POIPreview from '../POI/POIPreview'
 
-export default class DayItinerary extends Component {
+class DayItinerary extends Component {
 	constructor(props) {
 		super(props)
 
@@ -25,8 +28,8 @@ export default class DayItinerary extends Component {
 	}
 
 	render() {
-		const { dayItinerary, movePOI } = this.props
-		return (
+		const { dayItinerary, movePOI, connectDropTarget } = this.props
+		let content = (
 			<div className="tab-content">
 			<div className="tab-pane active" ref="tabPane">
 			<POIPreview containerOffset={this.state.offset}/>
@@ -43,10 +46,43 @@ export default class DayItinerary extends Component {
 			</div>
 			</div>
 		)
+		// Connect as drop target
+		content = connectDropTarget(content)
+		return content
 	}
 }
+
+const POITarget = {
+	hover(props, monitor, component) {
+		// Determine rectangle on screen
+		const hoverBoundingRect = findDOMNode(component).getBoundingClientRect()
+		const clientOffset = monitor.getSourceClientOffset()
+		const clientDimensions = monitor.getItem().dimensions
+		const windowHeight = window.innerHeight;
+		const hoverClientY = clientOffset.y + clientDimensions.height
+
+		if (clientOffset.y < 0) {
+			props.scrollContainer(clientOffset.y)
+			return
+		}
+
+		if (hoverClientY > windowHeight) {
+			props.scrollContainer(hoverClientY - windowHeight)
+			return
+		}
+	},
+}
+
+function DndTargetCollect(connect, monitor) {
+	return {
+		connectDropTarget: connect.dropTarget(),
+	}
+}
+
+export default DropTarget('POI', POITarget, DndTargetCollect)(DayItinerary)
 
 DayItinerary.propTypes = {
 	dayItinerary: PropTypes.array.isRequired,
 	movePOI: PropTypes.func.isRequired,
+	scrollContainer: PropTypes.func.isRequired,
 }

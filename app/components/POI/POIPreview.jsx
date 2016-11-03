@@ -43,6 +43,7 @@ class POIPreview extends React.Component {
 			}
 		}
 
+		window.console.log(currentOffset, initialOffset, this.props.initialOffset)
 		var x = currentOffset.x - initialOffset.x
 		var y = currentOffset.y - initialOffset.y
 		var transform = `translate(${x}px, ${y}px)`
@@ -53,7 +54,7 @@ class POIPreview extends React.Component {
 			WebkitTransform: transform,
 			color: 'black',
 			zIndex: 999,
-			position: 'absolute',
+			position: 'fixed',
 			opacity: 0.5,
 			width: '680px',
 			height: '150px',

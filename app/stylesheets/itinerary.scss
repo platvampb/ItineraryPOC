@@ -10,7 +10,6 @@ h3 {
 
 .itinerary-outer-container {
 	height: 100%;
-	overflow: scroll;
 }
 
 .content {
@@ -177,15 +176,12 @@ h3 {
 
 .tab-content {
 	float: left;
-	background-color: $background-color;
-	margin-left: $nav-bar-width + 20px;
+	margin-left: $nav-bar-width + 40px;
 	.tab-pane {
 		position: relative;
 		display: none;
 		overflow: hidden;
-		padding-right: $timeline-gutter;
-		padding-top: $timeline-gutter / 2;
-		box-shadow: $card-box-shadow;
+		/*box-shadow: $card-box-shadow;*/
 		z-index: 1;
 	}
 	.active { display: block; }
@@ -307,12 +303,8 @@ h3 {
 }
 
 .poi-bar-wrapper {
-	border-bottom: 20px solid white;
+	border-bottom: 20px solid $light-yellow;
 	width: 700px;
-
-	&:first-child {
-		border-top: 20px solid white;
-	}
 }
 
 .poi-bar {
@@ -329,12 +321,12 @@ h3 {
 	background: -moz-linear-gradient(right,rgba(0,0,0,0.9), rgba(0,0,0,0.2), transparent); /*Fx 3.6-15*/
 	background: linear-gradient(to right, rgba(0,0,0,0.9), rgba(0,0,0,0.2), transparent); /*Standard*/
 	&.dragging {
-		background: white;
+		opacity: 0;
 		border: none;
 	}
 	h3 {
 		font-size: 21px;
-		margin: 10px 0;
+		margin: 16px 0;
 	}
 	p {
 		font-size: 16px;
@@ -342,7 +334,7 @@ h3 {
 	}
 }
 
-.itinerary-poi-background {
+.poi-bar-background {
 	width: 680px;
 	height: 510px;
 	left: 0;

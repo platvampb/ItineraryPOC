@@ -20,5 +20,7 @@ export function parsePOIType(poi) {
 }
 
 export function getImageUrl(poi) {
-	return mallocApi.cdnUrl + "/" + poi.photoUrls[0].url
+	if (poi.photoUrls.length > 0)
+		return mallocApi.cdnUrl + "/" + poi.photoUrls[0].url
+	return ''
 }

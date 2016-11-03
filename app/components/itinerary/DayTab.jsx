@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
+import { DropTarget } from 'react-dnd'
 
-export default class DayTab extends Component {
+class DayTab extends Component {
 	displayDay(dayNumber) {
 		if (dayNumber < 10) {
 			return '0' + dayNumber.toString()
@@ -9,9 +10,9 @@ export default class DayTab extends Component {
 	}
 
 	render() {
-		const { active, dayNumber, changeDayHandler } = this.props
+		const { connectDropTarget, active, dayNumber, changeDayHandler } = this.props
 
-		return (
+		return connectDropTarget(
 				<li className={active ? 'active' : ''}>
 				<a data-toggle="tab" onClick={(e) => changeDayHandler(dayNumber)}>
 					<span className="day">Day</span>
@@ -22,6 +23,18 @@ export default class DayTab extends Component {
 	}
 }
 
+function DndTargetCollect(connect, monitor) {
+	return {
+		connectDropTarget: connect.dropTarget(),
+	}
+}
+const POITarget = {
+	hover(props, monitor, component) {
+		props.changeDayHandler(props.dayNumber)
+	},
+}
+
+export default DropTarget('POI', POITarget, DndTargetCollect)(DayTab)
 
 DayTab.propTypes = {
 	active: PropTypes.bool.isRequired,
