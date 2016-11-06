@@ -14,16 +14,8 @@ export default class BackgroundImage extends Component {
 			return {}
 		}
 
-		let className = ((poi) => {
-			let classes = "poi-bar-background"
-			if (poi.poi.photoUrls.length === 0)
-				classes += " poi-header"
-
-			return classes
-		})(poi)
-
 		return (
-			<div className={className}
+			<div className="poi-bar-background"
 				style={getBackgroundImage(poi)}
 			/>
 		)

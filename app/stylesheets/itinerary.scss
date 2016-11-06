@@ -313,6 +313,7 @@ h3 {
 	border: 1px solid #aaa;
 	font-family: 'Overlock', sans-serif;
 	color: white;
+	position: relative;
 	padding-left: 48px;
 	overflow: hidden;
 	background-color: rgba(0, 0, 0, 0.5);
@@ -320,17 +321,48 @@ h3 {
 	background: -o-linear-gradient(right,rgba(0,0,0,0.9), rgba(0,0,0,0.2), transparent); /*Opera 11.1-12*/
 	background: -moz-linear-gradient(right,rgba(0,0,0,0.9), rgba(0,0,0,0.2), transparent); /*Fx 3.6-15*/
 	background: linear-gradient(to right, rgba(0,0,0,0.9), rgba(0,0,0,0.2), transparent); /*Standard*/
+
+	&.no-image {
+		background: none;
+		.poi-bar-background {
+			height: 100%;
+			background: $blue;
+			background:
+				-webkit-linear-gradient(top, rgba(0,0,0, 0.3), rgba(172,246,255, 0.6)), /* For Safari 5.1 to 6.0 */
+				-webkit-linear-gradient(left, $blue, rgba(232,252,253, 0.3)), /* For Safari 5.1 to 6.0 */
+				-webkit-linear-gradient(bottom, orange, $light-yellow);
+			background: /* For Safari 5.1 to 6.0 */
+				-o-linear-gradient(right, $blue, rgba(232,252,253, 0.3)), /* For Opera 11.1 to 12.0 */
+				-o-linear-gradient(top, orange, $light-yellow); /* For Opera 11.1 to 12.0 */
+			background:
+				-moz-linear-gradient(right, $blue, rgba(232,252,253, 0.3)),
+				-moz-linear-gradient(top, orange, $light-yellow); /* Standard syntax */
+			background:
+				linear-gradient(to bottom right, rgba(60,142,166, 1), rgba(60,142,166, 0.4), rgba(172,246,255, 0)),
+				linear-gradient(to top, $light-yellow, transparent), /* Standard syntax */
+				linear-gradient(to top left, rgba(202,4,73, 0.6), rgba(232,252,253, 0.3));
+		}
+	}
 	&.dragging {
-		opacity: 0;
+		opacity: 1;
 		border: none;
+		background: $light-yellow;
+		.poi-name {
+			display: none;
+		}
+		.cost {
+			display: none;
+		}
 	}
 	h3 {
-		font-size: 21px;
+		font-size: 24px;
 		margin: 16px 0;
+		text-shadow: 0 0 3px #333;
 	}
 	p {
-		font-size: 16px;
+		font-size: 18px;
 		margin-top: 10px;
+		text-shadow: 0 0 2px #333;
 	}
 }
 

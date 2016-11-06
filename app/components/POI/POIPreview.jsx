@@ -14,8 +14,16 @@ function collect (monitor) {
 
 class POIPreview extends React.Component {
 	render () {
+		const { item } = this.props
 		if (!this.props.isDragging) {
 			return (<div></div>)
+		}//this has to go first
+
+		let hours = item.poi.poi.hoursOfVisit > 1 ? 'hours' : 'hour'
+
+		let styleClass = ''
+		if (item.poi.poi.photoUrls.length === 0) {
+			styleClass += ' no-image'
 		}
 
 		return (
@@ -24,9 +32,11 @@ class POIPreview extends React.Component {
 				className="poi-preview"
 			>
 				<div className="poi-bar-wrapper">
-				<div className="poi-bar">
-					<BackgroundImage poi={this.props.item.poi}/>
-					<h3 className="poi-name">{this.props.item.name}</h3>
+				<div className={"poi-bar" + styleClass}>
+
+					<BackgroundImage poi={item.poi}/>
+					<h3 className="poi-name">{item.name}</h3>
+					<p className="cost">Visit for: {item.poi.poi.hoursOfVisit} {hours}</p>
 				</div>
 				</div>
 			</div>
@@ -43,7 +53,6 @@ class POIPreview extends React.Component {
 			}
 		}
 
-		window.console.log(currentOffset, initialOffset, this.props.initialOffset)
 		var x = currentOffset.x - initialOffset.x
 		var y = currentOffset.y - initialOffset.y
 		var transform = `translate(${x}px, ${y}px)`

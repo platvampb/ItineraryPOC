@@ -24,10 +24,15 @@ class POIBar extends Component {
 class InnerBar extends Component {
 	render() {
 		const { connectDragPreview, connectDragSource, isDragging, poi } = this.props
-		const styleClass = isDragging ? 'dragging' : ''
 		let hours = poi.poi.hoursOfVisit > 1 ? 'hours' : 'hour'
+
+		let styleClass = isDragging ? ' dragging' : ''
+		if (poi.poi.photoUrls.length === 0) {
+			styleClass += ' no-image'
+		}
+
 		let content = (
-			<div className={"poi-bar " + styleClass}>
+			<div className={"poi-bar" + styleClass}>
 				<BackgroundImage poi={poi}/>
 				<h3 className="poi-name">{poi.poi.name}</h3>
 				<p className="cost">Visit for: {poi.poi.hoursOfVisit} {hours}</p>
