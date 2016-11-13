@@ -1,7 +1,7 @@
 import $ from 'jquery'
 import { mallocApi } from '../config/config.js'
-import { readCookie } from '../utils/cookieHelpers.js'
-
+import { getSessionValues } from '../utils/loginHelpers.js'
+import { parseTripToEdit } from '../utils/itineraryHelpers'
 /*
 * action types
 */
@@ -12,6 +12,10 @@ export const RESET_TRIP_REQUEST_STATE = 'RESET_TRIP_REQUEST_STATE'
 export const SET_TRIP_REQUEST_ERROR = 'SET_TRIP_REQUEST_ERROR'
 export const CHANGE_ACTIVE_DAY = 'CHANGE_ACTIVE_DAY'
 export const MOVE_POI = 'MOVE_POI'
+
+export const REQUEST_TRIP_SAVE = 'REQUEST_TRIP_SAVE'
+export const CONFIRM_TRIP_SAVE = 'CONFIRM_TRIP_SAVE'
+export const FAIL_TRIP_SAVE = 'FAIL_TRIP_SAVE'
 /*
 * other constants
 */
@@ -22,6 +26,8 @@ export const tripRequestStates = {
 	REQUEST_DONE: 'DONE',
 	REQUEST_ERROR: 'ERROR',
 }
+//they are the same for now
+export const tripSaveStates = tripRequestStates
 
 /*
 * action creators
@@ -32,10 +38,7 @@ export function requestTrip(placeId, duration) {
 		dispatch(requestTripStart())
 
 		//we can do || because readCookie doesn't return number 0
-		let userId = readCookie('wg_el_id') || "1"
-		let sessionId = readCookie('wg_sk_el') || ""
-		let email = readCookie('wg_el') || ""
-
+		const { userId, sessionId, email } = getSessionValues()
 		$.ajax({
 			type: 'POST',
 			url: mallocApi.baseUrl + mallocApi.command,
@@ -138,4 +141,45 @@ export function movePOI(fromDay, fromIndex, toDay, toIndex) {
 		toDay,
 		toIndex,
 	}
+}
+
+export function saveTrip(trip) {
+	return dispatch => {
+		dispatch(saveTripStart())
+
+		const { userId, sessionId, email } = getSessionValues()
+		const data = parseTripToEdit(trip)
+
+		$.ajax({
+			type: 'POST',
+			url: mallocApi.baseUrl + mallocApi.command,
+			headers: {
+				"wg_el_id": userId,
+				"wg_el": email,
+				"wg_sk_el": sessionId,
+			},
+			data: data,
+			contentType: "application/json",
+			dataType: 'json',
+		}).done(res => {
+			dispatch(saveTripSuccess(res))
+		}).fail(err => {
+			dispatch(saveTripError())
+		})
+	}
+}
+
+function saveTripStart() {
+	return { type: REQUEST_TRIP_SAVE }
+}
+
+function saveTripSuccess(res) {
+	if (res && res.result)
+		return { type: CONFIRM_TRIP_SAVE }
+
+	return saveTripError()
+}
+
+function saveTripError() {
+	return { type: FAIL_TRIP_SAVE }
 }

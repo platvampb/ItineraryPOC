@@ -6,7 +6,7 @@ import { changePageHeader } from '../actions/actions'
 import { closeNextStep } from '../actions/searchbarActions'
 import { requestTrip, tripRequestStates } from '../actions/itineraryActions'
 import SearchCity from '../components/searchCity/SearchCity'
-import Loading from '../components/searchCity/Loading'
+import Loading from '../components/loadingScreen/Loading'
 
 class CitySearchHandler extends Component {
 	constructor(props) {
@@ -53,6 +53,17 @@ class CitySearchHandler extends Component {
 			return className
 		})()
 
+		let tripRequestDisplay = (() => {
+			let state = tripRequestState.toLowerCase()
+
+			if (tripRequestState === tripRequestStates.REQUEST_NONE) {
+				state = "hidden"
+			} else if (tripRequestState === tripRequestStates.REQUEST_IN_PROGRESS) {
+				state = "loading"
+			}
+
+			return state
+		})()
 
 		return (
 			<div className={"search-outer-container" + containerClass}>
@@ -68,7 +79,10 @@ class CitySearchHandler extends Component {
 					}
 					showHideDropdown={ this.showHideDropdown.bind(this) }
 					/>
-				<Loading/>
+				<Loading
+					message={"Heavy lifting in progress..."}
+					state={tripRequestDisplay}
+				/>
 				{this.props.children}
 			</div>
 		)

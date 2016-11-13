@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-import { homeApi } from '../config/config'
+import { homeApi } from '../../config/config'
 import LoginButton from './LoginButton'
 import AvatarButton from './AvatarButton'
 import UserMenu from './UserMenu'

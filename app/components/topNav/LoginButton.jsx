@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { homeApi } from '../config/config'
+import { homeApi } from '../../config/config'
 
 export default class LoginButton extends Component {
 	render() {

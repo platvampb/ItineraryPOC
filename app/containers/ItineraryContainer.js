@@ -2,13 +2,16 @@ require('../stylesheets/itinerary.scss')
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { changePageHeader } from '../actions/actions'
-import { changeActiveDay, tripRequestStates, resetTripRequestState,
-	retrieveTrip, movePOI } from '../actions/itineraryActions'
-import DayMenu from '../components/itinerary/dayMenu'
-import DayItinerary from '../components/itinerary/DayItinerary'
 import TouchBackend from 'react-dnd-touch-backend'
 import { DragDropContext } from 'react-dnd'
+
+import { changePageHeader } from '../actions/actions'
+import { changeActiveDay, tripRequestStates, tripSaveStates,
+	resetTripRequestState, retrieveTrip, movePOI } from '../actions/itineraryActions'
+import DayMenu from '../components/itinerary/dayMenu'
+import DayItinerary from '../components/itinerary/DayItinerary'
+import Loading from '../components/loadingScreen/Loading'
+
 
 class ItineraryHandler extends Component {
 	constructor(props) {
@@ -81,15 +84,41 @@ class ItineraryHandler extends Component {
 			return ''
 		}
 
+		let tripSaveDisplay = (() => {
+			let message = "",
+				tripSaveState = this.props.tripSaveState,
+				state = this.props.tripSaveState.toLowerCase()
+
+			if (tripSaveState === tripSaveStates.REQUEST_DONE) {
+				message = "Your trip has been successfully saved."
+			} else if (tripSaveState === tripSaveStates.REQUEST_ERROR) {
+				message = "Sorry, we could not save your trip. Please try again ltaer."
+			} else if (tripSaveState === tripSaveStates.REQUEST_NONE) {
+				state = "hidden"
+			} else if (tripSaveState === tripSaveStates.REQUEST_IN_PROGRESS) {
+				message = "Saving..."
+				state = "loading"
+			}
+
+			return {
+				message,
+				state,
+			}
+		})()
+
 		return (
 			<div
 				ref="container"
 				className={"itinerary-outer-container"}
 			>
-				<div className="content col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-12">
+				<div className="itinerary-container">
 					{renderDayMenu(tripRequestState)}
 					{renderDayItinerary(tripRequestState)}
 				</div>
+				<Loading
+					message={tripSaveDisplay.message}
+					state={tripSaveDisplay.state}
+				/>
 				{this.props.children}
 			</div>
 		)
@@ -106,6 +135,7 @@ function select(state) {
 		tripItinerary: state.tripItinerary,
 		activeDay: state.activeDay,
 		tripRequestState: state.tripRequestState,
+		tripSaveState: state.tripSaveState,
 		tripDuration: state.tripDuration,
 	}
 }

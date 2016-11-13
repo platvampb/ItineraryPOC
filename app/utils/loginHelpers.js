@@ -1,9 +1,7 @@
 import { readCookie, eraseCookie } from './cookieHelpers'
 
 export function authUser(loginCb, logoutCb) {
-	const userId = readCookie('wg_el_id')
-	const sessionId = readCookie('wg_sk_el')
-	const email = readCookie('wg_el')
+	const { userId, sessionId, email } = getSessionValues()
 
 	if (!(userId && sessionId && email)) {
 		logoutCb()
@@ -25,5 +23,13 @@ function fetchUserProfile(cb) {
 export function signoutUser() {
 	for (const c of ['wg_el', 'wg_el_id', 'wg_sk_el']) {
 		eraseCookie(c)
+	}
+}
+
+export function getSessionValues() {
+	return {
+		userId: readCookie('wg_el_id'),
+		sessionId: readCookie('wg_sk_el'),
+		email: readCookie('wg_el'),
 	}
 }

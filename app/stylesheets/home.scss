@@ -14,11 +14,6 @@ body {
 	height: 100%;
 }
 
-.itinerary-container {
-	height: 100%;
-	overflow: scroll;
-}
-
 @-webkit-keyframes moveToLeft {
 	from { }
 	to { -webkit-transform: translateX(-100%); }
@@ -50,10 +45,12 @@ body {
 	background: white;
 	color: $orange;
 	box-shadow: 0 1px 5px 3px rgba(0,0,0,0.2);
+	z-index: $layer-3;
+	position: relative;
 }
 
 .top-nav .header {
-	padding-top: 12px;
+	padding-top: 8px;
 	img {
 		width: 180px;
 		margin-top: 4px;
@@ -69,20 +66,36 @@ body {
 	}
 }
 
-.user-nav {
+.user-nav, .itinerary-nav {
 	float: right;
 	position: relative;
+}
+
+.itinerary-nav {
+	border-right: 1px solid #DDD;
 }
 .nav-button {
 	width: 48px;
 	height: 100%;
-	margin: 12px 9px;
+	margin: 8px 4px;
 	float: right;
 	color: $orange;
 	cursor: pointer;
+	text-align: center;
+
+	i:before {
+		font-size: 26px;
+	}
 	&:hover {
 		text-decoration: none!important;
 		color: $deep-orange;
+	}
+	&.disabled {
+		color: $grey;
+		cursor: default;
+		&:hover {
+			color: $grey;
+		}
 	}
 	.icon-text {
 		text-decoration: none!important;
@@ -91,13 +104,18 @@ body {
 		}
 	}
 }
-.user-button, .back-button {
-	text-align: center;
-	i:before {
-		font-size: 26px;
+.user-button i.glyphicon-log-in {
+	margin-left: -5px;
+}
+.save-button {
+	i {
+		top: 4px;
 	}
-	i.glyphicon-log-in {
-		margin-left: -5px;
+	i:before {
+		font-size: 24px;
+	}
+	.icon-text {
+		margin-top: 1px;
 	}
 }
 

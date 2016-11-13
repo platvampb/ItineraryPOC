@@ -40,7 +40,7 @@ export default class DayMenu extends Component {
 
 		return (
 			<div>
-				<div className="tabs-left hidden-xs">
+				<div className="tabs-left hidden-sm">
 					<ul className="nav nav-tabs">
 					{this.state.days.map(day =>
 						<DayTab
@@ -52,7 +52,7 @@ export default class DayMenu extends Component {
 					)}
 					</ul>
 				</div>
-				<div className="visible-xs mobile-nav">
+				<div className="visible-sm visible-xs mobile-nav">
 					<ul className="mobile-nav-button">
 					<DayTab
 						key={activeDay}

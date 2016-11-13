@@ -1,14 +1,97 @@
-$blue: #4FB9D9;
+@import "variables";
+
+@-webkit-keyframes slide-down {
+  0%   { transform: translateY(-100%); }
+  100% { opacity: 1; }
+}
+@-moz-keyframes slide-down {
+  0%   { transform: translateY(-100%); }
+  100% { transform: translateY(0); }
+}
+@-o-keyframes slide-down {
+  0%   { transform: translateY(-100%); }
+  100% { transform: translateY(0); }
+}
+@keyframes slide-down {
+  0%   { transform: translateY(-100%); }
+  100% { transform: translateY(0); }
+}
+
+@-webkit-keyframes slide-up {
+  0%   { transform: translateY(0); }
+  90% { transform: translateY(-100%); }
+  100% { transform: translateY(-100%); }
+}
+@-moz-keyframes slide-up {
+  0%   { transform: translateY(0); }
+  90% { transform: translateY(-100%); }
+  100% { transform: translateY(-100%); }
+}
+@-o-keyframes slide-up {
+  0%   { transform: translateY(0); }
+  90% { transform: translateY(-100%); }
+  100% { transform: translateY(-100%); }
+}
+@keyframes slide-up {
+  0%   { transform: translateY(0); }
+  90% { transform: translateY(-100%); }
+  100% { transform: translateY(-100%); }
+}
+
+@-webkit-keyframes appear {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-100%); }
+}
+@-moz-keyframes appear {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-100%); }
+}
+@-o-keyframes appear {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-100%); }
+}
+@keyframes appear {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-100%); }
+}
+
 .loading-screen {
 	text-align: center;
 	margin: 0 auto;
 	position: absolute;
 	width: 100%;
-	top: 50%;
-	transform: translateY(-100%);
+	height: 100%;
+	top: 0;
+	z-index: $layer-2;
+	background-color: $light-yellow;
+	animation: slide-down 0.2s ease-in;
+
+	&.leaving {
+		animation: slide-up 0.2s ease-in;
+	}
+	&.hidden {
+		display: none;
+	}
 	h2 {
 		margin-bottom: 38px;
 		font-size: 24px;
+		animation: appear 0.2s ease-in;
+	}
+	.loading-content {
+		position: absolute;
+		width: 100%;
+		top: 50%;
+		transform: translateY(-100%);
+	}
+	&.error {
+		.loading-content {
+			color: $light-red;
+		}
+	}
+	&.done {
+		.loading-content {
+			color: $teal;
+		}
 	}
 	.bead {
 		display: inline-block;

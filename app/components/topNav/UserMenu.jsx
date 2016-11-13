@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import SimpleLayer from './SimpleLayer'
+import SimpleLayer from '../SimpleLayer'
 
 export default class UserMenu extends Component {
 	constructor(props) {
